@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script type="x-tmpl-mustache" id="city-template">
+            <div class="city">
+                <h3>{{ Name }}</h3>
+                <b>Stock</b><br>
+                <ul>
+                {{# Stock }}
+                    <li>{{ Quantity }} x {{ Commodity }}</li>
+                {{/ Stock }}
+                </ul>
+            </div>
+        </script>
+        <script type="x-tmpl-mustache" id="vehicle-template">
+            <div class="vehicle">
+                <h3>{{ name }}</h3>
+                {{ journey.from }}
+                {{# journey.distance }}
+                -&gt; {{ journey.to }} ({{ journey.remaining }} km)
+                {{/ journey.distance }}
+                <br>
+                <b>Cargo</b><br>
+                <ul>
+                {{# cargo }}
+                    <li>{{ Quantity }} x {{ Commodity }}</li>
+                {{/ cargo }}
+                </ul>
+            </div>
+        </script>
+    </head>
+    <body>
+        <div id="cities">
+        </div>
+        <div id="vehicles">
+        </div>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

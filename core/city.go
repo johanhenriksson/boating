@@ -41,7 +41,7 @@ func (city *City) Park(vehicle *Vehicle) {
 }
 
 func (city *City) Unpark(vehicle *Vehicle) {
-    city.Vehicles[vehicle.Id] = nil
+    delete(city.Vehicles, vehicle.Id)
 }
 
 func (city *City) HasVehicle(vehicle *Vehicle) bool {
@@ -70,10 +70,7 @@ func CityWorker(city *City) {
     for {
         select {
         case boat := <-city.Harbor:
-            fmt.Printf("Boat %s arrived in %s\n", boat.Name, city.Name)
             city.Park(boat)
-
-            city.Print()
         }
     }
 }

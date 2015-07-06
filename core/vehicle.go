@@ -3,6 +3,7 @@ package core
 import (
     "fmt"
     "time"
+    "math/rand"
 )
 
 const BOAT = 1
@@ -13,9 +14,18 @@ type Vehicle struct {
     Capacity    int64
     Speed       int64
     Name        string
+    Journey     Journey
     Cargo       []*Crate
     Owner       *Player
-    Orders      chan func()
+    Orders      chan func() 
+}
+
+type Journey struct {
+    From        *City
+    To          *City
+    Start       time.Time
+    Distance    int64
+    Remaining   int64
 }
 
 /* Queue an order */
@@ -26,22 +36,36 @@ func (v *Vehicle) Issue(order func()) {
 func (v *Vehicle) Move(city_a *City, city_b *City) bool {
     route := city_a.Routes[city_b]
 
-    /* TODO: Make sure we're at the start point */
-    if !city_a.HasVehicle(v) {
+    if route == nil || !city_a.HasVehicle(v) {
         return false
     }
     city_a.Unpark(v)
 
-    remaining := route.Length
-    for remaining > 0 {
-        fmt.Printf("Moving. %dkm remaining\n", remaining)
-        remaining -= v.Speed
+    v.Journey = Journey {
+        To:        route.To,
+        From:      route.From,
+        Distance:  route.Length,
+        Remaining: route.Length,
+        Start:     time.Now(),
+    }
+
+    for v.Journey.Remaining > 0 {
+        v.Journey.Remaining -= rand.Int63n(v.Speed)
         time.Sleep(1 * time.Second)
     }
 
-    fmt.Printf("Boat %s move completed\n", v.Name)
+    v.Journey = Journey {
+        To:  route.To,
+        From:  route.To,
+        Distance: 0,
+        Remaining: 0,
+        Start: time.Now(),
+    }
+
     city_b.Harbor <- v
-    fmt.Printf("In city b:", city_b.HasVehicle(v))
+    for !city_b.HasVehicle(v) { 
+        time.Sleep(500 * time.Millisecond) 
+    }
     return true
 }
 
@@ -52,6 +76,9 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
 
     /* TODO: Check capacity */
 
+    /* Load time */
+    time.Sleep(2 * time.Second)
+
     /* needs to be some kind of channel thingy */
     crate := city.Stock.Get(v.Owner, com, quantity)
 
@@ -61,17 +88,18 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
     }
 
     v.Cargo = append(v.Cargo, crate)
-    fmt.Printf("%s loaded %d x %s\n", v.Name, crate.Qty, crate.Type.Name)
     return true
 }
 
 func (v *Vehicle) UnloadAll(city *City) bool {
     if !city.HasVehicle(v) {
+        fmt.Println("Cannot unload: vehicle not in city")
         return false
     }
 
     for _, crate := range v.Cargo {
-        fmt.Printf("%s unloading %d x %s\n", v.Name, crate.Qty, crate.Type.Name)
+        /* Load time */
+        time.Sleep(2 * time.Second)
 
         /* needs to be some kind of channel thingy */
         city.Stock.Store(crate)
@@ -98,7 +126,6 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
 }
 
 func VehicleWorker(v *Vehicle) {
-    fmt.Printf("Vehicle %v waiting for order\n", v.Id)
     for {
         order := <-v.Orders
         order()

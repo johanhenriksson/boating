@@ -15,7 +15,7 @@ type Vehicle struct {
     Speed       int64
     Name        string
     Journey     Journey
-    Cargo       []*Crate
+    Cargo       *Storage
     Owner       *Player
     Orders      chan func() 
 }
@@ -39,7 +39,7 @@ func (v *Vehicle) Move(city_a *City, city_b *City) bool {
     if route == nil || !city_a.HasVehicle(v) {
         return false
     }
-    city_a.Unpark(v)
+    city_a.Embark <- v
 
     v.Journey = Journey {
         To:        route.To,
@@ -49,11 +49,14 @@ func (v *Vehicle) Move(city_a *City, city_b *City) bool {
         Start:     time.Now(),
     }
 
+    /* Perform movement */
     for v.Journey.Remaining > 0 {
-        v.Journey.Remaining -= rand.Int63n(v.Speed)
         time.Sleep(1 * time.Second)
+        v.Journey.Remaining -= rand.Int63n(v.Speed)
     }
+    v.Journey.Remaining = 0
 
+    /* Reset journey */
     v.Journey = Journey {
         To:  route.To,
         From:  route.To,
@@ -63,8 +66,8 @@ func (v *Vehicle) Move(city_a *City, city_b *City) bool {
     }
 
     city_b.Harbor <- v
-    for !city_b.HasVehicle(v) { 
-        time.Sleep(500 * time.Millisecond) 
+    for !city_b.HasVehicle(v) {
+        time.Sleep(500 * time.Millisecond)
     }
     return true
 }
@@ -87,7 +90,7 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
         return false
     }
 
-    v.Cargo = append(v.Cargo, crate)
+    v.Cargo.Store(crate)
     return true
 }
 
@@ -97,14 +100,17 @@ func (v *Vehicle) UnloadAll(city *City) bool {
         return false
     }
 
-    for _, crate := range v.Cargo {
-        /* Load time */
-        time.Sleep(2 * time.Second)
+    for _, crates:= range v.Cargo.Crates {
+        for _, crate := range crates {
+            /* Load time */
+            time.Sleep(2 * time.Second)
 
-        /* needs to be some kind of channel thingy */
-        city.Stock.Store(crate)
+            crate := v.Cargo.Remove(crate)
+
+            /* needs to be some kind of channel thingy */
+            city.Stock.Store(crate)
+        }
     }
-    v.Cargo = []*Crate { }
     return true
 }
 
@@ -113,15 +119,12 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
         return false
     }
 
-    for i, c := range v.Cargo {
-        if c.Id == crate.Id {
-            /* Remove crate from cargo */
-            v.Cargo = append(v.Cargo[0:i], v.Cargo[i+1:]...)
-            fmt.Printf("%s unloading %d x %s\n", v.Name, crate.Qty, crate.Type.Name)
-            city.Stock.Store(crate)
-            return true
-        }
+    crate = v.Cargo.Remove(crate)
+    if crate != nil {
+        city.Stock.Store(crate)
+        return true
     }
+
     return false
 }
 
@@ -139,7 +142,7 @@ func NewBoat(name string, owner *Player, capacity int64) *Vehicle {
         Type:       BOAT,
         Capacity:   capacity,
         Speed:      10,
-        Cargo:      []*Crate { },
+        Cargo:      NewStorage(),
         Owner:      owner,
         Orders:     make(chan func(), 5),
     }

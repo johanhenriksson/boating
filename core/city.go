@@ -9,18 +9,20 @@ type City struct {
     Name        string
     Vehicles    map[int64]*Vehicle
     Routes      map[*City]*Route
-    Stock       Storage
-    Harbor      chan*Vehicle
+    Stock       *Storage
+    Harbor      chan *Vehicle
+    Embark      chan *Vehicle
 }
 
 func NewCity(name string) *City {
     city := &City {
         Id:         nextId(),
         Name:       name,
+        Stock:      NewStorage(),
         Vehicles:   make(map[int64]*Vehicle),
         Routes:     make(map[*City]*Route),
-        Stock:      make(Storage),
-        Harbor:     make(chan*Vehicle),
+        Harbor:     make(chan *Vehicle),
+        Embark:     make(chan *Vehicle),
     }
     go CityWorker(city)
     return city
@@ -52,7 +54,7 @@ func (city *City) HasVehicle(vehicle *Vehicle) bool {
 func (city *City) Print() {
     fmt.Println("------------------")
     fmt.Println("City:", city.Name)
-    for player, crates := range city.Stock {
+    for player, crates := range city.Stock.Crates {
         fmt.Println("Player", player.Name)
         for _, crate := range crates {
             fmt.Printf("  %d x %s\n", crate.Qty, crate.Type.Name)
@@ -71,6 +73,8 @@ func CityWorker(city *City) {
         select {
         case boat := <-city.Harbor:
             city.Park(boat)
+        case boat := <-city.Embark:
+            city.Unpark(boat)
         }
     }
 }

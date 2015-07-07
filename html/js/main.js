@@ -20,6 +20,7 @@ $(document).ready(function() {
     });
 
     var CitiesView = Backbone.View.extend({
+        className: 'city',
         cityViews: [],
         initialize: function() {
             this.cities = new Cities();
@@ -45,6 +46,14 @@ $(document).ready(function() {
     });
 
     var Vehicle = Backbone.Model.extend({
+        Move: function(from, to) {
+            var order = {
+                type: 1,
+                from: from.get('id'),
+                to:   to.get('id'),
+            };
+
+        },
     });
 
     var Vehicles = Backbone.Collection.extend({
@@ -53,6 +62,7 @@ $(document).ready(function() {
     });
 
     var VehicleView = Backbone.View.extend({
+        className: 'vehicle',
         render: function() {
             this.$el.html(Mustache.render(VehicleTemplate, this.model.toJSON()));
             console.debug(this.$el.html());

@@ -8,10 +8,40 @@ var GOLD = &Commodity {
     Weight: 20000,
 }
 
+var SILVER = &Commodity {
+    Type: 2,
+    Name: "Silver",
+    Weight: 20000,
+}
+
+var COPPER = &Commodity {
+    Type: 3,
+    Name: "Copper",
+    Weight: 20000,
+}
+
+var DIAMOND = &Commodity {
+    Type: 4,
+    Name: "Diamond",
+    Weight: 40000,
+}
+
+var STEEL = &Commodity {
+    Type: 10,
+    Name: "Steel",
+    Weight: 95000,
+}
+
 var COFFEE = &Commodity {
     Type: 100,
     Name: "Coffee",
     Weight: 20000,
+}
+
+var WEAPONS = &Commodity {
+    Type: 1337,
+    Name: "GUNS",
+    Weight: 2000000,
 }
 
 type Commodity struct {

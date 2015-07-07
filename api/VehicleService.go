@@ -54,8 +54,9 @@ func (srv *VehicleService) GetAll(p RouteArgs) {
             },
         }
 
-        for _, crate := range v.Cargo {
-            if crate.Owner == player {
+        crates, ok := v.Cargo.Crates[player]
+        if ok {
+            for _, crate := range crates {
                 response[i].Cargo = append(response[i].Cargo, CrateResponse {
                     Commodity: crate.Type.Name,
                     Quantity: crate.Qty,

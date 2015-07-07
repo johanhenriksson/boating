@@ -1,31 +1,25 @@
 <html>
     <head>
+        <link href="css/app.css" rel="stylesheet">
         <script type="x-tmpl-mustache" id="city-template">
-            <div class="city">
-                <h3>{{ Name }}</h3>
-                <b>Stock</b><br>
-                <ul>
-                {{# Stock }}
-                    <li>{{ Quantity }} x {{ Commodity }}</li>
-                {{/ Stock }}
-                </ul>
-            </div>
+            <h3>{{ name }}</h3>
+            <ul>
+            {{# stock }}
+                <li>{{ commodity }} {{ quantity }}</li>
+            {{/ stock }}
+            </ul>
         </script>
         <script type="x-tmpl-mustache" id="vehicle-template">
-            <div class="vehicle">
-                <h3>{{ name }}</h3>
-                {{ journey.from }}
-                {{# journey.distance }}
-                -&gt; {{ journey.to }} ({{ journey.remaining }} km)
-                {{/ journey.distance }}
-                <br>
-                <b>Cargo</b><br>
-                <ul>
-                {{# cargo }}
-                    <li>{{ Quantity }} x {{ Commodity }}</li>
-                {{/ cargo }}
-                </ul>
-            </div>
+            <h3>{{ name }}</h3>
+            {{ journey.from }}
+            {{# journey.distance }}
+            -&gt; {{ journey.to }} ({{ journey.remaining }} km)
+            {{/ journey.distance }}
+            <ul>
+            {{# cargo }}
+                <li>{{ commodity }} {{ quantity }}</li>
+            {{/ cargo }}
+            </ul>
         </script>
     </head>
     <body>

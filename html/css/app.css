@@ -1,0 +1,8 @@
+.vehicle {
+    display: block;
+    float: left;
+    border: 1px solid black;
+    padding: 1.0em;
+    min-height: 150px;
+    min-width: 200px;
+}

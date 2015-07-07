@@ -48,7 +48,7 @@ func (srv *CityService) GetAll(p RouteArgs) {
         }
 
         /* Player stock */
-        if crates, ok := city.Stock[player]; ok {
+        if crates, ok := city.Stock.Crates[player]; ok {
             for _, crate := range crates {
                 response[i].Stock = append(response[i].Stock, CrateResponse {
                     Commodity: crate.Type.Name,
@@ -68,12 +68,12 @@ func (srv *CityService) GetAll(p RouteArgs) {
 }
 
 type CityResponse struct {
-    Id          int64
-    Name        string
-    Stock       []CrateResponse
+    Id          int64               `json:"id"`
+    Name        string              `json:"name"`
+    Stock       []CrateResponse     `json:"stock"`
 }
 
 type CrateResponse struct {
-    Commodity   string
-    Quantity    int64
+    Commodity   string              `json:"commodity"`
+    Quantity    int64               `json:"quantity"`
 }

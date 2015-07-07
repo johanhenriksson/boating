@@ -47,7 +47,6 @@ func (r *Router) Files(prefix string, dir string) {
 }
 
 func (router *Router) Register(srv RoutedService) {
-    fmt.Println("Adding routes")
     for _, route := range srv.Routes() {
         path := fmt.Sprintf("%s%s", srv.Path(), route.Pattern);
         router.Mux().
@@ -57,8 +56,6 @@ func (router *Router) Register(srv RoutedService) {
             HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
                 router.Route(route, w, r)
             })
-
-        fmt.Printf("%s %s: %s\n", route.Method, path, route.Name)
     }
 }
 

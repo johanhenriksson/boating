@@ -6,9 +6,19 @@ import (
 
 type Weight int64
 
-const GRAM Weight   = 1
-const KG Weight     = 1000
-const TON Weight    = 1000000
+type Weighable interface {
+    Weight() Weight
+}
+
+/* Units */
+
+const GRAM  Weight = 1
+const KG    Weight = 1000
+const TON   Weight = 1000000
+
+func (w Weight) Weight() Weight {
+    return w
+}
 
 func (w Weight) String() string {
     if (w > TON) {

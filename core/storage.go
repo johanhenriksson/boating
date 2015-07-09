@@ -5,8 +5,6 @@ import (
     "errors"
 )
 
-var CommodityNotFoundError = errors.New("No such commodity in storage")
-var NotEnoughItemsError    = errors.New("Not enough items in storage")
 var NoPlayerItemsError     = errors.New("Player does not have any stored items")
 var StorageDestroyedError  = errors.New("Storage container has been destroyed")
 
@@ -82,14 +80,19 @@ func storageWorker(stock *Storage) {
 /* Provides an interface for safely storing items in the storage container. 
    Will block the caller until a result is available */
 func (stock *Storage) Store(crate *Crate) (*Crate, error) {
+    /* Make sure the container hasn't been destroyed */
     if stock.destroy != nil {
         return nil, StorageDestroyedError
     }
+
+    /* Send a Store message to the worker goroutine */
     result := make(chan StoreResult)
     stock.load <- StoreMessage {
         Crate: crate,
         Result: result,
     }
+
+    /* Block until the result is available */
     r := <-result
     return r.Crate, r.err
 }
@@ -97,9 +100,12 @@ func (stock *Storage) Store(crate *Crate) (*Crate, error) {
 /* Provides an interface for safely retrieving items from the storage container. 
    Will block the caller until a result is available */
 func (stock *Storage) Get(owner *Player, com *Commodity, qty int64) (*Crate, error) {
+    /* Make sure the container hasn't been destroyed */
     if stock.destroy != nil {
         return nil, StorageDestroyedError
     }
+
+    /* Send a Get message to the worker goroutine */
     result := make(chan StoreResult)
     stock.unload <- GetMessage {
         Owner: owner,
@@ -107,12 +113,18 @@ func (stock *Storage) Get(owner *Player, com *Commodity, qty int64) (*Crate, err
         Quantity: qty,
         Result: result,
     }
+
+    /* Block until the result is available */
     r := <-result
     return r.Crate, r.err
 }
 
 /* Destroys this storage container. Stops the worker goroutine */
 func (stock *Storage) Destroy() {
+    /* Clean out storage map */
+    stock.Crates  = make(StorageMap, 0)
+
+    /* Send value on the destroy channel to notify worker */
     stock.destroy = make(chan bool)
     stock.destroy <- true
 }
@@ -121,21 +133,20 @@ func (stock *Storage) Destroy() {
 
 /* Retrieves goods from the storage container. Not thread safe */
 func (stock Storage) get(owner *Player, com *Commodity, quantity int64) (*Crate, error) {
+    /* Check if player has any goods stored */
     if crates, ok := stock.Crates[owner]; ok {
+        /* Check if player has the desired commodity... */
         if crate, ok := crates[com]; ok {
-            if crate.Qty >= quantity {
-                crate.Qty -= quantity
-                if crate.Qty == 0 {
-                    /* Remove empty crates */
-                    delete(crates, com)
-                }
-                return GetCrate(owner, com, quantity), nil
-            } else {
-                return nil, NotEnoughItemsError
+            /* We have the exact amount! Just return that crate and remove it */
+            if crate.Qty == quantity {
+                delete(crates, com)
+                return crate, nil
             }
-        } else {
-            return nil, CommodityNotFoundError
+
+            /* We have more than required. Split the crate */
+            return crate.Take(quantity)
         }
+        return nil, CommodityNotFoundError
     }
     return nil, NoPlayerItemsError
 }
@@ -143,20 +154,28 @@ func (stock Storage) get(owner *Player, com *Commodity, quantity int64) (*Crate,
 /* Stores goods in the storage container. Not thread safe */
 func (stock *Storage) put(crate *Crate) (*Crate, error) {
     owner  := crate.Owner
-    crates := stock.Crates[owner]
 
+    /* Attempt to get crates from the player map */
+    crates := stock.Crates[owner]
     if crates == nil {
+        /* Player-crate map doesn't exist yet. Create it */
         crates = make(map[*Commodity]*Crate)
-        crates[crate.Type] = crate
         stock.Crates[owner] = crates
+
+        /* Store a new crate with the contents */
+        newCrate, _ := crate.Take(crate.Qty)
+        crates[crate.Type] = newCrate
         return crate, nil
     }
 
+    /* Check if we already have a crate with this commodity type */
     if existing, ok := crates[crate.Type]; ok {
-        existing.Qty += crate.Qty
+        existing.Add(crate)
         return existing, nil
     } else {
-        crates[crate.Type] = crate
-        return crate, nil
+        /* Nope, store a new crate */
+        newCrate, _ := crate.Take(crate.Qty)
+        crates[crate.Type] = newCrate
+        return newCrate, nil
     }
 }

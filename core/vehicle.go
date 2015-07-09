@@ -1,6 +1,7 @@
 package core
 
 import (
+    "fmt"
     "time"
     "math/rand"
 )
@@ -16,7 +17,7 @@ type Vehicle struct {
     Journey     Journey
     Cargo       *Storage
     Owner       *Player
-    Orders      chan func() 
+    Orders      chan func()
 }
 
 type Journey struct {
@@ -25,6 +26,53 @@ type Journey struct {
     Start       time.Time
     Distance    int64
     Remaining   int64
+}
+
+func NewBoat(name string, owner *Player, capacity int64) *Vehicle {
+    boat := &Vehicle {
+        Id:         nextId(),
+        Name:       name,
+        Type:       BOAT,
+        Capacity:   capacity,
+        Speed:      10,
+        Cargo:      NewStorage(),
+        Owner:      owner,
+        Orders:     make(chan func()),
+    }
+    go VehicleWorker(boat)
+    return boat
+}
+
+type Order struct {
+    Execute     func()
+}
+
+func VehicleWorker(v *Vehicle) {
+    orderQueue := make([]func(), 0, 4)
+    orderDone  := make(chan int)
+    executing  := false
+
+    for {
+        /* if there is more work to do... */
+        if !executing && len(orderQueue) > 0 {
+            order := orderQueue[0]
+            orderQueue = orderQueue[1:]
+            executing = true
+            /* Execute order on a separate thread to make sure the worker
+               remains responsive while executing the order */
+            go func() {
+                order()
+                orderDone <- 1
+            }()
+        }
+
+        select {
+        case order := <-v.Orders:
+            orderQueue = append(orderQueue, order)
+        case <-orderDone:
+            executing = false
+        }
+    }
 }
 
 /* Queue an order */
@@ -134,24 +182,3 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
     return true
 }
 
-func VehicleWorker(v *Vehicle) {
-    for {
-        order := <-v.Orders
-        order()
-    }
-}
-
-func NewBoat(name string, owner *Player, capacity int64) *Vehicle {
-    boat := &Vehicle {
-        Id:         nextId(),
-        Name:       name,
-        Type:       BOAT,
-        Capacity:   capacity,
-        Speed:      10,
-        Cargo:      NewStorage(),
-        Owner:      owner,
-        Orders:     make(chan func(), 5),
-    }
-    go VehicleWorker(boat)
-    return boat
-}

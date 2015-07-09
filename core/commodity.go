@@ -1,23 +1,30 @@
 package core
 
+import (
+    "errors"
+)
+
 type ComType int64
+
+var CommodityNotFoundError = errors.New("No such commodity in storage")
+var NotEnoughItemsError    = errors.New("Not enough items in storage")
 
 var GOLD = &Commodity {
     Type: 1,
     Name: "Gold",
-    UnitWeight: 20000,
+    UnitWeight: 100 * GRAM,
 }
 
 var SILVER = &Commodity {
     Type: 2,
     Name: "Silver",
-    UnitWeight: 20000,
+    UnitWeight: 1 * KG,
 }
 
 var COPPER = &Commodity {
     Type: 3,
     Name: "Copper",
-    UnitWeight: 20000,
+    UnitWeight: 10 * KG,
 }
 
 var DIAMOND = &Commodity {
@@ -29,25 +36,25 @@ var DIAMOND = &Commodity {
 var STEEL = &Commodity {
     Type: 10,
     Name: "Steel",
-    UnitWeight: 95000,
+    UnitWeight: 100 * KG,
 }
 
 var FOOD = &Commodity {
     Type: 99,
     Name: "Food",
-    UnitWeight: 20000,
+    UnitWeight: 1 * TON,
 }
 
 var COFFEE = &Commodity {
     Type: 100,
     Name: "Coffee",
-    UnitWeight: 20000,
+    UnitWeight: 1 * TON,
 }
 
 var WEAPONS = &Commodity {
     Type: 1337,
     Name: "GUNS",
-    UnitWeight: 2000000,
+    UnitWeight: 1 * TON,
 }
 
 type Commodity struct {
@@ -69,6 +76,23 @@ type Crate struct {
 
 func (c *Crate) Weight() Weight {
     return Weight(c.Qty) * c.Type.Weight()
+}
+
+func (crate *Crate) Add(stuff *Crate) {
+    if crate.Type != stuff.Type {
+        /* Throw error? */
+        return
+    }
+    crate.Qty += stuff.Qty
+    stuff.Qty = 0
+}
+
+func (crate *Crate) Take(quantity int64) (*Crate, error) {
+    if quantity > crate.Qty {
+        return nil, NotEnoughItemsError
+    }
+    crate.Qty -= quantity
+    return GetCrate(crate.Owner, crate.Type, quantity), nil
 }
 
 func (crate *Crate) Split() (*Crate, *Crate) {

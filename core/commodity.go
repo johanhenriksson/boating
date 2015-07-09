@@ -32,6 +32,12 @@ var STEEL = &Commodity {
     Weight: 95000,
 }
 
+var FOOD = &Commodity {
+    Type: 99,
+    Name: "Food",
+    Weight: 20000,
+}
+
 var COFFEE = &Commodity {
     Type: 100,
     Name: "Coffee",

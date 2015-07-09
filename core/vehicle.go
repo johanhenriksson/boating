@@ -1,7 +1,6 @@
 package core
 
 import (
-    "fmt"
     "time"
     "math/rand"
 )
@@ -80,35 +79,32 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
     /* TODO: Check capacity */
 
     /* Load time */
-    time.Sleep(2 * time.Second)
+    loadAmount := quantity
+    var loadStep int64 = 10
+    for loadAmount > 0 {
+        if (loadAmount < loadStep) {
+            loadStep = loadAmount
+        }
+        loadAmount -= loadStep
 
-    /* needs to be some kind of channel thingy */
-    crate := city.Stock.Get(v.Owner, com, quantity)
-
-    if crate == nil {
-        fmt.Printf("Cannot load vehicle '%s' with %s: Not found in player stock\n", v.Name, com.Name)
-        return false
+        crate := city.Stock.Get(v.Owner, com, loadStep)
+        if crate == nil {
+            return false
+        }
+        time.Sleep(1 * time.Second)
+        v.Cargo.Store(crate)
     }
 
-    v.Cargo.Store(crate)
     return true
 }
 
 func (v *Vehicle) UnloadAll(city *City) bool {
     if !city.HasVehicle(v) {
-        fmt.Println("Cannot unload: vehicle not in city")
         return false
     }
-
     for _, crates:= range v.Cargo.Crates {
         for _, crate := range crates {
-            /* Load time */
-            time.Sleep(2 * time.Second)
-
-            crate := v.Cargo.Remove(crate)
-
-            /* needs to be some kind of channel thingy */
-            city.Stock.Store(crate)
+            v.Unload(crate, city)
         }
     }
     return true
@@ -119,13 +115,23 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
         return false
     }
 
-    crate = v.Cargo.Remove(crate)
-    if crate != nil {
+    loadAmount := crate.Qty
+    var loadStep int64 = 10
+    for loadAmount > 0 {
+        if (loadAmount < loadStep) {
+            loadStep = loadAmount
+        }
+        loadAmount -= loadStep
+
+        crate := v.Cargo.Get(v.Owner, crate.Type, loadStep)
+        if crate == nil {
+            return false
+        }
+        time.Sleep(1 * time.Second)
         city.Stock.Store(crate)
-        return true
     }
 
-    return false
+    return true
 }
 
 func VehicleWorker(v *Vehicle) {

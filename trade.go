@@ -44,7 +44,7 @@ func main() {
     city_c.Stock.Store(core.GetCrate(player, core.STEEL,    10000000))
     city_d.Stock.Store(core.GetCrate(player, core.WEAPONS,  10000000))
 
-    for i := 0; i < 10; i++ {
+    for i := 0; i < 100; i++ {
         boat := core.NewBoat(fmt.Sprintf("HMS Boat #%d", i), player, 1000)
         boat.Journey.From = city_a
         boat.Journey.To = city_a

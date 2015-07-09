@@ -2,6 +2,7 @@ package api
 
 import (
     "fmt"
+    "sort"
     "strconv"
     "encoding/json"
     "github.com/johanhenriksson/trade/core"
@@ -51,14 +52,21 @@ func (srv *CityService) GetAll(p RouteArgs) {
         if crates, ok := city.Stock.Crates[player]; ok {
             for _, crate := range crates {
                 response[i].Stock = append(response[i].Stock, CrateResponse {
-                    Commodity: crate.Type.Name,
-                    Quantity: crate.Qty,
+                    Type:       crate.Type.Type,
+                    Commodity:  crate.Type.Name,
+                    Quantity:   crate.Qty,
+                    Owner:      crate.Owner.Name,
                 })
             }
+
+            sort.Sort(CrateByType(response[i].Stock))
         }
 
         i++
     }
+
+    /* Sort responses by City Id */
+    sort.Sort(CityById(response))
 
     p.Writer.Header().Set("Content-Type", "application/json")
     json, err := json.Marshal(response)
@@ -67,13 +75,26 @@ func (srv *CityService) GetAll(p RouteArgs) {
     }
 }
 
+
 type CityResponse struct {
     Id          int64               `json:"id"`
     Name        string              `json:"name"`
     Stock       []CrateResponse     `json:"stock"`
 }
 
+type CityById []CityResponse
+func (c CityById) Len() int           { return len(c) }
+func (c CityById) Swap(i, j int)      { c[i], c[j] = c[j], c[i] }
+func (c CityById) Less(i, j int) bool { return c[i].Id < c[j].Id }
+
 type CrateResponse struct {
-    Commodity   string              `json:"commodity"`
+    Type        core.ComType        `json:"type"`
     Quantity    int64               `json:"quantity"`
+    Commodity   string              `json:"commodity"`
+    Owner       string              `json:"owner"`
 }
+
+type CrateByType []CrateResponse
+func (c CrateByType) Len() int           { return len(c) }
+func (c CrateByType) Swap(i, j int)      { c[i], c[j] = c[j], c[i] }
+func (c CrateByType) Less(i, j int) bool { return c[i].Type < c[j].Type }

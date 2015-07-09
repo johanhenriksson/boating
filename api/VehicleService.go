@@ -58,8 +58,10 @@ func (srv *VehicleService) GetAll(p RouteArgs) {
         if ok {
             for _, crate := range crates {
                 response[i].Cargo = append(response[i].Cargo, CrateResponse {
-                    Commodity: crate.Type.Name,
-                    Quantity: crate.Qty,
+                    Type:       crate.Type.Type,
+                    Commodity:  crate.Type.Name,
+                    Quantity:   crate.Qty,
+                    Owner:      crate.Owner.Name,
                 })
             }
         }

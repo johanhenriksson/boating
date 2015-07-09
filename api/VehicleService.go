@@ -62,6 +62,7 @@ func (srv *VehicleService) GetAll(p RouteArgs) {
                     Commodity:  crate.Type.Name,
                     Quantity:   crate.Qty,
                     Owner:      crate.Owner.Name,
+                    Weight:     crate.Weight().String(),
                 })
             }
         }

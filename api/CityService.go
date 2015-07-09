@@ -56,6 +56,7 @@ func (srv *CityService) GetAll(p RouteArgs) {
                     Commodity:  crate.Type.Name,
                     Quantity:   crate.Qty,
                     Owner:      crate.Owner.Name,
+                    Weight:     crate.Weight().String(),
                 })
             }
 
@@ -92,6 +93,7 @@ type CrateResponse struct {
     Quantity    int64               `json:"quantity"`
     Commodity   string              `json:"commodity"`
     Owner       string              `json:"owner"`
+    Weight      string              `json:"weight"`
 }
 
 type CrateByType []CrateResponse

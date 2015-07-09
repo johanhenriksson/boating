@@ -87,8 +87,8 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
         }
         loadAmount -= loadStep
 
-        crate := city.Stock.Get(v.Owner, com, loadStep)
-        if crate == nil {
+        crate, err := city.Stock.Get(v.Owner, com, loadStep)
+        if err != nil {
             return false
         }
         time.Sleep(1 * time.Second)
@@ -123,8 +123,8 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
         }
         loadAmount -= loadStep
 
-        crate := v.Cargo.Get(v.Owner, crate.Type, loadStep)
-        if crate == nil {
+        crate, err := v.Cargo.Get(v.Owner, crate.Type, loadStep)
+        if err != nil {
             return false
         }
         time.Sleep(1 * time.Second)

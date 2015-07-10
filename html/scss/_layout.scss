@@ -1,0 +1,266 @@
+
+
+/* Use border-box globally */
+
+html{
+	box-sizing: border-box;
+}
+
+*, *:before, *:after{
+	box-sizing: inherit;
+}
+
+.page{
+	max-width: 2560px;
+	margin: 0 auto;
+}
+
+/* Limits page width */
+
+.container{
+	margin: 0 auto;
+	max-width: $max-page-width;
+
+	
+	&.half{
+		max-width: $max-page-width/2;
+	}
+	
+	&.two-thirds{
+		max-width: ($max-page-width/3) * 2;
+	}
+	
+	&.third{
+		max-width: $max-page-width/3;
+	}
+	
+	&.fourth{
+		max-width: $max-page-width/4;
+	}
+	
+	&.fifth{
+		max-width: $max-page-width/5;
+	}
+	
+	
+}
+
+.grid,
+.column{
+	
+	&.padded-tight{
+		
+		padding: 0.5rem;
+		
+	}
+	
+	&.padded{
+		padding: 0.5rem;	
+	}
+	
+	&.padded-x{
+		
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		
+	}
+	
+	&.padded-y{
+		
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		
+	}
+	
+	@media (min-width: $breakpoint-desktop){
+		
+		&.padded{
+			padding: 1rem;	
+		}
+		
+		&.padded-x{
+			
+			padding-left: 1rem;
+			padding-right: 1rem;
+			
+		}
+		
+		&.padded-y{
+			
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			
+		}
+	
+	}
+	
+}
+
+form.grid{
+	padding: 0rem;
+	
+	.column{
+		padding: 0.5rem;
+	}
+	
+}
+@media (min-width: $breakpoint-desktop){
+	
+	form.grid{
+		padding: 0.5rem;
+	}
+}
+
+
+/******************************************************
+
+Grid system
+
+******************************************************/
+
+.clearfix:before,
+.clearfix:after{
+    content: " ";
+    display: table;
+}
+
+.clearfix:after{
+    clear: both;
+}
+
+.clearfix{
+    *zoom: 1;
+}
+
+
+
+@media (min-width: $breakpoint-tablet) {
+	
+	.grid{
+				
+		.row{
+			display: table;
+			width: 100%;
+			
+			
+			.column{
+				display: table-cell;
+				vertical-align: top;
+				
+				&.fixed-width{
+					
+					&.x-small{
+						width: 5rem;
+					}
+					
+					&.small{
+						width: 7rem;
+					}
+					
+					&.medium{
+						width: 20rem;
+					}
+					
+					&.large{
+						width: 30rem;
+					}
+				}
+				
+				&.auto{
+					width: auto;
+				}
+			
+				&.full{
+					width: 100%;
+				}
+			
+				&.two-thirds{
+					width: 66.7777%;
+				}
+					
+				&.half{
+					width: 50%;
+				}
+				
+				&.third {
+					width: 33.3333%;
+				}
+				
+				&.fourth{
+					width: 25%;
+				}
+				
+				&.fifth{
+					width: 20%;
+				}
+				
+				&.sixth{
+					width: 16.6666%;
+				}
+			}
+		}
+	}
+}
+
+
+
+/******************************************************
+
+Alignment
+
+******************************************************/
+
+.align-left{
+	text-align: left;
+}
+
+.align-right{
+	text-align: right;
+}
+
+.align-center{
+	text-align: center;
+}
+
+.float-left{
+	float: left;
+}
+
+.float-right{
+	float: right;
+}
+
+/******************************************************
+
+Images
+
+******************************************************/
+
+img{
+	max-width: 100%;
+	display: block;
+}
+
+/* Vertical + Horisontal centering */
+
+.center-x-y-outer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+
+	.center-x-y{
+		width: 100%;
+		height: 100%;
+		display: table;
+		text-align: center;
+	
+		.center-x-y-inner{
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

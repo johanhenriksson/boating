@@ -1,0 +1,1228 @@
+/* used to be style.scss */
+body {
+  font-size: 12pt;
+  background-color: #C5EFF7; }
+
+/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block; }
+
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden] {
+  display: none; }
+
+html {
+  font-size: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+html, button, input, select, textarea {
+  font-family: sans-serif; }
+
+body {
+  margin: 0; }
+
+a:focus {
+  outline: thin dotted; }
+
+a:active, a:hover {
+  outline: 0; }
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0; }
+
+h2 {
+  font-size: 1.5em;
+  margin: .83em 0; }
+
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0; }
+
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0; }
+
+h5 {
+  font-size: .83em;
+  margin: 1.67em 0; }
+
+h6 {
+  font-size: .67em;
+  margin: 2.33em 0; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b, strong {
+  font-weight: bold; }
+
+blockquote {
+  margin: 1em 40px; }
+
+dfn {
+  font-style: italic; }
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+mark {
+  background: #ff0;
+  color: #000; }
+
+p, pre {
+  margin: 1em 0; }
+
+code, kbd, pre, samp {
+  font-family: monospace,serif;
+  _font-family: 'courier new',monospace;
+  font-size: 1em; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+q {
+  quotes: none; }
+
+q:before, q:after {
+  content: '';
+  content: none; }
+
+small {
+  font-size: 80%; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+dl, menu, ol, ul {
+  margin: 1em 0; }
+
+dd {
+  margin: 0 0 0 40px; }
+
+menu, ol, ul {
+  padding: 0 0 0 40px; }
+
+nav ul, nav ol {
+  list-style: none;
+  list-style-image: none; }
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+figure {
+  margin: 0; }
+
+form {
+  margin: 0; }
+
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: .35em .625em .75em; }
+
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  *margin-left: -7px; }
+
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle; }
+
+button, input {
+  line-height: normal; }
+
+button, select {
+  text-transform: none; }
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  *overflow: visible; }
+
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  *height: 13px;
+  *width: 13px; }
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* Layout */
+/* Use border-box globally */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+.page {
+  max-width: 2560px;
+  margin: 0 auto; }
+
+/* Limits page width */
+.container {
+  margin: 0 auto;
+  max-width: 70rem; }
+  .container.half {
+    max-width: 35rem; }
+  .container.two-thirds {
+    max-width: 46.66667rem; }
+  .container.third {
+    max-width: 23.33333rem; }
+  .container.fourth {
+    max-width: 17.5rem; }
+  .container.fifth {
+    max-width: 14rem; }
+
+.grid.padded-tight,
+.column.padded-tight {
+  padding: 0.5rem; }
+.grid.padded,
+.column.padded {
+  padding: 0.5rem; }
+.grid.padded-x,
+.column.padded-x {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem; }
+.grid.padded-y,
+.column.padded-y {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; }
+@media (min-width: 60rem) {
+  .grid.padded,
+  .column.padded {
+    padding: 1rem; }
+  .grid.padded-x,
+  .column.padded-x {
+    padding-left: 1rem;
+    padding-right: 1rem; }
+  .grid.padded-y,
+  .column.padded-y {
+    padding-top: 1rem;
+    padding-bottom: 1rem; } }
+
+form.grid {
+  padding: 0rem; }
+  form.grid .column {
+    padding: 0.5rem; }
+
+@media (min-width: 60rem) {
+  form.grid {
+    padding: 0.5rem; } }
+/******************************************************
+
+Grid system
+
+******************************************************/
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+.clearfix {
+  *zoom: 1; }
+
+@media (min-width: 50rem) {
+  .grid .row {
+    display: table;
+    width: 100%; }
+    .grid .row .column {
+      display: table-cell;
+      vertical-align: top; }
+      .grid .row .column.fixed-width.x-small {
+        width: 5rem; }
+      .grid .row .column.fixed-width.small {
+        width: 7rem; }
+      .grid .row .column.fixed-width.medium {
+        width: 20rem; }
+      .grid .row .column.fixed-width.large {
+        width: 30rem; }
+      .grid .row .column.auto {
+        width: auto; }
+      .grid .row .column.full {
+        width: 100%; }
+      .grid .row .column.two-thirds {
+        width: 66.7777%; }
+      .grid .row .column.half {
+        width: 50%; }
+      .grid .row .column.third {
+        width: 33.3333%; }
+      .grid .row .column.fourth {
+        width: 25%; }
+      .grid .row .column.fifth {
+        width: 20%; }
+      .grid .row .column.sixth {
+        width: 16.6666%; } }
+/******************************************************
+
+Alignment
+
+******************************************************/
+.align-left {
+  text-align: left; }
+
+.align-right {
+  text-align: right; }
+
+.align-center {
+  text-align: center; }
+
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
+/******************************************************
+
+Images
+
+******************************************************/
+img {
+  max-width: 100%;
+  display: block; }
+
+/* Vertical + Horisontal centering */
+.center-x-y-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; }
+  .center-x-y-outer .center-x-y {
+    width: 100%;
+    height: 100%;
+    display: table;
+    text-align: center; }
+    .center-x-y-outer .center-x-y .center-x-y-inner {
+      display: table-cell;
+      vertical-align: middle; }
+
+/* Buttons */
+/* E-detalj Buttonz */
+button, .button {
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.5rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-transition: background-color 150ms ease-in-out;
+  -moz-transition: background-color 150ms ease-in-out;
+  -ms-transition: background-color 150ms ease-in-out;
+  -o-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  /* Size */
+  /* Color */
+  /* Icon */ }
+  button.block, .button.block {
+    display: block;
+    width: 100%; }
+  button.margin-bottom, .button.margin-bottom {
+    margin-bottom: 0.5rem; }
+  button.small, .button.small {
+    padding: 0.25rem 0.5rem;
+    height: 2rem; }
+    button.small:active, .button.small:active {
+      padding: 0.3rem 0.5rem 0.2rem 0.5rem; }
+  button.medium, .button.medium {
+    padding: 0.75rem 1rem;
+    height: 3rem; }
+    button.medium:active, .button.medium:active {
+      padding: 0.8rem 1rem 0.70rem 1rem; }
+  button.large, .button.large {
+    padding: 1.5rem;
+    height: 4.5rem; }
+    button.large:active, .button.large:active {
+      padding: 1.55rem 1.5rem 1.45rem 1.5rem; }
+  button.default, .button.default {
+    background-color: #f1f1f1;
+    color: #222222;
+    border: 1px solid #e0e0e0; }
+    button.default:hover, .button.default:hover {
+      background-color: #dfdfdf;
+      border-color: #cbcbcb; }
+  button.inverted, .button.inverted {
+    background-color: #444444;
+    color: white;
+    border: 1px solid #323232; }
+    button.inverted:hover, .button.inverted:hover {
+      background-color: #323232;
+      border-color: #1e1e1e; }
+  button.inactive, .button.inactive {
+    background-color: #e0e0e0 !important;
+    color: #999999 !important;
+    cursor: default !important;
+    pointer-events: none;
+    border: 1px solid #cecece; }
+  button.primary, .button.primary {
+    background-color: #0088cc;
+    color: #fafafa;
+    border: 1px solid #0070a8; }
+    button.primary:hover, .button.primary:hover {
+      background-color: #0070a8;
+      border-color: #005580; }
+  button.success, .button.success {
+    background-color: #5bb75b;
+    color: #fafafa;
+    border: 1px solid #49a649; }
+    button.success:hover, .button.success:hover {
+      background-color: #49a649;
+      border-color: #3c893c; }
+  button.warning, .button.warning {
+    background-color: #faa732;
+    color: #fafafa;
+    border: 1px solid #f9980f; }
+    button.warning:hover, .button.warning:hover {
+      background-color: #f9980f;
+      border-color: #da8205; }
+  button.danger, .button.danger {
+    background-color: #da4f49;
+    color: #fafafa;
+    border: 1px solid #d4322b; }
+    button.danger:hover, .button.danger:hover {
+      background-color: #d4322b;
+      border-color: #b22a24; }
+  button i, button i:before, button span, .button i, .button i:before, .button span {
+    vertical-align: middle;
+    pointer-events: none; }
+  button i, .button i {
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 1.3rem; }
+    button i + span, .button i + span {
+      margin-left: 0.5rem; }
+  button span, .button span {
+    display: inline-block;
+    height: 1.5rem;
+    line-height: 1.5rem; }
+    button span + i, .button span + i {
+      margin-left: 0.5rem; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  font-weight: 300;
+  line-height: 1em; }
+  h1.no-margin, h1:last-child,
+  h2.no-margin,
+  h2:last-child,
+  h3.no-margin,
+  h3:last-child,
+  h4.no-margin,
+  h4:last-child,
+  h5.no-margin,
+  h5:last-child,
+  h6.no-margin,
+  h6:last-child {
+    margin: 0; }
+
+h1 {
+  font-size: 2.5rem; }
+
+h2 {
+  font-size: 2rem; }
+
+h3 {
+  font-size: 1.75rem; }
+
+h4 {
+  font-size: 1.25rem; }
+
+h5 {
+  font-size: 1rem; }
+
+h6 {
+  font-size: 1rem; }
+
+p {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  line-height: 1.5rem; }
+  p.columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2rem;
+    -moz-column-gap: 2rem;
+    column-gap: 2rem; }
+  p.message {
+    margin: 0; }
+
+a {
+  text-decoration: none;
+  color: #000;
+  -webkit-tap-highlight-color: transparent; }
+
+small {
+  font-size: 0.9rem;
+  color: #999; }
+
+.control.cms a {
+  text-decoration: underline;
+  color: #0088cc;
+  -webkit-tap-highlight-color: transparent; }
+.control.cms .redactor_toolbar a {
+  color: #000;
+  text-decoration: none; }
+.control.cms .redactor_editor div,
+.control.cms .redactor_editor p,
+.control.cms .redactor_editor ul,
+.control.cms .redactor_editor ol,
+.control.cms .redactor_editor table,
+.control.cms .redactor_editor dl,
+.control.cms .redactor_editor blockquote,
+.control.cms .redactor_editor pre,
+.control.cms .redactor_editor h2,
+.control.cms .redactor_editor h3,
+.control.cms .redactor_editor h4,
+.control.cms .redactor_editor h5,
+.control.cms .redactor_editor h6 {
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit; }
+.control.cms table {
+  border: 1px solid #eee;
+  margin: 0 0 1rem 0; }
+  .control.cms table tr {
+    border-top: 1px solid #eee; }
+  .control.cms table thead tr {
+    font-weight: bold; }
+  .control.cms table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; }
+  .control.cms table tr td {
+    padding: 0.5rem; }
+    .control.cms table tr td:first-child {
+      padding-left: 1rem; }
+    .control.cms table tr td:last-child {
+      padding-right: 1rem; }
+.control.cms pre {
+  border: 1px solid #eee;
+  border-radius: 0;
+  background-color: #f2f2f2;
+  margin: 0 0 1rem 3rem;
+  display: inline-block;
+  padding: 2rem;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto; }
+.control.cms strong {
+  font-weight: bold; }
+.control.cms em {
+  font-style: italic; }
+
+label {
+  display: block;
+  line-height: 1.5rem; }
+
+/* Dropdown */
+.select {
+  display: block;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.25rem;
+  margin: 0 0 0.5rem 0;
+  background-color: #fff;
+  background-image: url("../img/arrow.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 40px; }
+  .select:last-child, .select .no-margin {
+    margin-bottom: 0; }
+  .select select {
+    display: inline-block;
+    width: 110%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 0.75rem;
+    font-family: inherit;
+    -webkit-appearance: none; }
+
+/* Text inputs */
+textarea,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number] {
+  border-radius: 0.25rem;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  padding: 0 0.75rem;
+  line-height: 2.9rem;
+  font-family: inherit;
+  background-color: #fff;
+  display: block;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  -webkit-transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+  -moz-transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+  -ms-transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+  -o-transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out;
+  transition: box-shadow 150ms ease-in-out, background-color 150ms ease-in-out; }
+  textarea:focus,
+  input[type=text]:focus,
+  input[type=password]:focus,
+  input[type=email]:focus,
+  input[type=number]:focus {
+    -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1); }
+  textarea.error,
+  input[type=text].error,
+  input[type=password].error,
+  input[type=email].error,
+  input[type=number].error {
+    border-color: #da4f49; }
+
+textarea {
+  height: 5em; }
+
+/* Form grid */
+.form-grid {
+  display: table;
+  width: 100%; }
+  .form-grid .row {
+    display: table-row; }
+    .form-grid .row label {
+      display: table-cell; }
+    .form-grid .row .inner {
+      display: table-cell; }
+      .form-grid .row .inner input {
+        margin: 0; }
+      .form-grid .row .inner .error-message {
+        margin: 0;
+        font-style: italic;
+        color: #da4f49; }
+
+/* Radio buttons & checkboxes */
+input[type=checkbox], input[type=radio] {
+  width: 2rem;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  opacity: 0; }
+  input[type=checkbox] + label, input[type=radio] + label {
+    display: inline-block;
+    margin-left: -2rem;
+    line-height: 1.4rem;
+    vertical-align: top;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: pointer; }
+    input[type=checkbox] + label span, input[type=radio] + label span {
+      display: inline-block;
+      width: 1.4rem;
+      height: 1.4rem;
+      border: 0.2rem solid #000;
+      vertical-align: top;
+      margin-right: 0.5rem;
+      padding: 0.25rem;
+      border-radius: 0.25rem; }
+      input[type=checkbox] + label span span, input[type=radio] + label span span {
+        width: 0.5rem;
+        height: 0.5rem;
+        display: block;
+        background-color: #000;
+        border: none;
+        margin: 0 auto;
+        opacity: 0;
+        border-radius: 0.15rem;
+        -webkit-transition: opacity 150ms ease-in-out;
+        -moz-transition: opacity 150ms ease-in-out;
+        -ms-transition: opacity 150ms ease-in-out;
+        -o-transition: opacity 150ms ease-in-out;
+        transition: opacity 150ms ease-in-out; }
+  input[type=checkbox]:checked + label span span, input[type=radio]:checked + label span span {
+    opacity: 1; }
+input[type=radio] + label span, input[type=radio] + label span span {
+  border-radius: 100%; }
+input[type=number] {
+  -moz-appearance: textfield; }
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner {
+  padding: 0 !important;
+  border: 0 none !important; }
+
+button.choice {
+  background-color: #f1f1f1; }
+  button.choice.selected {
+    background-color: #5bb75b;
+    color: #fff; }
+  button.choice:hover {
+    background-color: #49a649;
+    color: #fff; }
+
+.navbar {
+  background-color: #fff; }
+  .navbar ul, .navbar li {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  .navbar ul {
+    position: relative; }
+    .navbar ul li {
+      position: relative;
+      float: left;
+      height: 3rem; }
+      .navbar ul li:after {
+        display: block;
+        float: right;
+        content: " ";
+        height: 1rem;
+        margin: 1rem 0;
+        width: 2px;
+        background-color: #f1f1f1; }
+      .navbar ul li a {
+        display: block;
+        padding: 1rem;
+        line-height: 1rem;
+        height: 3rem;
+        color: #555;
+        white-space: nowrap;
+        overflow: hidden;
+        float: left;
+        max-width: 100%; }
+        .navbar ul li a i, .navbar ul li a span {
+          display: inline-block; }
+        .navbar ul li a i {
+          margin-right: 0.4rem; }
+        .navbar ul li a span + i {
+          float: right;
+          margin-left: 0.4rem;
+          margin-right: 0; }
+      .navbar ul li ul {
+        display: none; }
+      .navbar ul li:hover a {
+        color: #000; }
+      .navbar ul li:hover ul {
+        -webkit-animation-name: fadeIn;
+        -webkit-animation-duration: 0.3s;
+        -webkit-animation-timing-function: ease-out;
+        -webkit-animation-delay: 0;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-direction: normal;
+        -webkit-animation-fill-mode: forwards;
+        animation-name: fadeIn;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-out;
+        animation-delay: 0;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
+        position: absolute;
+        display: block;
+        top: 3rem;
+        left: 0;
+        background-color: #fff;
+        width: 15rem;
+        -webkit-box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+        z-index: 1; }
+        .navbar ul li:hover ul li {
+          float: none; }
+          .navbar ul li:hover ul li:after {
+            display: none; }
+          .navbar ul li:hover ul li a {
+            color: #777;
+            background-color: #fff; }
+            .navbar ul li:hover ul li a span + i {
+              position: absolute;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              height: 3rem;
+              width: 2rem;
+              padding: 1rem 0.5rem;
+              line-height: 1rem; }
+          .navbar ul li:hover ul li ul {
+            display: none; }
+          .navbar ul li:hover ul li:hover a {
+            color: #000; }
+          .navbar ul li:hover ul li:hover ul {
+            top: 1rem;
+            left: 14rem;
+            display: block; }
+            .navbar ul li:hover ul li:hover ul li a {
+              color: #777;
+              background-color: #fff; }
+            .navbar ul li:hover ul li:hover ul li ul {
+              display: none; }
+            .navbar ul li:hover ul li:hover ul li:hover a {
+              color: #000; }
+            .navbar ul li:hover ul li:hover ul li:hover ul {
+              display: block; }
+              .navbar ul li:hover ul li:hover ul li:hover ul li a {
+                color: #777;
+                background-color: #fff; }
+              .navbar ul li:hover ul li:hover ul li:hover ul li ul {
+                display: none; }
+              .navbar ul li:hover ul li:hover ul li:hover ul li:hover a {
+                color: #000; }
+              .navbar ul li:hover ul li:hover ul li:hover ul li:hover ul {
+                display: block; }
+                .navbar ul li:hover ul li:hover ul li:hover ul li:hover ul li a {
+                  color: #777;
+                  background-color: #fff; }
+                .navbar ul li:hover ul li:hover ul li:hover ul li:hover ul li ul {
+                  display: none; }
+                .navbar ul li:hover ul li:hover ul li:hover ul li:hover ul li:hover a {
+                  color: #000; }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+.gridView {
+  padding: 0.5rem; }
+  .gridView .card {
+    float: left;
+    width: 20rem;
+    margin: 0;
+    padding: 0.5rem; }
+    .gridView .card .card-inner {
+      background-color: #fff;
+      border-radius: 0.25rem;
+      padding: 1rem; }
+    .gridView .card h2 {
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      margin: 0; }
+      .gridView .card h2 a {
+        color: #000; }
+        .gridView .card h2 a:before {
+          font-family: FontAwesome;
+          margin-right: 0.4em;
+          font-weight: normal;
+          font-style: normal;
+          -webkit-font-smoothing: antialiased; }
+    .gridView .card.ship h2 a:before {
+      content: "\f21a"; }
+    .gridView .card.place h2 a:before {
+      content: "\f13d"; }
+    .gridView .card .cargo {
+      background-color: #f7f7f7;
+      border-radius: 0.25rem; }
+      .gridView .card .cargo ul {
+        margin: 0;
+        padding: 0;
+        list-style: none; }
+        .gridView .card .cargo ul li {
+          margin: 0;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #e0e0e0; }
+          .gridView .card .cargo ul li:last-child {
+            border-bottom: none; }
+          .gridView .card .cargo ul li span.qty {
+            float: right; }
+    .gridView .card .route {
+      background-color: #f7f7f7;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+      height: 3rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1rem; }
+      .gridView .card .route.active {
+        background-color: #E08283;
+        color: #fff; }
+        .gridView .card .route.active ul {
+          margin: 0;
+          padding: 0;
+          list-style: none; }
+          .gridView .card .route.active ul li {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: block;
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem; }
+            .gridView .card .route.active ul li:before {
+              font-family: FontAwesome;
+              margin-right: 0.4rem;
+              font-weight: normal;
+              font-style: normal;
+              -webkit-font-smoothing: antialiased; }
+            .gridView .card .route.active ul li.origin {
+              left: 0; }
+              .gridView .card .route.active ul li.origin:before {
+                content: "\f041"; }
+            .gridView .card .route.active ul li.destination {
+              right: 0; }
+              .gridView .card .route.active ul li.destination:before {
+                content: "\f14e"; }
+          .gridView .card .route.active ul:before {
+            display: block;
+            content: " ";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            -webkit-transition: width 500ms ease-in-out;
+            transition: width 500ms ease-in-out; }
+        .gridView .card .route.active[data-progress="1"] ul:before {
+          width: 1%; }
+        .gridView .card .route.active[data-progress="2"] ul:before {
+          width: 2%; }
+        .gridView .card .route.active[data-progress="3"] ul:before {
+          width: 3%; }
+        .gridView .card .route.active[data-progress="4"] ul:before {
+          width: 4%; }
+        .gridView .card .route.active[data-progress="5"] ul:before {
+          width: 5%; }
+        .gridView .card .route.active[data-progress="6"] ul:before {
+          width: 6%; }
+        .gridView .card .route.active[data-progress="7"] ul:before {
+          width: 7%; }
+        .gridView .card .route.active[data-progress="8"] ul:before {
+          width: 8%; }
+        .gridView .card .route.active[data-progress="9"] ul:before {
+          width: 9%; }
+        .gridView .card .route.active[data-progress="10"] ul:before {
+          width: 10%; }
+        .gridView .card .route.active[data-progress="11"] ul:before {
+          width: 11%; }
+        .gridView .card .route.active[data-progress="12"] ul:before {
+          width: 12%; }
+        .gridView .card .route.active[data-progress="13"] ul:before {
+          width: 13%; }
+        .gridView .card .route.active[data-progress="14"] ul:before {
+          width: 14%; }
+        .gridView .card .route.active[data-progress="15"] ul:before {
+          width: 15%; }
+        .gridView .card .route.active[data-progress="16"] ul:before {
+          width: 16%; }
+        .gridView .card .route.active[data-progress="17"] ul:before {
+          width: 17%; }
+        .gridView .card .route.active[data-progress="18"] ul:before {
+          width: 18%; }
+        .gridView .card .route.active[data-progress="19"] ul:before {
+          width: 19%; }
+        .gridView .card .route.active[data-progress="20"] ul:before {
+          width: 20%; }
+        .gridView .card .route.active[data-progress="21"] ul:before {
+          width: 21%; }
+        .gridView .card .route.active[data-progress="22"] ul:before {
+          width: 22%; }
+        .gridView .card .route.active[data-progress="23"] ul:before {
+          width: 23%; }
+        .gridView .card .route.active[data-progress="24"] ul:before {
+          width: 24%; }
+        .gridView .card .route.active[data-progress="25"] ul:before {
+          width: 25%; }
+        .gridView .card .route.active[data-progress="26"] ul:before {
+          width: 26%; }
+        .gridView .card .route.active[data-progress="27"] ul:before {
+          width: 27%; }
+        .gridView .card .route.active[data-progress="28"] ul:before {
+          width: 28%; }
+        .gridView .card .route.active[data-progress="29"] ul:before {
+          width: 29%; }
+        .gridView .card .route.active[data-progress="30"] ul:before {
+          width: 30%; }
+        .gridView .card .route.active[data-progress="31"] ul:before {
+          width: 31%; }
+        .gridView .card .route.active[data-progress="32"] ul:before {
+          width: 32%; }
+        .gridView .card .route.active[data-progress="33"] ul:before {
+          width: 33%; }
+        .gridView .card .route.active[data-progress="34"] ul:before {
+          width: 34%; }
+        .gridView .card .route.active[data-progress="35"] ul:before {
+          width: 35%; }
+        .gridView .card .route.active[data-progress="36"] ul:before {
+          width: 36%; }
+        .gridView .card .route.active[data-progress="37"] ul:before {
+          width: 37%; }
+        .gridView .card .route.active[data-progress="38"] ul:before {
+          width: 38%; }
+        .gridView .card .route.active[data-progress="39"] ul:before {
+          width: 39%; }
+        .gridView .card .route.active[data-progress="40"] ul:before {
+          width: 40%; }
+        .gridView .card .route.active[data-progress="41"] ul:before {
+          width: 41%; }
+        .gridView .card .route.active[data-progress="42"] ul:before {
+          width: 42%; }
+        .gridView .card .route.active[data-progress="43"] ul:before {
+          width: 43%; }
+        .gridView .card .route.active[data-progress="44"] ul:before {
+          width: 44%; }
+        .gridView .card .route.active[data-progress="45"] ul:before {
+          width: 45%; }
+        .gridView .card .route.active[data-progress="46"] ul:before {
+          width: 46%; }
+        .gridView .card .route.active[data-progress="47"] ul:before {
+          width: 47%; }
+        .gridView .card .route.active[data-progress="48"] ul:before {
+          width: 48%; }
+        .gridView .card .route.active[data-progress="49"] ul:before {
+          width: 49%; }
+        .gridView .card .route.active[data-progress="50"] ul:before {
+          width: 50%; }
+        .gridView .card .route.active[data-progress="51"] ul:before {
+          width: 51%; }
+        .gridView .card .route.active[data-progress="52"] ul:before {
+          width: 52%; }
+        .gridView .card .route.active[data-progress="53"] ul:before {
+          width: 53%; }
+        .gridView .card .route.active[data-progress="54"] ul:before {
+          width: 54%; }
+        .gridView .card .route.active[data-progress="55"] ul:before {
+          width: 55%; }
+        .gridView .card .route.active[data-progress="56"] ul:before {
+          width: 56%; }
+        .gridView .card .route.active[data-progress="57"] ul:before {
+          width: 57%; }
+        .gridView .card .route.active[data-progress="58"] ul:before {
+          width: 58%; }
+        .gridView .card .route.active[data-progress="59"] ul:before {
+          width: 59%; }
+        .gridView .card .route.active[data-progress="60"] ul:before {
+          width: 60%; }
+        .gridView .card .route.active[data-progress="61"] ul:before {
+          width: 61%; }
+        .gridView .card .route.active[data-progress="62"] ul:before {
+          width: 62%; }
+        .gridView .card .route.active[data-progress="63"] ul:before {
+          width: 63%; }
+        .gridView .card .route.active[data-progress="64"] ul:before {
+          width: 64%; }
+        .gridView .card .route.active[data-progress="65"] ul:before {
+          width: 65%; }
+        .gridView .card .route.active[data-progress="66"] ul:before {
+          width: 66%; }
+        .gridView .card .route.active[data-progress="67"] ul:before {
+          width: 67%; }
+        .gridView .card .route.active[data-progress="68"] ul:before {
+          width: 68%; }
+        .gridView .card .route.active[data-progress="69"] ul:before {
+          width: 69%; }
+        .gridView .card .route.active[data-progress="70"] ul:before {
+          width: 70%; }
+        .gridView .card .route.active[data-progress="71"] ul:before {
+          width: 71%; }
+        .gridView .card .route.active[data-progress="72"] ul:before {
+          width: 72%; }
+        .gridView .card .route.active[data-progress="73"] ul:before {
+          width: 73%; }
+        .gridView .card .route.active[data-progress="74"] ul:before {
+          width: 74%; }
+        .gridView .card .route.active[data-progress="75"] ul:before {
+          width: 75%; }
+        .gridView .card .route.active[data-progress="76"] ul:before {
+          width: 76%; }
+        .gridView .card .route.active[data-progress="77"] ul:before {
+          width: 77%; }
+        .gridView .card .route.active[data-progress="78"] ul:before {
+          width: 78%; }
+        .gridView .card .route.active[data-progress="79"] ul:before {
+          width: 79%; }
+        .gridView .card .route.active[data-progress="80"] ul:before {
+          width: 80%; }
+        .gridView .card .route.active[data-progress="81"] ul:before {
+          width: 81%; }
+        .gridView .card .route.active[data-progress="82"] ul:before {
+          width: 82%; }
+        .gridView .card .route.active[data-progress="83"] ul:before {
+          width: 83%; }
+        .gridView .card .route.active[data-progress="84"] ul:before {
+          width: 84%; }
+        .gridView .card .route.active[data-progress="85"] ul:before {
+          width: 85%; }
+        .gridView .card .route.active[data-progress="86"] ul:before {
+          width: 86%; }
+        .gridView .card .route.active[data-progress="87"] ul:before {
+          width: 87%; }
+        .gridView .card .route.active[data-progress="88"] ul:before {
+          width: 88%; }
+        .gridView .card .route.active[data-progress="89"] ul:before {
+          width: 89%; }
+        .gridView .card .route.active[data-progress="90"] ul:before {
+          width: 90%; }
+        .gridView .card .route.active[data-progress="91"] ul:before {
+          width: 91%; }
+        .gridView .card .route.active[data-progress="92"] ul:before {
+          width: 92%; }
+        .gridView .card .route.active[data-progress="93"] ul:before {
+          width: 93%; }
+        .gridView .card .route.active[data-progress="94"] ul:before {
+          width: 94%; }
+        .gridView .card .route.active[data-progress="95"] ul:before {
+          width: 95%; }
+        .gridView .card .route.active[data-progress="96"] ul:before {
+          width: 96%; }
+        .gridView .card .route.active[data-progress="97"] ul:before {
+          width: 97%; }
+        .gridView .card .route.active[data-progress="98"] ul:before {
+          width: 98%; }
+        .gridView .card .route.active[data-progress="99"] ul:before {
+          width: 99%; }
+        .gridView .card .route.active[data-progress="100"] ul:before {
+          width: 100%; }
+        .gridView .card .route.active.loop ul:after {
+          font-family: FontAwesome;
+          font-weight: normal;
+          font-style: normal;
+          -webkit-font-smoothing: antialiased;
+          display: block;
+          position: absolute;
+          left: 50%;
+          top: 0.5rem;
+          bottom: 0.5rem;
+          margin-left: -0.5rem;
+          width: 1rem;
+          height: 2rem;
+          font-size: 1.5rem;
+          line-height: 2rem;
+          content: "\f0ec"; }
+        .gridView .card .route.active.single ul:after {
+          font-family: FontAwesome;
+          font-weight: normal;
+          font-style: normal;
+          -webkit-font-smoothing: antialiased;
+          display: block;
+          position: absolute;
+          left: 50%;
+          top: 0.5rem;
+          bottom: 0.5rem;
+          margin-left: -0.5rem;
+          width: 1rem;
+          height: 2rem;
+          font-size: 1.5rem;
+          line-height: 2rem;
+          content: "\f178"; }
+
+.item:before {
+  font-family: FontAwesome;
+  margin-right: 0.4rem;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased; }
+.item[data-name="gold"]:before {
+  content: "\f0d6"; }
+.item[data-name="coffee"]:before {
+  content: "\f0f4"; }
+
+.ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll; }
+
+#world-display {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -99; }

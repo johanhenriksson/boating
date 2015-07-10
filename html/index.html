@@ -1,41 +1,128 @@
-<html>
-    <head>
-        <title>go boatin</title>
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link href="css/app.css" rel="stylesheet">
 
         <script type="x-tmpl-mustache" id="city-template">
-            <h3>{{ name }}</h3>
-            <ul>
-            {{# stock }}
-                <li>{{ commodity }} {{ quantity }}</li>
-            {{/ stock }}
-            </ul>
+			<div class="card city">
+				<div class="card-inner">
+					<h2><a href="">{{ name }}</a></h2>
+					<p>
+			            {{ journey.from }}
+			            {{# journey.distance }}
+			            -&gt; {{ journey.to }} ({{ journey.remaining }} km)
+			            {{/ journey.distance }}
+		            </p>
+					<div class="route active loop" data-progress="60">
+						<ul>
+							<li class="origin">{{ journey.from }}</li>
+							<li class="destination">{{ journey.to }}</li>
+						</ul>
+					</div>
+					<div class="cargo">
+						<ul>
+							{{# stock }}
+								<li><span class="item" data-name="{{ commodity }}">{{ commodity }}</span> <span class="qty">{{ quantity }}</span></li>
+				            {{/ stock }}
+						</ul>
+					</div>
+				</div>
+			</div>
         </script>
+        
         <script type="x-tmpl-mustache" id="vehicle-template">
-            <h3>{{ name }} ({{ id }})</h3>
-            {{ journey.from }}
-            {{# journey.distance }}
-            -&gt; {{ journey.to }} ({{ journey.remaining }} km)
-            {{/ journey.distance }}
-            <ul>
-            {{# cargo }}
-                <li>{{ commodity }} {{ quantity }}</li>
-            {{/ cargo }}
-            </ul>
+        
+			<div class="card ship">
+				<div class="card-inner">
+					<h2><a href="">{{ name }} ({{ id }})</a></h2>
+					<p>
+			            {{ journey.from }}
+			            {{# journey.distance }}
+			            -&gt; {{ journey.to }} ({{ journey.remaining }} km)
+			            {{/ journey.distance }}
+		            </p>
+					<div class="route active loop" data-progress="60">
+						<ul>
+							<li class="origin">{{ journey.from }}</li>
+							<li class="destination">{{ journey.to }}</li>
+						</ul>
+					</div>
+					<div class="cargo">
+						<ul>
+				            {{# cargo }}
+								<li><span class="item" data-name="{{ commodity }}">{{ commodity }}</span> <span class="qty">{{ quantity }}</span></li>
+				            {{/ cargo }}
+						</ul>
+					</div>
+				</div>
+			</div>
+			
         </script>
-    </head>
-    <body>
-        <div id="cities">
+        
+	</head>
+	<body>
+        <div id="world-display">
         </div>
-        <div id="vehicles">
-        </div>
-        <div id="world-display"></div>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/world.js"></script>
-    </body>
+        <div class="ui">
+			<section class="navbar">
+				<ul class="clearfix">
+					<li>
+						<a href="">
+							 <i class="fa fa-ship"></i><span>Ships</span><i class="fa fa-chevron-down"></i>
+						</a>
+						<ul>
+							<li>
+								<a href=""><span>Lorem ipsum</span><i class="fa fa-chevron-right"></i></a>
+								<ul>
+									<li>
+										<a href=""><span>Lorem ipsum</span><i class="fa fa-chevron-right"></i></a>
+										<ul>
+											<li><a href="">Dolor sit amet</a></li>
+											<li><a href="">Consectetur adipiscing elit</a></li>
+											<li><a href="">Sed viverra lorem nisl</a></li>
+										</ul>
+									</li>
+									<li><a href="">Dolor sit amet</a></li>
+									<li><a href="">Consectetur adipiscing elit</a></li>
+									<li><a href="">Sed viverra lorem nisl</a></li>
+								</ul>
+							</li>
+							<li><a href="">Dolor sit amet</a></li>
+							<li><a href="">Consectetur adipiscing elit</a></li>
+							<li><a href="">Sed viverra lorem nisl</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href=""> <i class="fa fa-anchor"></i><span>Places</span><i class="fa fa-chevron-down"></i></a>
+					</li>
+					<li>
+						<a href=""><i class="fa fa-money"></i><span>Assets</span><i class="fa fa-chevron-down"></i></a>
+					</li>
+				</ul>
+			</section>
+	        
+			<div class="gridView clearfix">
+		        <div id="cities">
+		        </div>
+			</div>
+			<div class="gridView clearfix">
+		        <div id="vehicles">
+		        </div>
+			</div>
+		</div>
+	</body>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/world.js"></script>
 </html>

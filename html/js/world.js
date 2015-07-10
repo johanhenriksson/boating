@@ -9,13 +9,11 @@ $(document).ready(function() {
     $('#world-display').append(renderer.domElement);
 
     /* Setup earth */
-    var geometry         = new THREE.SphereGeometry(0.5, 32, 32)
-    var material         = new THREE.MeshPhongMaterial()
-    material.map         = THREE.ImageUtils.loadTexture('img/earthmap4k.jpg')
-    material.bumpMap     = THREE.ImageUtils.loadTexture('img/earthbump4k.jpg')
-    material.bumpScale   = 0.02
-    material.specularMap = THREE.ImageUtils.loadTexture('img/earthspec4k.jpg')
-    material.specular    = new THREE.Color('#333')
+    var geometry         = new THREE.SphereGeometry(0.5, 64, 64);
+    var material         = new THREE.MeshPhongMaterial();
+    material.map         = THREE.ImageUtils.loadTexture('img/new.png');
+    material.fog = false;
+    material.shininess = 0;
 
     var earthMesh = new THREE.Mesh(geometry, material)
     scene.add( earthMesh );
@@ -42,7 +40,7 @@ $(document).ready(function() {
 
         var intersect = raycaster.intersectObject(earthMesh);
         if (intersect.length > 0) {
-            console.log(spheres[i].position);
+            console.debug(intersect);
         }
     });
     document.addEventListener('mouseup', function(event){
@@ -56,12 +54,14 @@ $(document).ready(function() {
     document.addEventListener("mousewheel", function(event) {
         w = event.wheelDeltaY;
         cam_distance -= Math.sign(w) * 0.02;
+        if (cam_distance < 0.60) cam_distance = 0.60;
         camera.position.y = Math.sin(cam_angle) * cam_distance;
         camera.position.z = Math.cos(cam_angle) * cam_distance;
         camera.lookAt(earthMesh.position);
+        event.preventDefault();
     }, false);
     renderJobs.push(function(delta, now){
-        earthMesh.rotateY(0.0002);
+        earthMesh.rotateY(0.00005);
         if (!down) return;
 
         m = { x: mouse.x - down_pos.x, y: mouse.y - down_pos.y };
@@ -70,8 +70,9 @@ $(document).ready(function() {
         earthMesh.rotateY(r);
 
         cam_angle += m.y * 0.1;
-        if (cam_angle > Math.PI / 2) cam_angle = Math.PI / 2;
-        if (cam_angle < -Math.PI / 2) cam_angle = -Math.PI / 2;
+        max_angle = Math.PI / 3;
+        if (cam_angle > max_angle) cam_angle = max_angle;
+        if (cam_angle < -max_angle) cam_angle = -max_angle;
 
         camera.position.y = Math.sin(cam_angle) * cam_distance;
         camera.position.z = Math.cos(cam_angle) * cam_distance;
@@ -81,9 +82,21 @@ $(document).ready(function() {
     /* scene lighting */
     var ambient = new THREE.AmbientLight( 0x888888 )
     scene.add(ambient)
-    var sol = new THREE.DirectionalLight( 0xcccccc, 1 )
-    sol.position.set(5,3,5)
+    var sol = new THREE.DirectionalLight( 0xcccccc, 0.65 )
+    sol.position.set(3,3,25)
     scene.add(sol)
+    
+
+    var material = new THREE.LineBasicMaterial({
+        color: 0x0000ff
+    });
+
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(0, -1, 0));
+    geometry.vertices.push(new THREE.Vector3(0, 1, 0));
+
+    var line = new THREE.Line(geometry, material);
+    scene.add(line);
 
     renderJobs.push(function(){
         renderer.render( scene, camera );       

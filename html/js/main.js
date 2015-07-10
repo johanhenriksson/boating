@@ -64,7 +64,12 @@ $(document).ready(function() {
     var VehicleView = Backbone.View.extend({
         className: 'vehicle',
         render: function() {
-            this.$el.html(Mustache.render(VehicleTemplate, this.model.toJSON()));
+            var model = this.model.toJSON();
+            var vars = _.extend(model, { 
+                moving: model.journey.from != model.journey.to,
+                progress: parseInt(100 * (1.0 - model.journey.remaining / model.journey.distance)),
+            });
+            this.$el.html(Mustache.render(VehicleTemplate, vars));
             return this;
         },
     });

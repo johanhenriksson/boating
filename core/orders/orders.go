@@ -93,12 +93,12 @@ func (order *LoadOrder) Execute(actor *core.Actor) {
 
 func (order *LoadOrder) Print() {
     qty := order.Quantity
-    com := order.Commodity.Name
 
     if order.Unload {
         if order.All {
             fmt.Println("Unload all")
         } else {
+            com := order.Commodity.Name
             if qty > 0 {
                 fmt.Println("Unload", qty, "x", com)
             } else {
@@ -106,6 +106,7 @@ func (order *LoadOrder) Print() {
             }
         }
     } else {
+        com := order.Commodity.Name
         if qty > 0 {
             fmt.Println("Load", qty, "x", com)
         } else {

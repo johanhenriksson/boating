@@ -25,10 +25,10 @@ func main() {
         },
     }
 
-    core.LONDON.Stock.Store(core.GetCrate(player, core.GOLD,     10000000000))
-    core.AMSTERDAM.Stock.Store(core.GetCrate(player, core.COFFEE,   1000000000))
-    core.HAMBURG.Stock.Store(core.GetCrate(player, core.STEEL,    10000000))
-    core.WASHINGTON.Stock.Store(core.GetCrate(player, core.WEAPONS,  10000000))
+    core.LONDON.Stock.Store(core.NewCrate(player,     core.GOLD,    100000))
+    core.AMSTERDAM.Stock.Store(core.NewCrate(player,  core.COFFEE,  70000))
+    core.HAMBURG.Stock.Store(core.NewCrate(player,    core.STEEL,   50000))
+    core.WASHINGTON.Stock.Store(core.NewCrate(player, core.WEAPONS, 10000))
 
     for i := 0; i < 1; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))

@@ -1,9 +1,16 @@
-# stock up in london
-go london
-unload coffee
-load gold 50
+# stock up 
+load gold 100
  
 # head to the dam
 go amsterdam
 unload gold 50
 load coffee 100
+
+# pick up steel in hamburg
+go hamburg
+unload gold 50
+load steel 150
+
+# return goods
+go london
+unload

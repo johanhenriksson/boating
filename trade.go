@@ -26,7 +26,7 @@ func main() {
     core.LONDON.Stock.Store(core.NewCrate(player,     core.GOLD,    100000))
     core.AMSTERDAM.Stock.Store(core.NewCrate(player,  core.COFFEE,  70000))
     core.HAMBURG.Stock.Store(core.NewCrate(player,    core.STEEL,   50000))
-    core.WASHINGTON.Stock.Store(core.NewCrate(player, core.WEAPONS, 10000))
+    core.WASHINGTON.Stock.Store(core.NewCrate(player, core.EXPLOSIVES, 10000))
 
     for i := 0; i < 10; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))
@@ -34,7 +34,7 @@ func main() {
         orders := orders.CompileFile("scripts/amsterdam_coffee.txt")
 
         orders.SetVehicle(boat)
-        orders.Execute(boat.Actor)
+        orders.Loop(boat.Actor)
     }
 
     router := api.NewRouter()

@@ -5,8 +5,8 @@ import (
     "errors"
 )
 
-var NoPlayerItemsError     = errors.New("Player does not have any stored items")
-var StorageDestroyedError  = errors.New("Storage container has been destroyed")
+var NoPlayerItemsError    = errors.New("Player does not have any stored items")
+var StorageDestroyedError = errors.New("Storage container has been destroyed")
 
 /* Base data structure - each player has a map if items currently in storage */
 type StorageMap map[*Player]map[*Commodity]*Crate

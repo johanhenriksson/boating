@@ -11,9 +11,12 @@ $(document).ready(function() {
     /* Setup earth */
     var geometry         = new THREE.SphereGeometry(0.5, 64, 64);
     var material         = new THREE.MeshPhongMaterial();
-    material.map         = THREE.ImageUtils.loadTexture('img/new.png');
+    material.map         = THREE.ImageUtils.loadTexture('img/earthmap4k.jpg');
+    material.bumpMap     = THREE.ImageUtils.loadTexture('img/earthbump4k.jpg');
+    material.specularMap = THREE.ImageUtils.loadTexture('img/earthspec4k.jpg');
     material.fog = false;
-    material.shininess = 0;
+    material.shininess = 0.01;
+    //material.wireframe = true;
 
     var earthMesh = new THREE.Mesh(geometry, material)
     scene.add( earthMesh );
@@ -86,7 +89,7 @@ $(document).ready(function() {
     sol.position.set(3,3,25)
     scene.add(sol)
     
-
+    /*
     var material = new THREE.LineBasicMaterial({
         color: 0x0000ff
     });
@@ -97,6 +100,7 @@ $(document).ready(function() {
 
     var line = new THREE.Line(geometry, material);
     scene.add(line);
+    */
 
     renderJobs.push(function(){
         renderer.render( scene, camera );       

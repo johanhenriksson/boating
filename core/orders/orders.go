@@ -7,7 +7,7 @@ import (
 )
 
 type Order interface {
-    Execute(*core.Actor)
+    Create() func()
     Print()
 }
 
@@ -27,8 +27,24 @@ func (orders *Orders) SetVehicle(v *core.Vehicle) {
 
 func (orders Orders) Execute(actor *core.Actor) {
     for _, order := range orders {
-        order.Execute(actor)
+        command := order.Create()
+        actor.Issue(command)
     }
+}
+
+func (orders Orders) Loop(actor *core.Actor) {
+    commands := make([]func(), 0)
+    for _, order := range orders {
+        command := order.Create()
+        commands = append(commands, command)
+    }
+    actor.Issue(func() {
+        for {
+            for _, command := range commands {
+                command()
+            }
+        }
+    })
 }
 
 func (orders Orders) Print() {
@@ -47,14 +63,11 @@ func (order *GoOrder) SetVehicle(v *core.Vehicle) {
     order.Vehicle = v
 }
 
-func (order *GoOrder) Execute(actor *core.Actor) {
-    if order.Vehicle == nil {
-        fmt.Println("Error in order Go: Target vehicle is nil")
-        return
+func (order *GoOrder) Create() func() {
+    v, city := order.Vehicle, order.City
+    return func() {
+        v.Move(city)
     }
-    actor.Issue(func() {
-        order.Vehicle.Move(order.City)
-    })
 }
 
 func (order *GoOrder) Print() {
@@ -74,22 +87,20 @@ func (order *LoadOrder) SetVehicle(v *core.Vehicle) {
     order.Vehicle = v
 }
 
-func (order *LoadOrder) Execute(actor *core.Actor) {
-    if order.Vehicle == nil {
-        fmt.Println("Error in order Load: Target vehicle is nil")
-        return
-    }
-    actor.Issue(func() {
-        if order.Unload {
-            if order.All {
-                order.Vehicle.UnloadAll()
+func (order *LoadOrder) Create() func() {
+    v := order.Vehicle
+    unload, all := order.Unload, order.All
+    return func() {
+        if unload {
+            if all {
+                v.UnloadAll()
             } else {
-                order.Vehicle.Unload(order.Commodity, order.Quantity)
+                v.Unload(order.Commodity, order.Quantity)
             }
         } else {
-            order.Vehicle.Load(order.Commodity, order.Quantity)
+            v.Load(order.Commodity, order.Quantity)
         }
-    })
+    }
 }
 
 func (order *LoadOrder) Print() {
@@ -120,10 +131,11 @@ type WaitOrder struct {
     Duration    time.Duration
 }
 
-func (order *WaitOrder) Execute(actor *core.Actor) {
-    actor.Issue(func() {
-        core.Sleep(order.Duration)
-    })
+func (order *WaitOrder) Create() func() {
+    duration := order.Duration
+    return func() {
+        core.Sleep(duration)
+    }
 }
 
 func (order *WaitOrder) Print() {

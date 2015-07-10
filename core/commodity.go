@@ -61,7 +61,7 @@ var STEEL = &Commodity {
 var WOOD = &Commodity {
     Type: 11,
     Name: "Wood",
-    UnitWeigh: 100 * KG,
+    UnitWeight: 100 * KG,
 }
 
 var FOOD = &Commodity {

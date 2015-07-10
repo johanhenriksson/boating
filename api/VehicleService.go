@@ -4,7 +4,7 @@ import (
     "fmt"
     "strconv"
     "encoding/json"
-    "github.com/johanhenriksson/trade/core"
+    "github.com/johanhenriksson/boating/core"
 )
 
 type VehicleService struct {

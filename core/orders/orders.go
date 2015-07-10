@@ -3,7 +3,7 @@ package orders
 import (
     "fmt"
     "time"
-    "github.com/johanhenriksson/trade/core"
+    "github.com/johanhenriksson/boating/core"
 )
 
 type Order interface {

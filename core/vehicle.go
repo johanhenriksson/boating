@@ -1,6 +1,7 @@
 package core
 
 import (
+    "fmt"
     "time"
     "math/rand"
 )
@@ -102,6 +103,7 @@ func (v *Vehicle) Move(city_b *City) bool {
 
 func (v *Vehicle) Load(com *Commodity, quantity int64) bool {
     if !v.InCity() {
+        fmt.Println("Cannot load ship", v.Id, "- not in town")
         return false
     }
 
@@ -129,6 +131,7 @@ func (v *Vehicle) Load(com *Commodity, quantity int64) bool {
 
 func (v *Vehicle) UnloadAll() bool {
     if !v.InCity() {
+        fmt.Println("Cannot unload ship", v.Id, "- not in town")
         return false
     }
 
@@ -143,6 +146,7 @@ func (v *Vehicle) UnloadAll() bool {
 
 func (v *Vehicle) Unload(com *Commodity, qty int64) bool {
     if !v.InCity() {
+        fmt.Println("Cannot unload ship", v.Id, "- not in town")
         return false
     }
 

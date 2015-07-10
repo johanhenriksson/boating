@@ -6,7 +6,7 @@ import (
     "errors"
     "strings"
     "strconv"
-    "github.com/johanhenriksson/trade/core"
+    "github.com/johanhenriksson/boating/core"
 )
 
 var parseTable = map[string]ParserFunction {

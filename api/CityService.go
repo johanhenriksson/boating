@@ -5,7 +5,7 @@ import (
     "sort"
     "strconv"
     "encoding/json"
-    "github.com/johanhenriksson/trade/core"
+    "github.com/johanhenriksson/boating/core"
 )
 
 type CityService struct {

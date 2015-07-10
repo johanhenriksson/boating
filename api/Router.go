@@ -5,8 +5,6 @@ import (
     "net/http"
     "github.com/gorilla/mux"
     "github.com/gorilla/sessions"
-
-    "github.com/johanhenriksson/edetalj-backend/views"
 )
 
 type RoutedService interface {
@@ -57,20 +55,6 @@ func (router *Router) Register(srv RoutedService) {
                 router.Route(route, w, r)
             })
     }
-}
-
-func (router *Router) RegisterView(view *views.View) {
-    router.Mux().
-        Methods("GET").
-        Path(view.Pattern).
-        HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-            view := views.UserView { }
-            view.Render(views.ViewContext{
-                Writer: w,
-                Vars: make(map[string]interface{}),
-            })
-
-        })
 }
 
 func (router *Router) Route(route Route, w http.ResponseWriter, r *http.Request) {

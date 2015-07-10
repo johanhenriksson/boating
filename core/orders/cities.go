@@ -1,7 +1,7 @@
 package orders
 
 import (
-    "github.com/johanhenriksson/trade/core"
+    "github.com/johanhenriksson/boating/core"
 )
 
 /* City translations for order scripting */

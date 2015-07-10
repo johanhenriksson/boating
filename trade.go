@@ -5,9 +5,9 @@ import (
     "time"
     "net/http"
 
-    "github.com/johanhenriksson/trade/api"
-    "github.com/johanhenriksson/trade/core"
-    "github.com/johanhenriksson/trade/core/orders"
+    "github.com/johanhenriksson/boating/api"
+    "github.com/johanhenriksson/boating/core"
+    "github.com/johanhenriksson/boating/core/orders"
 )
 
 func main() {
@@ -31,8 +31,7 @@ func main() {
     for i := 0; i < 10; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))
 
-        orders := orders.CompileFile("scripts/merchant.txt")
-        orders.Print()
+        orders := orders.CompileFile("scripts/amsterdam_coffee.txt")
 
         orders.SetVehicle(boat)
         orders.Execute(boat.Actor)

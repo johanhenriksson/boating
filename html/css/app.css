@@ -1,3 +1,6 @@
+.city {
+    color: #fff;
+}
 .vehicle {
     display: block;
     float: left;
@@ -5,4 +8,15 @@
     padding: 1.0em;
     min-height: 150px;
     width: 220px;
+
+    color: #fff;
+}
+
+#world-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -99;
 }

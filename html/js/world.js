@@ -12,8 +12,9 @@ $(document).ready(function() {
     var geometry         = new THREE.SphereGeometry(0.5, 64, 64);
     var material         = new THREE.MeshPhongMaterial();
     material.map         = THREE.ImageUtils.loadTexture('img/earthmap4k.jpg');
-    material.bumpMap     = THREE.ImageUtils.loadTexture('img/earthbump4k.jpg');
+    //material.bumpMap     = THREE.ImageUtils.loadTexture('img/earthbump4k.jpg');
     material.specularMap = THREE.ImageUtils.loadTexture('img/earthspec4k.jpg');
+    material.bumpScale = 0.07
     material.fog = false;
     material.shininess = 0.01;
     //material.wireframe = true;
@@ -57,14 +58,15 @@ $(document).ready(function() {
     document.addEventListener("mousewheel", function(event) {
         w = event.wheelDeltaY;
         cam_distance -= Math.sign(w) * 0.02;
-        if (cam_distance < 0.60) cam_distance = 0.60;
-        camera.position.y = Math.sin(cam_angle) * cam_distance;
-        camera.position.z = Math.cos(cam_angle) * cam_distance;
-        camera.lookAt(earthMesh.position);
+        min_distance = 0.75;
+        if (cam_distance < min_distance) cam_distance = min_distance;
         event.preventDefault();
     }, false);
     renderJobs.push(function(delta, now){
-        earthMesh.rotateY(0.00005);
+        earthMesh.rotateY(0.00007);
+        camera.position.y = Math.sin(cam_angle) * cam_distance;
+        camera.position.z = Math.cos(cam_angle) * cam_distance;
+        camera.lookAt(earthMesh.position);
         if (!down) return;
 
         m = { x: mouse.x - down_pos.x, y: mouse.y - down_pos.y };
@@ -83,10 +85,10 @@ $(document).ready(function() {
     })
 
     /* scene lighting */
-    var ambient = new THREE.AmbientLight( 0x888888 )
+    var ambient = new THREE.AmbientLight( 0 )
     scene.add(ambient)
-    var sol = new THREE.DirectionalLight( 0xcccccc, 0.65 )
-    sol.position.set(3,3,25)
+    var sol = new THREE.DirectionalLight( 0xcccccc, 1.65 )
+    sol.position.set(3,3,5)
     scene.add(sol)
     
     /*

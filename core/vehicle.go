@@ -1,15 +1,17 @@
 package core
 
 import (
-    "fmt"
     "time"
     "math/rand"
 )
 
 const BOAT = 1
 
+type VehicleId  int64
+
 type Vehicle struct {
-    Id          int64
+    *Actor
+    Id          VehicleId
     Type        int64
     Capacity    int64
     Speed       int64
@@ -17,76 +19,58 @@ type Vehicle struct {
     Journey     Journey
     Cargo       *Storage
     Owner       *Player
-    Orders      chan func()
+    City        *City
 }
 
 type Journey struct {
     From        *City
     To          *City
     Start       time.Time
-    Distance    int64
-    Remaining   int64
+    Distance    Distance
+    Remaining   Distance
 }
 
-func NewBoat(name string, owner *Player, capacity int64) *Vehicle {
+func NewBoat(owner *Player, city *City, name string) *Vehicle {
     boat := &Vehicle {
-        Id:         nextId(),
+        Actor:      NewActor(),
+        Id:         VehicleId(nextId()),
         Name:       name,
         Type:       BOAT,
-        Capacity:   capacity,
-        Speed:      10,
+        Capacity:   100,
+        Speed:      25,
         Cargo:      NewStorage(),
         Owner:      owner,
-        Orders:     make(chan func()),
+        City:       city,
+        Journey:    Journey {
+            From:   city,
+            To:     city,
+            Start:  time.Now(),
+            Distance:  0,
+            Remaining: 0,
+        },
     }
-    go VehicleWorker(boat)
+    owner.AddVehicle(boat)
+    city.Vehicles.Add(boat)
     return boat
 }
 
-type Order struct {
-    Execute     func()
-}
-
-func VehicleWorker(v *Vehicle) {
-    orderQueue := make([]func(), 0, 4)
-    orderDone  := make(chan int)
-    executing  := false
-
-    for {
-        /* if there is more work to do... */
-        if !executing && len(orderQueue) > 0 {
-            order := orderQueue[0]
-            orderQueue = orderQueue[1:]
-            executing = true
-            /* Execute order on a separate thread to make sure the worker
-               remains responsive while executing the order */
-            go func() {
-                order()
-                orderDone <- 1
-            }()
-        }
-
-        select {
-        case order := <-v.Orders:
-            orderQueue = append(orderQueue, order)
-        case <-orderDone:
-            executing = false
-        }
-    }
-}
-
-/* Queue an order */
-func (v *Vehicle) Issue(order func()) {
-    v.Orders <- order
-}
-
-func (v *Vehicle) Move(city_a *City, city_b *City) bool {
-    route := city_a.Routes[city_b]
-
-    if route == nil || !city_a.HasVehicle(v) {
+/* Returns true if the vehicle is currently in a city */
+func (v *Vehicle) InCity() bool {
+    if v.City == nil {
         return false
     }
-    city_a.Embark <- v
+    return v.City.Vehicles.Stores(v)
+}
+
+func (v *Vehicle) Move(city_b *City) bool {
+    city_a := v.City
+    route := city_a.Routes[city_b]
+
+    if route == nil || !city_a.Vehicles.Stores(v) {
+        return false
+    }
+    city_a.Vehicles.Unpark(v)
+    v.City = city_b
 
     v.Journey = Journey {
         To:        route.To,
@@ -98,8 +82,8 @@ func (v *Vehicle) Move(city_a *City, city_b *City) bool {
 
     /* Perform movement */
     for v.Journey.Remaining > 0 {
-        time.Sleep(1 * time.Second)
-        v.Journey.Remaining -= rand.Int63n(v.Speed)
+        sleep(1 * time.Hour) /* Kilometers per hour */
+        v.Journey.Remaining -= Distance(rand.Int63n(v.Speed))
     }
     v.Journey.Remaining = 0
 
@@ -112,15 +96,12 @@ func (v *Vehicle) Move(city_a *City, city_b *City) bool {
         Start: time.Now(),
     }
 
-    city_b.Harbor <- v
-    for !city_b.HasVehicle(v) {
-        time.Sleep(500 * time.Millisecond)
-    }
+    city_b.Vehicles.Park(v)
     return true
 }
 
-func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
-    if !city.HasVehicle(v) {
+func (v *Vehicle) Load(com *Commodity, quantity int64) bool {
+    if !v.InCity() {
         return false
     }
 
@@ -135,35 +116,35 @@ func (v *Vehicle) Load(city *City, com *Commodity, quantity int64) bool {
         }
         loadAmount -= loadStep
 
-        crate, err := city.Stock.Get(v.Owner, com, loadStep)
+        crate, err := v.City.Stock.Get(v.Owner, com, loadStep)
         if err != nil {
             return false
         }
-        time.Sleep(1 * time.Second)
+        sleep(1 * time.Hour)
         v.Cargo.Store(crate)
     }
 
     return true
 }
 
-func (v *Vehicle) UnloadAll(city *City) bool {
-    if !city.HasVehicle(v) {
+func (v *Vehicle) UnloadAll() bool {
+    if !v.InCity() {
         return false
     }
     for _, crates:= range v.Cargo.Crates {
         for _, crate := range crates {
-            v.Unload(crate, city)
+            v.Unload(crate.Type, crate.Qty)
         }
     }
     return true
 }
 
-func (v *Vehicle) Unload(crate *Crate, city *City) bool {
-    if !city.HasVehicle(v) {
+func (v *Vehicle) Unload(com *Commodity, qty int64) bool {
+    if !v.InCity() {
         return false
     }
 
-    loadAmount := crate.Qty
+    loadAmount := qty
     var loadStep int64 = 10
     for loadAmount > 0 {
         if (loadAmount < loadStep) {
@@ -171,14 +152,13 @@ func (v *Vehicle) Unload(crate *Crate, city *City) bool {
         }
         loadAmount -= loadStep
 
-        crate, err := v.Cargo.Get(v.Owner, crate.Type, loadStep)
+        crate, err := v.Cargo.Get(v.Owner, com, loadStep)
         if err != nil {
             return false
         }
-        time.Sleep(1 * time.Second)
-        city.Stock.Store(crate)
+        sleep(1 * time.Hour)
+        v.City.Stock.Store(crate)
     }
 
     return true
 }
-

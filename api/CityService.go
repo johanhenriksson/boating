@@ -37,13 +37,13 @@ func (srv *CityService) GetAll(p RouteArgs) {
         fmt.Fprintf(p.Writer, "no such player %s", p.Vars["user"])
         return
     }
-    player := srv.World.Players[user_id]
+    player := srv.World.Players[core.PlayerId(user_id)]
 
-    response := make([]CityResponse, len(srv.World.Cities))
+    response := make([]CityResponse, len(core.Cities))
     i := 0
-    for _, city := range srv.World.Cities {
+    for _, city := range core.Cities {
         response[i] = CityResponse {
-            Id: city.Id,
+            Id: int64(city.Id),
             Name: city.Name,
             Stock: make([]CrateResponse, 0),
         }

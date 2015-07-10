@@ -1,24 +1,14 @@
 package core
 
-type Player struct {
-    Id          int64
-    Name        string
+type PlayerId int64
+type PlayerMap map[PlayerId]*Player
 
-    Transit     []*Transit
+type Player struct {
+    Id          PlayerId
+    Name        string
     Vehicles    []*Vehicle
 }
 
 func (player *Player) AddVehicle(vehicle *Vehicle) {
     player.Vehicles = append(player.Vehicles, vehicle)
-}
-
-func (player *Player) AddTransit(transit *Transit) {
-    player.Transit = append(player.Transit, transit)
-}
-
-type Transit struct {
-    Id          int64
-    Vehicle     *Vehicle
-    Route       *Route
-    /* Depart timestamp */
 }

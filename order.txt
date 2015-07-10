@@ -1,0 +1,38 @@
+
+One command per line. Split on whitespace, first word is the command
+go <city>
+load <commodity> [quantity]
+store <commodity> [quantity]
+
+-----------
+Design Goal
+-----------
+
+VAR coffee_price 50
+VAR coffee_amount 75
+
+VAR steel_price 100
+VAR steel_amount 150
+
+FUNC load
+    go london
+    load gold coffee_price + steel_price
+END
+
+FUNC buy_coffee
+    go amsterdam
+    store gold coffee_price
+    load coffee coffee_amount
+END
+
+FUNC buy_steel
+    go hamburg
+    store gold steel_price
+    load steel steel_amount
+END
+
+LOOP
+    load
+    buy_coffee
+    buy_steel
+END

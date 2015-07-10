@@ -36,20 +36,20 @@ func (srv *VehicleService) GetAll(p RouteArgs) {
         fmt.Fprintf(p.Writer, "no such player %s", p.Vars["user"])
         return
     }
-    player := srv.World.Players[user_id]
+    player := srv.World.Players[core.PlayerId(user_id)]
 
     response := make([]VehicleResponse, len(player.Vehicles))
     i := 0
     for _, v := range player.Vehicles {
         response[i] = VehicleResponse {
-            Id:      v.Id,
+            Id:      int64(v.Id),
             Name:    v.Name,
             Cargo:   make([]CrateResponse, 0),
             Journey: JourneyResponse {
                 To:         v.Journey.To.Name,
                 From:       v.Journey.From.Name,
-                Distance:   v.Journey.Distance,
-                Remaining:  v.Journey.Remaining,
+                Distance:   int64(v.Journey.Distance),
+                Remaining:  int64(v.Journey.Remaining),
                 Start:      v.Journey.Start.Unix(),
             },
         }

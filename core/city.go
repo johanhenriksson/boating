@@ -1,34 +1,34 @@
 package core
 
 import (
-    "fmt"
+    "sync"
 )
 
+type CityId int64
+type RouteMap map[*City]*Route
+
 type City struct {
-    Id          int64
+    Id          CityId
     Name        string
-    Vehicles    map[int64]*Vehicle
-    Routes      map[*City]*Route
     Stock       *Storage
-    Harbor      chan *Vehicle
-    Embark      chan *Vehicle
+    Vehicles    *Garage
+    Routes      RouteMap
+    routeLock   *sync.RWMutex
 }
 
-func NewCity(name string) *City {
+func NewCity(id CityId, name string) *City {
     city := &City {
-        Id:         nextId(),
+        Id:         id,
         Name:       name,
+        Routes:     make(RouteMap),
         Stock:      NewStorage(),
-        Vehicles:   make(map[int64]*Vehicle),
-        Routes:     make(map[*City]*Route),
-        Harbor:     make(chan *Vehicle),
-        Embark:     make(chan *Vehicle),
+        Vehicles:   NewGarage(),
     }
-    go CityWorker(city)
     return city
 }
 
-func (city *City) AddRoute(target *City, distance int64) *Route {
+/* Add an available transport route originating from this city */
+func (city *City) addRoute(target *City, distance Distance) *Route {
     route := &Route {
         From: city,
         To: target,
@@ -38,43 +38,7 @@ func (city *City) AddRoute(target *City, distance int64) *Route {
     return route
 }
 
-func (city *City) Park(vehicle *Vehicle) {
-    city.Vehicles[vehicle.Id] = vehicle
+func (city *City) ShortName() string {
+    return city.Name
 }
 
-func (city *City) Unpark(vehicle *Vehicle) {
-    delete(city.Vehicles, vehicle.Id)
-}
-
-func (city *City) HasVehicle(vehicle *Vehicle) bool {
-    _, exists := city.Vehicles[vehicle.Id]
-    return exists
-}
-
-func (city *City) Print() {
-    fmt.Println("------------------")
-    fmt.Println("City:", city.Name)
-    for player, crates := range city.Stock.Crates {
-        fmt.Println("Player", player.Name)
-        for _, crate := range crates {
-            fmt.Printf("  %d x %s\n", crate.Qty, crate.Type.Name)
-        }
-        fmt.Println("")
-    }
-    fmt.Println("Vehicles:")
-    for _, vehicle := range city.Vehicles {
-        fmt.Printf("  %d %s (%s)\n", vehicle.Id, vehicle.Name, vehicle.Owner.Name)
-    }
-    fmt.Println("------------------")
-}
-
-func CityWorker(city *City) {
-    for {
-        select {
-        case boat := <-city.Harbor:
-            city.Park(boat)
-        case boat := <-city.Embark:
-            city.Unpark(boat)
-        }
-    }
-}

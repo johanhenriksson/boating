@@ -28,7 +28,7 @@ func main() {
     core.HAMBURG.Stock.Store(core.NewCrate(player,    core.STEEL,   50000))
     core.WASHINGTON.Stock.Store(core.NewCrate(player, core.WEAPONS, 10000))
 
-    for i := 0; i < 1; i++ {
+    for i := 0; i < 10; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))
 
         orders := orders.CompileFile("scripts/merchant.txt")

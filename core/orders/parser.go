@@ -2,27 +2,78 @@ package orders
 
 import (
     "fmt"
+    "time"
     "errors"
+    "strings"
     "strconv"
     "github.com/johanhenriksson/trade/core"
 )
 
 var parseTable = map[string]ParserFunction {
-    "go": func(line int64, tokens []string) (Order, error) {
-        if len(tokens) != 1 {
-            return nil, errors.New(fmt.Sprintf("%d: Too many arguments to Go", line))
-        }
-        city := cityMap[tokens[0]]
-        return &GoOrder {
-            City: city,
-        }, nil
-    },
+    "go": parseGo,
+    "wait": parseWait,
     "load": func(line int64, tokens []string) (Order, error) {
         return parseLoad(false, line, tokens)
     },
     "unload": func(line int64, tokens []string) (Order, error) {
         return parseLoad(true, line, tokens)
     },
+}
+
+func parseGo(line int64, tokens []string) (Order, error) {
+    if len(tokens) != 1 {
+        return nil, errors.New(fmt.Sprintf("%d: Too many arguments to Go", line))
+    }
+    city := cityMap[tokens[0]]
+    return &GoOrder {
+        City: city,
+    }, nil
+}
+
+func parseWait(line int64, tokens []string) (Order, error) {
+    if len(tokens) < 1 {
+        return nil, errors.New(fmt.Sprintf("%d: Too few arguments to Wait", line))
+    }
+
+    d, err := strconv.ParseInt(tokens[0], 10, 64)
+    if err != nil {
+        return nil, errors.New(fmt.Sprintf("%d: Wait error: invalid duration", line))
+    }
+
+    duration := time.Duration(d)
+
+    if len(tokens) == 2 {
+        switch strings.ToLower(tokens[1]) {
+        case "year":
+            duration *= 365 * 24 * time.Hour
+        case "years":
+            duration *= 365 * 24 * time.Hour
+        case "month":
+            duration *= 30 * 24 * time.Hour
+        case "months":
+            duration *= 30 * 24 * time.Hour
+        case "day":
+            duration *= 24 * time.Hour
+        case "days":
+            duration *= 24 * time.Hour
+        case "hour":
+            duration *= time.Hour
+        case "hours":
+            duration *= time.Hour
+        case "minute":
+            duration *= time.Minute
+        case "minutes":
+            duration *= time.Minute
+        case "second":
+        case "seconds":
+        default:
+            return nil, errors.New(fmt.Sprintf("%d: Wait error: Invalid duration unit '%s'", line, tokens[1]))
+        }
+    }
+
+    return &WaitOrder {
+        Duration: duration,
+    }, nil
 }
 
 func parseLoad(unload bool, line int64, tokens []string) (Order, error) {
@@ -65,3 +116,4 @@ func parseLoad(unload bool, line int64, tokens []string) (Order, error) {
         Quantity: qty,
     }, nil
 }
+

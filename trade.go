@@ -11,8 +11,6 @@ import (
 )
 
 func main() {
-
-
     player := &core.Player {
         Id: 123,
         Name: "jojje",
@@ -33,7 +31,7 @@ func main() {
     for i := 0; i < 1; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))
 
-        orders := orders.CompileFile("scripts/amsterdam_coffee.txt")
+        orders := orders.CompileFile("scripts/merchant.txt")
         orders.Print()
 
         orders.SetVehicle(boat)

@@ -2,6 +2,7 @@ package orders
 
 import (
     "fmt"
+    "time"
     "github.com/johanhenriksson/trade/core"
 )
 
@@ -113,4 +114,18 @@ func (order *LoadOrder) Print() {
             fmt.Println("Load", com)
         }
     }
+}
+
+type WaitOrder struct {
+    Duration    time.Duration
+}
+
+func (order *WaitOrder) Execute(actor *core.Actor) {
+    actor.Issue(func() {
+        core.Sleep(order.Duration)
+    })
+}
+
+func (order *WaitOrder) Print() {
+    fmt.Println("Wait", order.Duration)
 }

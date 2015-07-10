@@ -82,7 +82,7 @@ func (v *Vehicle) Move(city_b *City) bool {
 
     /* Perform movement */
     for v.Journey.Remaining > 0 {
-        sleep(1 * time.Hour) /* Kilometers per hour */
+        Sleep(1 * time.Hour) /* Kilometers per hour */
         v.Journey.Remaining -= Distance(rand.Int63n(v.Speed))
     }
     v.Journey.Remaining = 0
@@ -120,7 +120,7 @@ func (v *Vehicle) Load(com *Commodity, quantity int64) bool {
         if err != nil {
             return false
         }
-        sleep(1 * time.Hour)
+        Sleep(1 * time.Hour)
         v.Cargo.Store(crate)
     }
 
@@ -131,11 +131,13 @@ func (v *Vehicle) UnloadAll() bool {
     if !v.InCity() {
         return false
     }
+
     for _, crates:= range v.Cargo.Crates {
         for _, crate := range crates {
             v.Unload(crate.Type, crate.Qty)
         }
     }
+
     return true
 }
 
@@ -156,7 +158,7 @@ func (v *Vehicle) Unload(com *Commodity, qty int64) bool {
         if err != nil {
             return false
         }
-        sleep(1 * time.Hour)
+        Sleep(1 * time.Hour)
         v.City.Stock.Store(crate)
     }
 

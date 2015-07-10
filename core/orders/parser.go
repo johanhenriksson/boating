@@ -4,6 +4,7 @@ import (
     "fmt"
     "errors"
     "strconv"
+    "github.com/johanhenriksson/trade/core"
 )
 
 var parseTable = map[string]ParserFunction {
@@ -24,31 +25,37 @@ var parseTable = map[string]ParserFunction {
     },
 }
 
-
 func parseLoad(unload bool, line int64, tokens []string) (Order, error) {
-    if len(tokens) == 0 {
-        return nil, errors.New(fmt.Sprintf("%d: Too few arguments to Load", line))
+    if !unload && len(tokens) == 0 {
+        return nil, errors.New(fmt.Sprintf("%d: Too few arguments", line))
     }
     if len(tokens) > 2 {
-        return nil, errors.New(fmt.Sprintf("%d: Too many arguments to Load", line))
+        return nil, errors.New(fmt.Sprintf("%d: Too many arguments", line))
     }
 
     all := true
+    var ok bool
     var qty int64 = 0
-    if len(tokens) == 2 {
-        /* get count */
-        var err error
-        qty, err = strconv.ParseInt(tokens[1], 10, 64)
-        if err != nil {
-            return nil, errors.New(fmt.Sprintf("%d: Expected integer value (argument 2)", line))
+    var com *core.Commodity = nil
+
+    /* We have a commodity specifier */
+    if len(tokens) > 0 {
+        all = false
+
+        com, ok = commodityMap[tokens[0]]
+        if !ok {
+            return nil, errors.New(fmt.Sprintf("No such commodity '%s'", tokens[0]))
         }
 
-        all = false
-    }
-
-    com, ok := commodityMap[tokens[0]]
-    if !ok {
-        return nil, errors.New(fmt.Sprintf("No such commodity '%s'", tokens[0]))
+        /* Check for a specified quantity */
+        if len(tokens) > 1 {
+            /* get count */
+            var err error
+            qty, err = strconv.ParseInt(tokens[1], 10, 64)
+            if err != nil {
+                return nil, errors.New(fmt.Sprintf("%d: Expected integer value (argument 2)", line))
+            }
+        }
     }
 
     return &LoadOrder {

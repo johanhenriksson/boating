@@ -33,31 +33,11 @@ func main() {
     for i := 0; i < 1; i++ {
         boat := core.NewBoat(player, core.LONDON, fmt.Sprintf("HMS Boat #%d", 100+i))
 
-        orders := orders.Compile("load gold 50; go hamburg; unload gold 50; go london")
+        orders := orders.CompileFile("scripts/amsterdam_coffee.txt")
+        orders.Print()
+
         orders.SetVehicle(boat)
         orders.Execute(boat.Actor)
-
-        boat.Issue(func() {
-            for {
-                /* Load up cash */
-                boat.Load(core.GOLD, 45)
-
-                /* Go to amsterdam */
-                boat.Move(core.AMSTERDAM)
-
-                /* Drop gold & pick up coffee in amsterdam */
-                boat.UnloadAll()
-                boat.Load(core.COFFEE, 77)
-
-                /* pickup steel in hamburg */
-                boat.Move(core.HAMBURG)
-                boat.Load(core.STEEL, 140)
-
-                /* Return to london, dump goods */
-                boat.Move(core.LONDON)
-                boat.UnloadAll()
-            }
-        })
     }
 
     router := api.NewRouter()

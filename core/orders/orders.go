@@ -46,7 +46,7 @@ func (order *GoOrder) SetVehicle(v *core.Vehicle) {
     order.Vehicle = v
 }
 
-func (order GoOrder) Execute(actor *core.Actor) {
+func (order *GoOrder) Execute(actor *core.Actor) {
     if order.Vehicle == nil {
         fmt.Println("Error in order Go: Target vehicle is nil")
         return
@@ -56,7 +56,7 @@ func (order GoOrder) Execute(actor *core.Actor) {
     })
 }
 
-func (order GoOrder) Print() {
+func (order *GoOrder) Print() {
     fmt.Println("Go to", order.City.Name)
 }
 
@@ -97,7 +97,7 @@ func (order *LoadOrder) Print() {
 
     if order.Unload {
         if order.All {
-            fmt.Println("Unload alln")
+            fmt.Println("Unload all")
         } else {
             if qty > 0 {
                 fmt.Println("Unload", qty, "x", com)

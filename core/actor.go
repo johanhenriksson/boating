@@ -11,6 +11,10 @@ type Actor struct {
     Orders chan func()
 }
 
+type Orderable interface {
+    Issue(func())
+}
+
 func NewActor() *Actor {
     actor := &Actor {
         Orders: make(chan func()),

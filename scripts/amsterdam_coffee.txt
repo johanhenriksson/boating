@@ -1,0 +1,9 @@
+# stock up in london
+go london
+unload coffee
+load gold 50
+ 
+# head to the dam
+go amsterdam
+unload gold 50
+load coffee 100

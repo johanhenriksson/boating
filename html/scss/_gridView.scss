@@ -33,172 +33,182 @@
 					-webkit-font-smoothing: antialiased;
 				}
 			}
-
-			
-		}
-		
-		&.ship h2 a:before{
-			
-			content: "\f21a";
-			
-		}
-		
-		&.place h2 a:before{
-			
-			content: "\f13d";
-			
-		}
-		
-		
-		.cargo{
-			background-color: #f7f7f7;
-			border-radius: 0.25rem;
-			
-			ul{
-				margin: 0;
-				padding: 0;
-				list-style: none;
-				
-				li{
-					
-					margin: 0;
-					padding: 0.75rem 1rem;
-					line-height: 1rem;
-					white-space: nowrap;
-					overflow: hidden;
-					
-					&:nth-child(odd){
-						
-						background-color: #f1f1f1;
-						
-					}
-					
-					&:last-child{
-							border-bottom: none;							
-					}
-					
-					span.qty{
-						
-						float: right;
-						
-					}
-				}
-			}
-			
-		}
-		
-		.route{
-			background-color: #f7f7f7;
-			border-radius: 0.25rem;
-			padding: 0.5rem;
-			height: 3rem;
-			position: relative;
-			overflow: hidden;
-			margin-bottom: 1rem;
-			
-			&.active{
-				background-color: #E08283;
-				color: #fff;
-				
-				ul{
-					margin: 0;
-					padding: 0;
-					list-style: none;
-					
-					
-					li{
-						margin: 0;
-						padding: 0;
-						position: absolute;
-						top: 0;
-						bottom: 0;
-						display: block;
-						height: 3rem;
-						line-height: 3rem;
-						padding: 0 1rem;
-						
-						&:before{
-							font-family: FontAwesome;
-							margin-right: 0.4rem;
-							font-weight: normal;
-							font-style: normal;
-							-webkit-font-smoothing: antialiased;
-						}
-
-						&.origin{
-							
-							left: 0;
-							
-							&:before{
-								content: "\f041";	
-							}
-							
-						}
-						
-						&.destination{
-							
-							right: 0;
-							
-							&:before{
-								content: "\f14e";
-							}
-							
-						}
-						
-					}
-					
-					&:before{
-						
-						display: block;
-						content: " ";
-						position: absolute;
-						top: 0;
-						bottom: 0;
-						left: 0;
-						height: 3rem;
-						background-color: rgba(0,0,0,0.2);
-					    -webkit-transition: width 500ms;
-					    transition: width 500ms;
-					
-					}
-					
-				}
-				
-				@for $i from 1 through 100{
-				  &[data-progress="#{$i}"] ul:before{ width: unquote($i + "%");}
-				}
-					
-					
-				@mixin route-icon(){
-					font-family: FontAwesome;
-					font-weight: normal;
-					font-style: normal;
-					-webkit-font-smoothing: antialiased;
-					display: block;
-					position: absolute;
-					left: 50%;
-					top: 0.5rem;
-					bottom: 0.5rem;
-					margin-left: -0.5rem;
-					width: 1rem;
-					height: 2rem;
-					font-size: 1.5rem;
-					line-height: 2rem;
-				}
-				
-				&.loop ul:after{
-					@include route-icon(); 
-					content: "\f0ec";
-				}
-				
-				&.single ul:after{
-					@include route-icon(); 
-					content: "\f178";
-				}
-			}
-			
+	
 		}
 		
 	}
 	
+}
+
+
+.place h2 a:before{
+	
+	content: "\f13d";
+	
+}
+
+
+
+.cargo{
+	background-color: #f7f7f7;
+	border-radius: 0.25rem;
+
+	
+	ul{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		
+		li{
+			
+			margin: 0;
+			padding: 0.75rem 1rem;
+			line-height: 1rem;
+			white-space: nowrap;
+			overflow: hidden;
+			
+			&:nth-child(odd){
+				
+				background-color: #f1f1f1;
+				
+			}
+			
+			&:last-child{
+					border-bottom: none;							
+			}
+			
+			span.qty{
+				
+				float: right;
+				
+			}
+		}
+	}
+	
+}
+		
+.ship{ 
+	
+	h2 a:before{
+		
+		content: "\f21a";
+		
+	}
+	
+	
+	.route{
+		background-color: #f7f7f7;
+		border-radius: 0.25rem;
+		padding: 0;
+		height: 3rem;
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 1rem;
+		
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			
+			
+			li{
+				margin: 0;
+				padding: 0;
+				display: block;
+				height: 3rem;
+				line-height: 3rem;
+				padding: 0 1rem;
+				float: left;
+				position: relative;
+				
+				&.current{
+					
+					color: #999;
+					
+					&:before{
+						content: "\f041";	
+					}
+				}
+				
+				&.origin{
+			
+			
+					&:before{
+						content: "\f041";	
+					}
+					
+				}
+				
+				&.destination{
+					
+					float: right;
+					
+					&:before{
+						content: "\f14e";
+					}
+					
+				}
+				
+				&:before{
+					font-family: FontAwesome;
+					margin-right: 0.4rem;
+					font-weight: normal;
+					font-style: normal;
+					-webkit-font-smoothing: antialiased;
+				}
+			}
+		}
+		
+		&.active{
+			background-color: #E08283;
+			color: #fff;
+			
+			ul:before{
+					
+				display: block;
+				content: " ";
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				height: 3rem;
+				background-color: rgba(0,0,0,0.2);
+			    -webkit-transition: width 500ms;
+			    transition: width 500ms;
+				
+			}
+			
+			@for $i from 1 through 100{
+			  &[data-progress="#{$i}"] ul:before{ width: unquote($i + "%");}
+			}
+				
+				
+			@mixin route-icon(){
+				font-family: FontAwesome;
+				font-weight: normal;
+				font-style: normal;
+				-webkit-font-smoothing: antialiased;
+				display: block;
+				position: absolute;
+				left: 50%;
+				top: 0.5rem;
+				bottom: 0.5rem;
+				margin-left: -0.5rem;
+				width: 1rem;
+				height: 2rem;
+				font-size: 1.5rem;
+				line-height: 2rem;
+			}
+			
+			&.loop ul:after{
+				@include route-icon(); 
+				content: "\f0ec";
+			}
+			
+			&.single ul:after{
+				@include route-icon(); 
+				content: "\f178";
+			}
+		}
+	}
 }

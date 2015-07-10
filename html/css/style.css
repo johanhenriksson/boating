@@ -242,18 +242,6 @@ html {
 .column.padded-y {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }
-@media (min-width: 60rem) {
-  .grid.padded,
-  .column.padded {
-    padding: 1rem; }
-  .grid.padded-x,
-  .column.padded-x {
-    padding-left: 1rem;
-    padding-right: 1rem; }
-  .grid.padded-y,
-  .column.padded-y {
-    padding-top: 1rem;
-    padding-bottom: 1rem; } }
 
 form.grid {
   padding: 0rem; }
@@ -608,9 +596,27 @@ label {
   background-image: url("../img/arrow.png");
   background-repeat: no-repeat;
   background-position: right;
-  background-size: 40px; }
+  background-size: 40px;
+  position: relative;
+  height: 3rem;
+  line-height: 2.9rem; }
   .select:last-child, .select .no-margin {
     margin-bottom: 0; }
+  .select:after {
+    font-family: FontAwesome;
+    margin-right: 0.4rem;
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    content: "\f078";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.3rem;
+    height: 3rem;
+    line-height: 2.9rem;
+    padding: 0 0.75rem; }
   .select select {
     display: inline-block;
     width: 110%;
@@ -618,7 +624,7 @@ label {
     outline: none;
     background-color: transparent;
     height: 3rem;
-    line-height: 3rem;
+    line-height: 2.9rem;
     padding: 0 0.75rem;
     font-family: inherit;
     -webkit-appearance: none; }
@@ -633,6 +639,7 @@ input[type=number] {
   border: 1px solid #e0e0e0;
   outline: none;
   padding: 0 0.75rem;
+  height: 3rem;
   line-height: 2.9rem;
   font-family: inherit;
   background-color: #fff;
@@ -749,7 +756,9 @@ button.choice {
 
 .navbar {
   background-color: #fff;
-  height: 3rem; }
+  height: 3rem;
+  position: relative;
+  z-index: 100; }
   .navbar ul, .navbar li {
     margin: 0;
     padding: 0;
@@ -912,319 +921,328 @@ button.choice {
           font-weight: normal;
           font-style: normal;
           -webkit-font-smoothing: antialiased; }
-    .gridView .card.ship h2 a:before {
-      content: "\f21a"; }
-    .gridView .card.place h2 a:before {
-      content: "\f13d"; }
-    .gridView .card .cargo {
-      background-color: #f7f7f7;
-      border-radius: 0.25rem; }
-      .gridView .card .cargo ul {
-        margin: 0;
-        padding: 0;
-        list-style: none; }
-        .gridView .card .cargo ul li {
-          margin: 0;
-          padding: 0.75rem 1rem;
-          line-height: 1rem;
-          white-space: nowrap;
-          overflow: hidden; }
-          .gridView .card .cargo ul li:nth-child(odd) {
-            background-color: #f1f1f1; }
-          .gridView .card .cargo ul li:last-child {
-            border-bottom: none; }
-          .gridView .card .cargo ul li span.qty {
-            float: right; }
-    .gridView .card .route {
-      background-color: #f7f7f7;
-      border-radius: 0.25rem;
-      padding: 0.5rem;
+
+.place h2 a:before {
+  content: "\f13d"; }
+
+.cargo {
+  background-color: #f7f7f7;
+  border-radius: 0.25rem; }
+  .cargo ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .cargo ul li {
+      margin: 0;
+      padding: 0.75rem 1rem;
+      line-height: 1rem;
+      white-space: nowrap;
+      overflow: hidden; }
+      .cargo ul li:nth-child(odd) {
+        background-color: #f1f1f1; }
+      .cargo ul li:last-child {
+        border-bottom: none; }
+      .cargo ul li span.qty {
+        float: right; }
+
+.ship h2 a:before {
+  content: "\f21a"; }
+.ship .route {
+  background-color: #f7f7f7;
+  border-radius: 0.25rem;
+  padding: 0;
+  height: 3rem;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem; }
+  .ship .route ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .ship .route ul li {
+      margin: 0;
+      padding: 0;
+      display: block;
       height: 3rem;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 1rem; }
-      .gridView .card .route.active {
-        background-color: #E08283;
-        color: #fff; }
-        .gridView .card .route.active ul {
-          margin: 0;
-          padding: 0;
-          list-style: none; }
-          .gridView .card .route.active ul li {
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            display: block;
-            height: 3rem;
-            line-height: 3rem;
-            padding: 0 1rem; }
-            .gridView .card .route.active ul li:before {
-              font-family: FontAwesome;
-              margin-right: 0.4rem;
-              font-weight: normal;
-              font-style: normal;
-              -webkit-font-smoothing: antialiased; }
-            .gridView .card .route.active ul li.origin {
-              left: 0; }
-              .gridView .card .route.active ul li.origin:before {
-                content: "\f041"; }
-            .gridView .card .route.active ul li.destination {
-              right: 0; }
-              .gridView .card .route.active ul li.destination:before {
-                content: "\f14e"; }
-          .gridView .card .route.active ul:before {
-            display: block;
-            content: " ";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, 0.2);
-            -webkit-transition: width 500ms;
-            transition: width 500ms; }
-        .gridView .card .route.active[data-progress="1"] ul:before {
-          width: 1%; }
-        .gridView .card .route.active[data-progress="2"] ul:before {
-          width: 2%; }
-        .gridView .card .route.active[data-progress="3"] ul:before {
-          width: 3%; }
-        .gridView .card .route.active[data-progress="4"] ul:before {
-          width: 4%; }
-        .gridView .card .route.active[data-progress="5"] ul:before {
-          width: 5%; }
-        .gridView .card .route.active[data-progress="6"] ul:before {
-          width: 6%; }
-        .gridView .card .route.active[data-progress="7"] ul:before {
-          width: 7%; }
-        .gridView .card .route.active[data-progress="8"] ul:before {
-          width: 8%; }
-        .gridView .card .route.active[data-progress="9"] ul:before {
-          width: 9%; }
-        .gridView .card .route.active[data-progress="10"] ul:before {
-          width: 10%; }
-        .gridView .card .route.active[data-progress="11"] ul:before {
-          width: 11%; }
-        .gridView .card .route.active[data-progress="12"] ul:before {
-          width: 12%; }
-        .gridView .card .route.active[data-progress="13"] ul:before {
-          width: 13%; }
-        .gridView .card .route.active[data-progress="14"] ul:before {
-          width: 14%; }
-        .gridView .card .route.active[data-progress="15"] ul:before {
-          width: 15%; }
-        .gridView .card .route.active[data-progress="16"] ul:before {
-          width: 16%; }
-        .gridView .card .route.active[data-progress="17"] ul:before {
-          width: 17%; }
-        .gridView .card .route.active[data-progress="18"] ul:before {
-          width: 18%; }
-        .gridView .card .route.active[data-progress="19"] ul:before {
-          width: 19%; }
-        .gridView .card .route.active[data-progress="20"] ul:before {
-          width: 20%; }
-        .gridView .card .route.active[data-progress="21"] ul:before {
-          width: 21%; }
-        .gridView .card .route.active[data-progress="22"] ul:before {
-          width: 22%; }
-        .gridView .card .route.active[data-progress="23"] ul:before {
-          width: 23%; }
-        .gridView .card .route.active[data-progress="24"] ul:before {
-          width: 24%; }
-        .gridView .card .route.active[data-progress="25"] ul:before {
-          width: 25%; }
-        .gridView .card .route.active[data-progress="26"] ul:before {
-          width: 26%; }
-        .gridView .card .route.active[data-progress="27"] ul:before {
-          width: 27%; }
-        .gridView .card .route.active[data-progress="28"] ul:before {
-          width: 28%; }
-        .gridView .card .route.active[data-progress="29"] ul:before {
-          width: 29%; }
-        .gridView .card .route.active[data-progress="30"] ul:before {
-          width: 30%; }
-        .gridView .card .route.active[data-progress="31"] ul:before {
-          width: 31%; }
-        .gridView .card .route.active[data-progress="32"] ul:before {
-          width: 32%; }
-        .gridView .card .route.active[data-progress="33"] ul:before {
-          width: 33%; }
-        .gridView .card .route.active[data-progress="34"] ul:before {
-          width: 34%; }
-        .gridView .card .route.active[data-progress="35"] ul:before {
-          width: 35%; }
-        .gridView .card .route.active[data-progress="36"] ul:before {
-          width: 36%; }
-        .gridView .card .route.active[data-progress="37"] ul:before {
-          width: 37%; }
-        .gridView .card .route.active[data-progress="38"] ul:before {
-          width: 38%; }
-        .gridView .card .route.active[data-progress="39"] ul:before {
-          width: 39%; }
-        .gridView .card .route.active[data-progress="40"] ul:before {
-          width: 40%; }
-        .gridView .card .route.active[data-progress="41"] ul:before {
-          width: 41%; }
-        .gridView .card .route.active[data-progress="42"] ul:before {
-          width: 42%; }
-        .gridView .card .route.active[data-progress="43"] ul:before {
-          width: 43%; }
-        .gridView .card .route.active[data-progress="44"] ul:before {
-          width: 44%; }
-        .gridView .card .route.active[data-progress="45"] ul:before {
-          width: 45%; }
-        .gridView .card .route.active[data-progress="46"] ul:before {
-          width: 46%; }
-        .gridView .card .route.active[data-progress="47"] ul:before {
-          width: 47%; }
-        .gridView .card .route.active[data-progress="48"] ul:before {
-          width: 48%; }
-        .gridView .card .route.active[data-progress="49"] ul:before {
-          width: 49%; }
-        .gridView .card .route.active[data-progress="50"] ul:before {
-          width: 50%; }
-        .gridView .card .route.active[data-progress="51"] ul:before {
-          width: 51%; }
-        .gridView .card .route.active[data-progress="52"] ul:before {
-          width: 52%; }
-        .gridView .card .route.active[data-progress="53"] ul:before {
-          width: 53%; }
-        .gridView .card .route.active[data-progress="54"] ul:before {
-          width: 54%; }
-        .gridView .card .route.active[data-progress="55"] ul:before {
-          width: 55%; }
-        .gridView .card .route.active[data-progress="56"] ul:before {
-          width: 56%; }
-        .gridView .card .route.active[data-progress="57"] ul:before {
-          width: 57%; }
-        .gridView .card .route.active[data-progress="58"] ul:before {
-          width: 58%; }
-        .gridView .card .route.active[data-progress="59"] ul:before {
-          width: 59%; }
-        .gridView .card .route.active[data-progress="60"] ul:before {
-          width: 60%; }
-        .gridView .card .route.active[data-progress="61"] ul:before {
-          width: 61%; }
-        .gridView .card .route.active[data-progress="62"] ul:before {
-          width: 62%; }
-        .gridView .card .route.active[data-progress="63"] ul:before {
-          width: 63%; }
-        .gridView .card .route.active[data-progress="64"] ul:before {
-          width: 64%; }
-        .gridView .card .route.active[data-progress="65"] ul:before {
-          width: 65%; }
-        .gridView .card .route.active[data-progress="66"] ul:before {
-          width: 66%; }
-        .gridView .card .route.active[data-progress="67"] ul:before {
-          width: 67%; }
-        .gridView .card .route.active[data-progress="68"] ul:before {
-          width: 68%; }
-        .gridView .card .route.active[data-progress="69"] ul:before {
-          width: 69%; }
-        .gridView .card .route.active[data-progress="70"] ul:before {
-          width: 70%; }
-        .gridView .card .route.active[data-progress="71"] ul:before {
-          width: 71%; }
-        .gridView .card .route.active[data-progress="72"] ul:before {
-          width: 72%; }
-        .gridView .card .route.active[data-progress="73"] ul:before {
-          width: 73%; }
-        .gridView .card .route.active[data-progress="74"] ul:before {
-          width: 74%; }
-        .gridView .card .route.active[data-progress="75"] ul:before {
-          width: 75%; }
-        .gridView .card .route.active[data-progress="76"] ul:before {
-          width: 76%; }
-        .gridView .card .route.active[data-progress="77"] ul:before {
-          width: 77%; }
-        .gridView .card .route.active[data-progress="78"] ul:before {
-          width: 78%; }
-        .gridView .card .route.active[data-progress="79"] ul:before {
-          width: 79%; }
-        .gridView .card .route.active[data-progress="80"] ul:before {
-          width: 80%; }
-        .gridView .card .route.active[data-progress="81"] ul:before {
-          width: 81%; }
-        .gridView .card .route.active[data-progress="82"] ul:before {
-          width: 82%; }
-        .gridView .card .route.active[data-progress="83"] ul:before {
-          width: 83%; }
-        .gridView .card .route.active[data-progress="84"] ul:before {
-          width: 84%; }
-        .gridView .card .route.active[data-progress="85"] ul:before {
-          width: 85%; }
-        .gridView .card .route.active[data-progress="86"] ul:before {
-          width: 86%; }
-        .gridView .card .route.active[data-progress="87"] ul:before {
-          width: 87%; }
-        .gridView .card .route.active[data-progress="88"] ul:before {
-          width: 88%; }
-        .gridView .card .route.active[data-progress="89"] ul:before {
-          width: 89%; }
-        .gridView .card .route.active[data-progress="90"] ul:before {
-          width: 90%; }
-        .gridView .card .route.active[data-progress="91"] ul:before {
-          width: 91%; }
-        .gridView .card .route.active[data-progress="92"] ul:before {
-          width: 92%; }
-        .gridView .card .route.active[data-progress="93"] ul:before {
-          width: 93%; }
-        .gridView .card .route.active[data-progress="94"] ul:before {
-          width: 94%; }
-        .gridView .card .route.active[data-progress="95"] ul:before {
-          width: 95%; }
-        .gridView .card .route.active[data-progress="96"] ul:before {
-          width: 96%; }
-        .gridView .card .route.active[data-progress="97"] ul:before {
-          width: 97%; }
-        .gridView .card .route.active[data-progress="98"] ul:before {
-          width: 98%; }
-        .gridView .card .route.active[data-progress="99"] ul:before {
-          width: 99%; }
-        .gridView .card .route.active[data-progress="100"] ul:before {
-          width: 100%; }
-        .gridView .card .route.active.loop ul:after {
-          font-family: FontAwesome;
-          font-weight: normal;
-          font-style: normal;
-          -webkit-font-smoothing: antialiased;
-          display: block;
-          position: absolute;
-          left: 50%;
-          top: 0.5rem;
-          bottom: 0.5rem;
-          margin-left: -0.5rem;
-          width: 1rem;
-          height: 2rem;
-          font-size: 1.5rem;
-          line-height: 2rem;
-          content: "\f0ec"; }
-        .gridView .card .route.active.single ul:after {
-          font-family: FontAwesome;
-          font-weight: normal;
-          font-style: normal;
-          -webkit-font-smoothing: antialiased;
-          display: block;
-          position: absolute;
-          left: 50%;
-          top: 0.5rem;
-          bottom: 0.5rem;
-          margin-left: -0.5rem;
-          width: 1rem;
-          height: 2rem;
-          font-size: 1.5rem;
-          line-height: 2rem;
-          content: "\f178"; }
+      line-height: 3rem;
+      padding: 0 1rem;
+      float: left;
+      position: relative; }
+      .ship .route ul li.current {
+        color: #999; }
+        .ship .route ul li.current:before {
+          content: "\f041"; }
+      .ship .route ul li.origin:before {
+        content: "\f041"; }
+      .ship .route ul li.destination {
+        float: right; }
+        .ship .route ul li.destination:before {
+          content: "\f14e"; }
+      .ship .route ul li:before {
+        font-family: FontAwesome;
+        margin-right: 0.4rem;
+        font-weight: normal;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased; }
+  .ship .route.active {
+    background-color: #E08283;
+    color: #fff; }
+    .ship .route.active ul:before {
+      display: block;
+      content: " ";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      height: 3rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      -webkit-transition: width 500ms;
+      transition: width 500ms; }
+    .ship .route.active[data-progress="1"] ul:before {
+      width: 1%; }
+    .ship .route.active[data-progress="2"] ul:before {
+      width: 2%; }
+    .ship .route.active[data-progress="3"] ul:before {
+      width: 3%; }
+    .ship .route.active[data-progress="4"] ul:before {
+      width: 4%; }
+    .ship .route.active[data-progress="5"] ul:before {
+      width: 5%; }
+    .ship .route.active[data-progress="6"] ul:before {
+      width: 6%; }
+    .ship .route.active[data-progress="7"] ul:before {
+      width: 7%; }
+    .ship .route.active[data-progress="8"] ul:before {
+      width: 8%; }
+    .ship .route.active[data-progress="9"] ul:before {
+      width: 9%; }
+    .ship .route.active[data-progress="10"] ul:before {
+      width: 10%; }
+    .ship .route.active[data-progress="11"] ul:before {
+      width: 11%; }
+    .ship .route.active[data-progress="12"] ul:before {
+      width: 12%; }
+    .ship .route.active[data-progress="13"] ul:before {
+      width: 13%; }
+    .ship .route.active[data-progress="14"] ul:before {
+      width: 14%; }
+    .ship .route.active[data-progress="15"] ul:before {
+      width: 15%; }
+    .ship .route.active[data-progress="16"] ul:before {
+      width: 16%; }
+    .ship .route.active[data-progress="17"] ul:before {
+      width: 17%; }
+    .ship .route.active[data-progress="18"] ul:before {
+      width: 18%; }
+    .ship .route.active[data-progress="19"] ul:before {
+      width: 19%; }
+    .ship .route.active[data-progress="20"] ul:before {
+      width: 20%; }
+    .ship .route.active[data-progress="21"] ul:before {
+      width: 21%; }
+    .ship .route.active[data-progress="22"] ul:before {
+      width: 22%; }
+    .ship .route.active[data-progress="23"] ul:before {
+      width: 23%; }
+    .ship .route.active[data-progress="24"] ul:before {
+      width: 24%; }
+    .ship .route.active[data-progress="25"] ul:before {
+      width: 25%; }
+    .ship .route.active[data-progress="26"] ul:before {
+      width: 26%; }
+    .ship .route.active[data-progress="27"] ul:before {
+      width: 27%; }
+    .ship .route.active[data-progress="28"] ul:before {
+      width: 28%; }
+    .ship .route.active[data-progress="29"] ul:before {
+      width: 29%; }
+    .ship .route.active[data-progress="30"] ul:before {
+      width: 30%; }
+    .ship .route.active[data-progress="31"] ul:before {
+      width: 31%; }
+    .ship .route.active[data-progress="32"] ul:before {
+      width: 32%; }
+    .ship .route.active[data-progress="33"] ul:before {
+      width: 33%; }
+    .ship .route.active[data-progress="34"] ul:before {
+      width: 34%; }
+    .ship .route.active[data-progress="35"] ul:before {
+      width: 35%; }
+    .ship .route.active[data-progress="36"] ul:before {
+      width: 36%; }
+    .ship .route.active[data-progress="37"] ul:before {
+      width: 37%; }
+    .ship .route.active[data-progress="38"] ul:before {
+      width: 38%; }
+    .ship .route.active[data-progress="39"] ul:before {
+      width: 39%; }
+    .ship .route.active[data-progress="40"] ul:before {
+      width: 40%; }
+    .ship .route.active[data-progress="41"] ul:before {
+      width: 41%; }
+    .ship .route.active[data-progress="42"] ul:before {
+      width: 42%; }
+    .ship .route.active[data-progress="43"] ul:before {
+      width: 43%; }
+    .ship .route.active[data-progress="44"] ul:before {
+      width: 44%; }
+    .ship .route.active[data-progress="45"] ul:before {
+      width: 45%; }
+    .ship .route.active[data-progress="46"] ul:before {
+      width: 46%; }
+    .ship .route.active[data-progress="47"] ul:before {
+      width: 47%; }
+    .ship .route.active[data-progress="48"] ul:before {
+      width: 48%; }
+    .ship .route.active[data-progress="49"] ul:before {
+      width: 49%; }
+    .ship .route.active[data-progress="50"] ul:before {
+      width: 50%; }
+    .ship .route.active[data-progress="51"] ul:before {
+      width: 51%; }
+    .ship .route.active[data-progress="52"] ul:before {
+      width: 52%; }
+    .ship .route.active[data-progress="53"] ul:before {
+      width: 53%; }
+    .ship .route.active[data-progress="54"] ul:before {
+      width: 54%; }
+    .ship .route.active[data-progress="55"] ul:before {
+      width: 55%; }
+    .ship .route.active[data-progress="56"] ul:before {
+      width: 56%; }
+    .ship .route.active[data-progress="57"] ul:before {
+      width: 57%; }
+    .ship .route.active[data-progress="58"] ul:before {
+      width: 58%; }
+    .ship .route.active[data-progress="59"] ul:before {
+      width: 59%; }
+    .ship .route.active[data-progress="60"] ul:before {
+      width: 60%; }
+    .ship .route.active[data-progress="61"] ul:before {
+      width: 61%; }
+    .ship .route.active[data-progress="62"] ul:before {
+      width: 62%; }
+    .ship .route.active[data-progress="63"] ul:before {
+      width: 63%; }
+    .ship .route.active[data-progress="64"] ul:before {
+      width: 64%; }
+    .ship .route.active[data-progress="65"] ul:before {
+      width: 65%; }
+    .ship .route.active[data-progress="66"] ul:before {
+      width: 66%; }
+    .ship .route.active[data-progress="67"] ul:before {
+      width: 67%; }
+    .ship .route.active[data-progress="68"] ul:before {
+      width: 68%; }
+    .ship .route.active[data-progress="69"] ul:before {
+      width: 69%; }
+    .ship .route.active[data-progress="70"] ul:before {
+      width: 70%; }
+    .ship .route.active[data-progress="71"] ul:before {
+      width: 71%; }
+    .ship .route.active[data-progress="72"] ul:before {
+      width: 72%; }
+    .ship .route.active[data-progress="73"] ul:before {
+      width: 73%; }
+    .ship .route.active[data-progress="74"] ul:before {
+      width: 74%; }
+    .ship .route.active[data-progress="75"] ul:before {
+      width: 75%; }
+    .ship .route.active[data-progress="76"] ul:before {
+      width: 76%; }
+    .ship .route.active[data-progress="77"] ul:before {
+      width: 77%; }
+    .ship .route.active[data-progress="78"] ul:before {
+      width: 78%; }
+    .ship .route.active[data-progress="79"] ul:before {
+      width: 79%; }
+    .ship .route.active[data-progress="80"] ul:before {
+      width: 80%; }
+    .ship .route.active[data-progress="81"] ul:before {
+      width: 81%; }
+    .ship .route.active[data-progress="82"] ul:before {
+      width: 82%; }
+    .ship .route.active[data-progress="83"] ul:before {
+      width: 83%; }
+    .ship .route.active[data-progress="84"] ul:before {
+      width: 84%; }
+    .ship .route.active[data-progress="85"] ul:before {
+      width: 85%; }
+    .ship .route.active[data-progress="86"] ul:before {
+      width: 86%; }
+    .ship .route.active[data-progress="87"] ul:before {
+      width: 87%; }
+    .ship .route.active[data-progress="88"] ul:before {
+      width: 88%; }
+    .ship .route.active[data-progress="89"] ul:before {
+      width: 89%; }
+    .ship .route.active[data-progress="90"] ul:before {
+      width: 90%; }
+    .ship .route.active[data-progress="91"] ul:before {
+      width: 91%; }
+    .ship .route.active[data-progress="92"] ul:before {
+      width: 92%; }
+    .ship .route.active[data-progress="93"] ul:before {
+      width: 93%; }
+    .ship .route.active[data-progress="94"] ul:before {
+      width: 94%; }
+    .ship .route.active[data-progress="95"] ul:before {
+      width: 95%; }
+    .ship .route.active[data-progress="96"] ul:before {
+      width: 96%; }
+    .ship .route.active[data-progress="97"] ul:before {
+      width: 97%; }
+    .ship .route.active[data-progress="98"] ul:before {
+      width: 98%; }
+    .ship .route.active[data-progress="99"] ul:before {
+      width: 99%; }
+    .ship .route.active[data-progress="100"] ul:before {
+      width: 100%; }
+    .ship .route.active.loop ul:after {
+      font-family: FontAwesome;
+      font-weight: normal;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      margin-left: -0.5rem;
+      width: 1rem;
+      height: 2rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      content: "\f0ec"; }
+    .ship .route.active.single ul:after {
+      font-family: FontAwesome;
+      font-weight: normal;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      margin-left: -0.5rem;
+      width: 1rem;
+      height: 2rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      content: "\f178"; }
 
 .item:before {
   font-family: FontAwesome;
-  margin-right: 0.4rem;
+  margin-right: 0.5em;
   font-weight: normal;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
-  content: "\f1b2"; }
+  content: "\f1b2";
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  text-align: center; }
 .item[data-name="Gold"]:before {
   content: "\f1c0"; }
 .item[data-name="Silver"]:before {
@@ -1261,7 +1279,17 @@ button.choice {
 #world-display {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  left: 30rem;
   height: 100%;
   z-index: -99; }
+
+.sidebar {
+  position: fixed;
+  top: 3rem;
+  bottom: 0;
+  left: 0;
+  width: 40rem;
+  height: 100%;
+  background-color: #f7f7f7;
+  z-index: 99; }

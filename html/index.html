@@ -30,19 +30,20 @@
 			<div class="card ship">
 				<div class="card-inner">
 					<h2><a href="">{{ name }} ({{ id }})</a></h2>
-					<p>
-			            {{ journey.from }}
-			            {{# journey.distance }}
-			            -&gt; {{ journey.to }} ({{ journey.remaining }} km)
-			            {{/ journey.distance }}
-		            </p>
                     {{# moving }}
-                    <div class="route active loop" data-progress="{{ progress }}">
-						<ul>
-							<li class="origin">{{ journey.from }}</li>
-							<li class="destination">{{ journey.to }}</li>
-						</ul>
-					</div>
+	                    <div class="route active loop" data-progress="{{ progress }}">
+							<ul>
+								<li class="origin">{{ journey.from }}</li>
+								<li class="destination">{{ journey.to }}</li>
+							</ul>
+						</div>
+                    {{/ moving }}
+                    {{^ moving }}
+	                    <div class="route inactive" data-progress="{{ progress }}">
+							<ul>
+								<li class="current">{{ journey.from }}</li>
+							</ul>
+						</div>
                     {{/ moving }}
 					<div class="cargo">
 						<ul>
@@ -58,8 +59,8 @@
         
 	</head>
 	<body>
-        <div id="world-display">
-        </div>
+	    <div id="world-display">
+	    </div>
         <div class="ui">
 			<section class="navbar">
 				<h1>Boatin'!</h1>
@@ -98,7 +99,64 @@
 					</li>
 				</ul>
 			</section>
-	        
+			<section class="sidebar">
+				<div class="grid padded">
+					<section class="sidebar-section">
+						<form>
+							<div class="row">
+								<div class="column auto padded">
+									<div class="select">
+										<select>
+											<option>Load</option>
+										</select>
+									</div>
+								</div>
+								<div class="column fixed-width x-small padded">
+									<button class="default medium block"><i class="fa fa-remove"></i></button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="column auto padded">
+									<div class="select">
+										<select>
+											<option>Gold</option>
+										</select>
+									</div>
+								</div>
+								<div class="column fixed-width x-small padded">
+									<input type="text" />
+								</div>
+							</div>
+						</form>
+					</section>
+					<section class="sidebar-section">
+						<form>
+							<div class="row">
+								<div class="column auto padded">
+									<div class="select">
+										<select>
+											<option>Go</option>
+										</select>
+									</div>
+								</div>
+								<div class="column fixed-width x-small padded">
+									<button class="default medium block"><i class="fa fa-remove"></i></button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="column auto padded">
+									<div class="select">
+										<select>
+											<option>Amsterdam</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</form>
+					</section>
+
+				</div>
+			</section>
 			<div class="gridView clearfix">
 		        <div id="cities">
 		        </div>

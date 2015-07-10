@@ -2,11 +2,16 @@
 	
 	&:before{
 		font-family: FontAwesome;
-		margin-right: 0.4rem;
+		margin-right: 0.5em;
 		font-weight: normal;
 		font-style: normal;
 		-webkit-font-smoothing: antialiased;
 		content: "\f1b2";
+		display: inline-block;
+		height: 1em;
+		width: 1em;
+		line-height: 1em;
+		text-align: center;
 	}
 	
 	&[data-name="Gold"]:before{

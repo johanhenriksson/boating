@@ -71,29 +71,6 @@ html{
 		padding-bottom: 0.5rem;
 		
 	}
-	
-	@media (min-width: $breakpoint-desktop){
-		
-		&.padded{
-			padding: 1rem;	
-		}
-		
-		&.padded-x{
-			
-			padding-left: 1rem;
-			padding-right: 1rem;
-			
-		}
-		
-		&.padded-y{
-			
-			padding-top: 1rem;
-			padding-bottom: 1rem;
-			
-		}
-	
-	}
-	
 }
 
 form.grid{

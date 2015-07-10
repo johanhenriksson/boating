@@ -1,7 +1,9 @@
 .navbar{
 	
 	background-color: #fff;
-		height: 3rem;
+	height: 3rem;
+	position: relative;
+	z-index: 100;
 	
 	ul, li{
 		

@@ -64,8 +64,19 @@ $button-danger-text-color: #fafafa;
 #world-display {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    left: 30rem;
     height: 100%;
     z-index: -99;
+}
+
+.sidebar{
+	position: fixed;
+	top: 3rem;
+	bottom: 0;
+	left: 0;
+	width: 40rem;
+	height: 100%;
+	background-color: #f7f7f7;
+	z-index: 99;
 }

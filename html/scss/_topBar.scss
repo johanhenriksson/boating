@@ -1,17 +1,29 @@
 .navbar{
 	
 	background-color: #fff;
+		height: 3rem;
 	
 	ul, li{
 		
 		margin: 0;
 		padding: 0;
 		list-style: none;
+	}
+	
+	h1{
 		
+		font-size: 1.4rem;
+		font-weight: 400;
+		margin: 0;
+		float: right;
+		line-height: 3rem;
+		padding-right: 1rem;
+		color: #555;
+		font-family: "Lobster", Helvetica, sans-serif;
 	}
 	
 	ul{
-		
+		float: left;
 		position: relative;
 		
 		li{
@@ -29,6 +41,12 @@
 				margin: 1rem 0;
 				width: 2px;
 				background-color: #f1f1f1;
+				
+			}
+			
+			&:last-child:after{
+				
+				display: none;
 				
 			}
 			

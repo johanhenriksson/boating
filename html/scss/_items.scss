@@ -1,18 +1,66 @@
 .item{
+	
 	&:before{
 		font-family: FontAwesome;
 		margin-right: 0.4rem;
 		font-weight: normal;
 		font-style: normal;
 		-webkit-font-smoothing: antialiased;
+		content: "\f1b2";
 	}
 	
-	&[data-name="gold"]:before{
-		content: "\f0d6";
+	&[data-name="Gold"]:before{
+		content: "\f1c0";
 	}
 	
-	&[data-name="coffee"]:before{
+	&[data-name="Silver"]:before{
+		content: "\f1b3";
+	}
+	
+	&[data-name="Copper"]:before{
+		content: "\f1b3";
+	}
+	
+	&[data-name="Steel"]:before{
+		content: "\f1b3";
+	}
+	
+	&[data-name="Diamond"]:before{
+		content: "\f219";
+	}
+	
+	&[data-name="Wood"]:before{
+	}
+	
+	
+	&[data-name="Food"]:before{
 		content: "\f0f4";	
 	}
+	
+	&[data-name="Coffee"]:before{
+		content: "\f0f4";	
+	}
+	
+	&[data-name="Garbage"]:before{
+		content: "\f1f8";
+	}
+	
+	&[data-name="Lemon"]:before{
+		content: "\f094";
+	}
+	
+	&[data-name="Beer"]:before{
+		content: "\f0fc";
+	}
+	
+	&[data-name="Explosives"]:before{
+		content: "\f1e2";
+	}
+	
+	&[data-name="Mail"]:before{
+		content: "\f003";
+	}
+	
+	
 	
 }

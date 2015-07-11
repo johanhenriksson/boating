@@ -3,8 +3,10 @@ package main
 import (
     "os"
     "fmt"
+    "time"
     "bufio"
     "strings"
+    "strconv"
     "net/http"
 
     "github.com/johanhenriksson/boating/api"
@@ -28,6 +30,16 @@ func main() {
         orders.Loop(boat.Actor)
     }
 
+    fmt.Println("boat server")
+
+    /* Stdio console */
+    go console()
+
+    /* Run http interface server on main thread */
+    httpServe(core.World)
+}
+
+func httpServe(world *core.WorldState) {
     router := api.NewRouter()
     router.Register(&api.VehicleService {
         World: core.World,
@@ -37,15 +49,14 @@ func main() {
     })
     router.Files("/", "./html/")
 
-    go console()
     http.ListenAndServe(":8000", router.Mux())
 }
 
 func console() {
     reader := bufio.NewReader(os.Stdin)
-    fmt.Println("hello?")
     for {
         fmt.Print("> ")
+
         text, _ := reader.ReadString('\n')
         line := strings.ToLower(strings.Trim(strings.Trim(text, "\n"), " "))
         tokens := strings.Split(line, " ")
@@ -53,11 +64,34 @@ func console() {
         switch tokens[0] {
         case "help":
             fmt.Println("Helpful Help Menu:")
-            fmt.Println("quit - quit.")
+            fmt.Println("  time")
+            fmt.Println("  timescale <int scale>")
+            fmt.Println("  quit")
         case "quit":
             os.Exit(0)
+        case "time":
+            fmt.Println("Server time:", core.Time())
+        case "timescale":
+            if len(tokens) < 2 {
+                fmt.Println("usage: timescale <int scale>")
+                continue
+            }
+            if tokens[1] == "reset" {
+                fmt.Println("Timescale: 1hr per second")
+                core.TIMESCALE = time.Duration(3600)
+                continue
+            }
+            scale, err := strconv.ParseInt(tokens[1], 10, 64)
+            if err != nil {
+                fmt.Println("Invalid number")
+                continue
+            }
+            core.TIMESCALE = time.Duration(scale)
+            t := core.TIMESCALE * time.Second
+            fmt.Println("Server timescale:", t, "per second") 
+
         default:
-            fmt.Println("Invalid command. Type help to activate helpful help menu")
+            fmt.Printf("Invalid command '%s'. Type 'help' to show a helpful help menu\n", tokens[0])
         }
     }
 }

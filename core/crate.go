@@ -8,6 +8,9 @@ type Crate struct {
 }
 
 func NewCrate(owner *Player, com *Commodity, quantity int64) *Crate {
+    if quantity < 0 {
+        quantity = 0
+    }
     return &Crate {
         Id:    nextId(),
         Owner: owner,

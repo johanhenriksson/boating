@@ -4,81 +4,16 @@ load gold 100
 # head to the dam
 go amsterdam
 unload gold 50
+wait 1 hour
 load coffee 100
 
 # pick up steel in hamburg
 go hamburg
 unload gold 50
+wait 1 hour
 load steel 150
 
 # return goods
 go london
 unload
-
-# stock up 
-load gold 100
- 
-# head to the dam
-go amsterdam
-unload gold 50
-load coffee 100
-
-# pick up steel in hamburg
-go hamburg
-unload gold 50
-load steel 150
-
-# return goods
-go london
-unload
-
-# stock up 
-load gold 100
- 
-# head to the dam
-go amsterdam
-unload gold 50
-load coffee 100
-
-# pick up steel in hamburg
-go hamburg
-unload gold 50
-load steel 150
-
-# return goods
-go london
-unload
-
-# stock up 
-load gold 100
- 
-# head to the dam
-go amsterdam
-unload gold 50
-load coffee 100
-
-# pick up steel in hamburg
-go hamburg
-unload gold 50
-load steel 150
-
-# return goods
-go london
-unload
-
-# stock up 
-load gold 100
- 
-# head to the dam
-go amsterdam
-unload gold 50
-load coffee 100
-
-# pick up steel in hamburg
-go hamburg
-unload gold 50
-load steel 150
-
-# return goods
-go london
-unload
+wait 1 hour

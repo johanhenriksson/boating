@@ -14,6 +14,13 @@ func Sleep(duration time.Duration) {
     time.Sleep(duration / TIMESCALE)
 }
 
+func Time() time.Time {
+    /* Changing timescale during game will fuck up dates */
+    world_duration := time.Since(START_TIME) * TIMESCALE
+    game_time      := EPOCH.Add(world_duration)
+    return game_time
+}
+
 /* NextId state */
 var _nextId   int64       = 0
 var _nextLock *sync.Mutex = &sync.Mutex { }

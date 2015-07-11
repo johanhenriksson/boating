@@ -8,6 +8,11 @@ import (
 
 const BOAT = 1
 
+const LOADING   = "loading"
+const UNLOADING = "unloading"
+const MOVING    = "moving"
+const WAITING   = "waiting"
+
 type VehicleId  int64
 
 type Vehicle struct {
@@ -17,6 +22,7 @@ type Vehicle struct {
     Capacity    int64
     Speed       int64
     Name        string
+    Status      string
     Journey     Journey
     Cargo       *Storage
     Owner       *Player

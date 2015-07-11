@@ -63,7 +63,7 @@ $(document).ready(function() {
         event.preventDefault();
     }, false);
     renderJobs.push(function(delta, now){
-        earthMesh.rotateY(0.00007);
+        earthMesh.rotateY(0.00008);
         camera.position.y = Math.sin(cam_angle) * cam_distance;
         camera.position.z = Math.cos(cam_angle) * cam_distance;
         camera.lookAt(earthMesh.position);

@@ -1,27 +1,28 @@
-package orders
+package compiler
 
 import (
     "os"
     "fmt"
     "strings"
     "io/ioutil"
+    "github.com/johanhenriksson/boating/core/orders"
 )
 
-type ParserFunction func(int64, []string) (Order, error)
+type ParserFunction func(int64, []string) (orders.Order, error)
 
-func CompileFile(filename string) Orders {
+func CompileFile(filename string) orders.Orders {
     bytes, err := ioutil.ReadFile(filename)
     if err != nil {
-        return Orders { }
+        return orders.Orders { }
     }
 
     return Compile(string(bytes))
 }
 
-func Compile(code string) Orders {
+func Compile(code string) orders.Orders {
     code = strings.Replace(code, "\n", ";", -1)
     lines := strings.Split(code, ";")
-    orders := make(Orders, 0)
+    orders := make(orders.Orders, 0)
 
     for i, line := range lines {
         line = strings.Trim(line, " ")

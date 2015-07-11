@@ -56,6 +56,14 @@ func (a *Actor) Issue(order func()) {
     a.Orders <- order
 }
 
+func (a *Actor) Loop(order func()) {
+    a.Orders <- func() {
+        for {
+            order()
+        }
+    }
+}
+
 func (a *Actor) Type() ActorType {
     return ACTOR
 }

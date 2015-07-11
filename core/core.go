@@ -5,7 +5,7 @@ import (
     "sync"
 )
 
-var TIMESCALE   time.Duration = 3600
+var TIMESCALE   time.Duration = 3600 * 2
 var START_TIME  time.Time = time.Now()
 var EPOCH       time.Time = time.Date(1852, time.January, 1, 0, 0, 0, 0, time.UTC)
 

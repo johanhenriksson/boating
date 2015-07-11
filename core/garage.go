@@ -10,14 +10,14 @@ type VehicleChan chan *Vehicle
 type Garage struct {
     *Actor
     Vehicles VehicleMap
-    lock     *sync.RWMutex
+    lock     *sync.Mutex
 }
 
 func NewGarage() *Garage {
     garage := &Garage {
         Actor:    NewActor(),
         Vehicles: make(VehicleMap),
-        lock:     &sync.RWMutex { },
+        lock:     &sync.Mutex { },
     }
     return garage
 }
@@ -28,21 +28,17 @@ func (g *Garage) Add(vehicle *Vehicle) {
 }
 
 func (g *Garage) Park(vehicle *Vehicle) {
-    g.Issue(func() {
-        g.park(vehicle)
-    })
+    g.park(vehicle)
 }
 
 func (g *Garage) Unpark(vehicle *Vehicle) {
-    g.Issue(func() {
-        g.unpark(vehicle)
-    })
+    g.unpark(vehicle)
 }
 
 /* Returns true if given vehicle is parked in this city */
 func (g *Garage) Stores(vehicle *Vehicle) bool {
-    g.lock.RLock()
-    defer g.lock.RUnlock()
+    g.lock.Lock()
+    defer g.lock.Unlock()
 
     _, exists := g.Vehicles[vehicle.Id]
     return exists

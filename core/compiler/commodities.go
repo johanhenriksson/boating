@@ -1,4 +1,4 @@
-package orders
+package compiler
 
 import (
     "github.com/johanhenriksson/boating/core"

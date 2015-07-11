@@ -1,4 +1,4 @@
-package orders
+package compiler
 
 import (
     "fmt"
@@ -7,30 +7,31 @@ import (
     "strings"
     "strconv"
     "github.com/johanhenriksson/boating/core"
+    "github.com/johanhenriksson/boating/core/orders"
 )
 
 var parseTable = map[string]ParserFunction {
     "go": parseGo,
     "wait": parseWait,
-    "load": func(line int64, tokens []string) (Order, error) {
+    "load": func(line int64, tokens []string) (orders.Order, error) {
         return parseLoad(false, line, tokens)
     },
-    "unload": func(line int64, tokens []string) (Order, error) {
+    "unload": func(line int64, tokens []string) (orders.Order, error) {
         return parseLoad(true, line, tokens)
     },
 }
 
-func parseGo(line int64, tokens []string) (Order, error) {
+func parseGo(line int64, tokens []string) (orders.Order, error) {
     if len(tokens) != 1 {
         return nil, errors.New(fmt.Sprintf("%d: Too many arguments to Go", line))
     }
     city := cityMap[tokens[0]]
-    return &GoOrder {
+    return &orders.GoOrder {
         City: city,
     }, nil
 }
 
-func parseWait(line int64, tokens []string) (Order, error) {
+func parseWait(line int64, tokens []string) (orders.Order, error) {
     if len(tokens) < 1 {
         return nil, errors.New(fmt.Sprintf("%d: Too few arguments to Wait", line))
     }
@@ -71,12 +72,12 @@ func parseWait(line int64, tokens []string) (Order, error) {
         }
     }
 
-    return &WaitOrder {
+    return &orders.WaitOrder {
         Duration: duration,
     }, nil
 }
 
-func parseLoad(unload bool, line int64, tokens []string) (Order, error) {
+func parseLoad(unload bool, line int64, tokens []string) (orders.Order, error) {
     if !unload && len(tokens) == 0 {
         return nil, errors.New(fmt.Sprintf("%d: Too few arguments", line))
     }
@@ -109,7 +110,7 @@ func parseLoad(unload bool, line int64, tokens []string) (Order, error) {
         }
     }
 
-    return &LoadOrder {
+    return &orders.LoadOrder {
         Commodity: com,
         Unload: unload,
         All: all,

@@ -9,7 +9,7 @@ import (
 )
 
 type CityService struct {
-    World *core.World
+    World *core.WorldState
 }
 
 func (srv CityService) Load() {

@@ -25,8 +25,9 @@ label{
 	background-position: right;
 	background-size: 40px;
 	position: relative;
-	height: 3rem;
-	line-height: 2.9rem;
+	height: 2.5rem;
+	line-height: 2.4rem;
+	cursor: pointer;
 	
 	&:last-child, .no-margin{
 		margin-bottom: 0;
@@ -44,24 +45,26 @@ label{
 		position: absolute;
 		top: 0;
 		right: 0;
-		font-size: 1.3rem;
-		height: 3rem;
-		line-height: 2.9rem;
-		padding: 0 0.75rem;
+		font-size: 1.1rem;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		padding: 0 0.5rem;
+		pointer-events: none;
 		
 	}
 	
 	select{
-		display: inline-block;
+		display: block;
 		width: 110%;
 		border: none;
 		outline: none;
 		background-color: transparent;
-		height: 3rem;
-		line-height: 2.9rem;
+		height: 2.5rem;
+		line-height: 2.4rem;
 		padding: 0 0.75rem;
 		font-family: inherit;
   		-webkit-appearance: none;
+  		cursor: pointer;	
 	}
 }
 
@@ -76,8 +79,8 @@ input[type=number]{
 	border: 1px solid #e0e0e0;
 	outline: none;
 	padding: 0 0.75rem;
-	height: 3rem;
-	line-height: 2.9rem;
+	height: 2.5rem;
+	line-height: 2.4rem;
 	font-family: inherit;
 	background-color: #fff;
 	display: block;

@@ -2,16 +2,15 @@
 
 body{
 	font-size: 12pt;
-	background-color: #C5EFF7;
 	font-family: "Lato", Helvetica, sans-serif;
+	background-color: #e0e0e0;
 }
 
 @import "normalize.min.scss";
 
 /* Layout */
 
-$max-page-width: 70rem;
-$top-bar-breakpoint: 50rem;
+$max-page-width: 1980px;
 $breakpoint-desktop: 60rem;
 $breakpoint-tablet: 50rem;
 $breakpoint-mobile: 30rem;
@@ -50,33 +49,66 @@ $button-danger-text-color: #fafafa;
 @import "gridView.scss";
 @import "items.scss";
 
-.ui{
-	
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	overflow-y: scroll;
-	
-}
 
 #world-display {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 30rem;
-    height: 100%;
+	width: 100%;
     z-index: -99;
+    overflow: hidden;
+    height: 50rem;
 }
 
 .sidebar{
-	position: fixed;
-	top: 3rem;
-	bottom: 0;
-	left: 0;
-	width: 40rem;
 	height: 100%;
 	background-color: #f7f7f7;
-	z-index: 99;
+	width: 30rem;
+	
+	.sidebar-section{
+		&:after{
+		
+			content: " ";
+			display: block;
+			margin: 0 1rem;
+			height: 2px;
+			background-color: rgba(0,0,0,0.05);
+			
+		}
+		
+		&:last-child:after{
+			
+			display: none;
+			
+		}
+	}
+}
+
+main.main-content{
+	position: relative;
+	background-color: #C5EFF7;
+}
+
+.main-content h2{
+	
+	color: rgba(0,0,0,0.4);
+	padding: 0.5rem;
+	text-align: center;
+				
+	&:before{
+		font-family: FontAwesome;
+		margin-right: 0.4em;
+		font-weight: normal;
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	&.cities:before{
+		
+		content: "\f13d";
+		
+	}
+	
+	&.ships:before{
+		
+		content: "\f21a";
+		
+	}
 }

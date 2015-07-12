@@ -1,14 +1,13 @@
 
 .gridView{
-	padding: 0.5rem;
 	
 	.card{
 		
 		float: left;
-		width: 20rem;
+		width: 100%;
 		margin: 0;
 		padding: 0.5rem;
-		
+				
 		.card-inner{
 			
 			background-color: #fff;
@@ -16,24 +15,36 @@
 			padding: 1rem;
 		}
 			
-		h2{
+		h3{
 			
-			font-size: 1.3rem;
+			font-size: 1.2rem;
 			line-height: 1.3rem;
 			margin: 0 0 0.5rem 0;
 			
 			a{
 				color: #000;
+			}
 				
-				&:before{
-					font-family: FontAwesome;
-					margin-right: 0.4em;
-					font-weight: normal;
-					font-style: normal;
-					-webkit-font-smoothing: antialiased;
-				}
+			&:before{
+				font-family: FontAwesome;
+				margin-right: 0.4em;
+				font-weight: normal;
+				font-style: normal;
+				-webkit-font-smoothing: antialiased;
 			}
 	
+		}
+
+		&.city h3:before{
+			
+			content: "\f13d";
+			
+		}
+	
+		&.ship h3:before{
+			
+			content: "\f21a";
+			
 		}
 		
 	}
@@ -41,17 +52,13 @@
 }
 
 
-.place h2 a:before{
-	
-	content: "\f13d";
-	
-}
-
 
 
 .cargo{
 	background-color: #f7f7f7;
 	border-radius: 0.25rem;
+	font-size: 0.9rem;
+	overflow: hidden;
 
 	
 	ul{
@@ -88,12 +95,6 @@
 }
 		
 .ship{ 
-	
-	h2 a:before{
-		
-		content: "\f21a";
-		
-	}
 	
 	
 	.route{
@@ -134,7 +135,7 @@
 			
 			
 					&:before{
-						content: "\f041";	
+						content: "\f10c";
 					}
 					
 				}
@@ -144,7 +145,7 @@
 					float: right;
 					
 					&:before{
-						content: "\f14e";
+						content: "\f041";	
 					}
 					
 				}
@@ -160,7 +161,7 @@
 		}
 		
 		&.active{
-			background-color: #E08283;
+			background-color: #B36869;
 			color: #fff;
 			
 			ul:before{
@@ -172,10 +173,31 @@
 				bottom: 0;
 				left: 0;
 				height: 3rem;
-				background-color: rgba(0,0,0,0.2);
+				background-color: #E08283;
 			    -webkit-transition: width 500ms;
 			    transition: width 500ms;
-				
+				background: -moz-linear-gradient(left, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);
+				background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,0.13)), color-stop(50%, rgba(255,255,255,0.13)), color-stop(50%, rgba(255,255,255,0.15)), color-stop(100%, rgba(255,255,255,0.15)));
+				background: -webkit-linear-gradient(left, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);
+				background: -o-linear-gradient(left, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);
+				background: -ms-linear-gradient(left, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);
+				background: linear-gradient(to right, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
+				background-size: 3rem;
+				-webkit-animation-name: animateProgressBar;
+				-webkit-animation-duration: 1s;
+				-webkit-animation-timing-function: linear;
+				-webkit-animation-delay: 0;
+				-webkit-animation-iteration-count: infinite;
+				-webkit-animation-direction: normal;
+				-webkit-animation-fill-mode: forwards;
+				animation-name: animateProgressBar;
+				animation-duration: 1s;
+				animation-timing-function: linear;
+				animation-delay: 0;
+				animation-iteration-count: infinite;
+				animation-direction: normal;
+				animation-fill-mode: forwards;
 			}
 			
 			@for $i from 1 through 100{
@@ -196,7 +218,7 @@
 				margin-left: -0.5rem;
 				width: 1rem;
 				height: 2rem;
-				font-size: 1.5rem;
+				font-size: 1.2rem;
 				line-height: 2rem;
 			}
 			
@@ -212,3 +234,27 @@
 		}
 	}
 }
+
+
+
+@-webkit-keyframes animateProgressBar{
+
+	0%{
+		background-position: 0;
+	}
+	
+	100%{
+		background-position: 3rem;
+	}
+}
+
+@keyframes animateProgressBar{
+	0%{
+		background-position: 0;
+	}
+	
+	100%{
+		background-position: 3rem;
+	}
+}
+

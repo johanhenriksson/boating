@@ -13,7 +13,7 @@
         <script type="x-tmpl-mustache" id="city-template">
 			<div class="card city">
 				<div class="card-inner">
-					<h2><a href="">{{ name }}</a></h2>
+					<h3><a href="">{{ name }}</a></h3>
 					<div class="cargo">
 						<ul>
 							{{# stock }}
@@ -29,7 +29,7 @@
         
 			<div class="card ship">
 				<div class="card-inner">
-					<h2><a href="">{{ name }} ({{ id }})</a></h2>
+					<h3><a href="">{{ name }} ({{ id }})</a></h3>
                     {{# moving }}
 	                    <div class="route active loop" data-progress="{{ progress }}">
 							<ul>
@@ -59,10 +59,8 @@
         
 	</head>
 	<body>
-	    <div id="world-display">
-	    </div>
-        <div class="ui">
-			<section class="navbar">
+		<div class="container full-height page">
+			<nav class="navbar">
 				<h1>Boatin'!</h1>
 				<ul class="clearfix">
 					<li>
@@ -98,72 +96,87 @@
 						<a href=""><i class="fa fa-money"></i><span>Assets</span><i class="fa fa-chevron-down"></i></a>
 					</li>
 				</ul>
-			</section>
-			<section class="sidebar">
-				<div class="grid padded">
+			</nav>
+	    <div id="world-display">
+	    </div>
+			<div class="row full-height">
+				<aside class="column full-height sidebar">
 					<section class="sidebar-section">
-						<form>
-							<div class="row">
-								<div class="column auto padded">
-									<div class="select">
-										<select>
-											<option>Load</option>
-										</select>
+						<div class="row padded">
+							<div class="column auto">
+								<div class="row">
+									<div class="column auto padded">
+										<div class="select">
+											<select>
+												<option>Load</option>
+											</select>
+										</div>
 									</div>
 								</div>
-								<div class="column fixed-width x-small padded">
-									<button class="default medium block"><i class="fa fa-remove"></i></button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="column auto padded">
-									<div class="select">
-										<select>
-											<option>Gold</option>
-										</select>
+								<div class="row">
+									<div class="column fixed-width small padded">
+										<input type="number" value="1"/>
+									</div>
+									<div class="column auto padded">
+										<div class="select">
+											<select>
+												<option>Gold</option>
+											</select>
+										</div>
 									</div>
 								</div>
-								<div class="column fixed-width x-small padded">
-									<input type="text" />
-								</div>
 							</div>
-						</form>
+							<div class="column fixed-width x-small padded">
+								<button class="default square block"><i class="fa fa-remove"></i></button>
+							</div>
+						</div>
 					</section>
 					<section class="sidebar-section">
-						<form>
-							<div class="row">
-								<div class="column auto padded">
-									<div class="select">
-										<select>
-											<option>Go</option>
-										</select>
+						<div class="row padded">
+							<div class="column auto">
+								<div class="row">
+									<div class="column auto padded">
+										<div class="select">
+											<select>
+												<option>Go</option>
+											</select>
+										</div>
 									</div>
 								</div>
-								<div class="column fixed-width x-small padded">
-									<button class="default medium block"><i class="fa fa-remove"></i></button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="column auto padded">
-									<div class="select">
-										<select>
-											<option>Amsterdam</option>
-										</select>
+								<div class="row">
+									<div class="column auto padded">
+										<div class="select">
+											<select>
+												<option>Amsterdam</option>
+											</select>
+										</div>
 									</div>
 								</div>
 							</div>
-						</form>
+							<div class="column fixed-width x-small padded">
+								<button class="default square block"><i class="fa fa-remove"></i></button>
+							</div>
+						</div>	
 					</section>
-
-				</div>
-			</section>
-			<div class="gridView clearfix">
-		        <div id="cities">
-		        </div>
-			</div>
-			<div class="gridView clearfix">
-		        <div id="vehicles">
-		        </div>
+				</aside>
+				<main class="column auto main-content">
+					<div class="row padded">
+						<div class="column half">
+							<h2 class="cities">Cities</h2>
+							<div class="gridView clearfix">
+						        <div id="cities">
+						        </div>
+							</div>
+						</div>
+						<div class="column half">
+							<h2 class="ships">Ships</h2>
+							<div class="gridView clearfix">
+						        <div id="vehicles">
+						        </div>
+							</div>
+						</div>
+					</div>
+				</main>
 			</div>
 		</div>
 	</body>

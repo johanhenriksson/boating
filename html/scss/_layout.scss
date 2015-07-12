@@ -11,8 +11,10 @@ html{
 }
 
 .page{
-	max-width: 2560px;
-	margin: 0 auto;
+	
+	-webkit-box-shadow: 0 0 1rem 0 rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 0 1rem 0 rgba(0,0,0,0.1);
+	box-shadow: 0 0 1rem 0 rgba(0,0,0,0.1);
 }
 
 /* Limits page width */
@@ -45,8 +47,15 @@ html{
 	
 }
 
-.grid,
+.container,
+.row,
 .column{
+
+	.full-height{ 
+		
+		height: 100%;
+		
+	}
 	
 	&.padded-tight{
 		
@@ -73,22 +82,6 @@ html{
 	}
 }
 
-form.grid{
-	padding: 0rem;
-	
-	.column{
-		padding: 0.5rem;
-	}
-	
-}
-@media (min-width: $breakpoint-desktop){
-	
-	form.grid{
-		padding: 0.5rem;
-	}
-}
-
-
 /******************************************************
 
 Grid system
@@ -112,68 +105,65 @@ Grid system
 
 
 @media (min-width: $breakpoint-tablet) {
-	
-	.grid{
 				
-		.row{
-			display: table;
-			width: 100%;
+	.row{
+		display: table;
+		width: 100%;
+		
+		
+		.column{
+			display: table-cell;
+			vertical-align: top;
 			
+			&.fixed-width{
+				
+				&.x-small{
+					width: 3.5rem;
+				}
+				
+				&.small{
+					width: 7rem;
+				}
+				
+				&.medium{
+					width: 20rem;
+				}
+				
+				&.large{
+					width: 30rem;
+				}
+			}
 			
-			.column{
-				display: table-cell;
-				vertical-align: top;
+			&.auto{
+				width: auto;
+			}
+		
+			&.full{
+				width: 100%;
+			}
+		
+			&.two-thirds{
+				width: 66.7777%;
+			}
 				
-				&.fixed-width{
-					
-					&.x-small{
-						width: 5rem;
-					}
-					
-					&.small{
-						width: 7rem;
-					}
-					
-					&.medium{
-						width: 20rem;
-					}
-					
-					&.large{
-						width: 30rem;
-					}
-				}
-				
-				&.auto{
-					width: auto;
-				}
+			&.half{
+				width: 50%;
+			}
 			
-				&.full{
-					width: 100%;
-				}
+			&.third {
+				width: 33.3333%;
+			}
 			
-				&.two-thirds{
-					width: 66.7777%;
-				}
-					
-				&.half{
-					width: 50%;
-				}
-				
-				&.third {
-					width: 33.3333%;
-				}
-				
-				&.fourth{
-					width: 25%;
-				}
-				
-				&.fifth{
-					width: 20%;
-				}
-				
-				&.sixth{
-					width: 16.6666%;
-				}
+			&.fourth{
+				width: 25%;
+			}
+			
+			&.fifth{
+				width: 20%;
+			}
+			
+			&.sixth{
+				width: 16.6666%;
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 /* used to be style.scss */
 body {
   font-size: 12pt;
-  background-color: #C5EFF7;
-  font-family: "Lato", Helvetica, sans-serif; }
+  font-family: "Lato", Helvetica, sans-serif;
+  background-color: #e0e0e0; }
 
 /*! normalize.css v1.1.3 | MIT License | git.io/normalize */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -210,47 +210,48 @@ html {
   box-sizing: inherit; }
 
 .page {
-  max-width: 2560px;
-  margin: 0 auto; }
+  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1); }
 
 /* Limits page width */
 .container {
   margin: 0 auto;
-  max-width: 70rem; }
+  max-width: 1980px; }
   .container.half {
-    max-width: 35rem; }
+    max-width: 990px; }
   .container.two-thirds {
-    max-width: 46.66667rem; }
+    max-width: 1320px; }
   .container.third {
-    max-width: 23.33333rem; }
+    max-width: 660px; }
   .container.fourth {
-    max-width: 17.5rem; }
+    max-width: 495px; }
   .container.fifth {
-    max-width: 14rem; }
+    max-width: 396px; }
 
-.grid.padded-tight,
+.container .full-height,
+.row .full-height,
+.column .full-height {
+  height: 100%; }
+.container.padded-tight,
+.row.padded-tight,
 .column.padded-tight {
   padding: 0.5rem; }
-.grid.padded,
+.container.padded,
+.row.padded,
 .column.padded {
   padding: 0.5rem; }
-.grid.padded-x,
+.container.padded-x,
+.row.padded-x,
 .column.padded-x {
   padding-left: 0.5rem;
   padding-right: 0.5rem; }
-.grid.padded-y,
+.container.padded-y,
+.row.padded-y,
 .column.padded-y {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }
 
-form.grid {
-  padding: 0rem; }
-  form.grid .column {
-    padding: 0.5rem; }
-
-@media (min-width: 60rem) {
-  form.grid {
-    padding: 0.5rem; } }
 /******************************************************
 
 Grid system
@@ -268,35 +269,35 @@ Grid system
   *zoom: 1; }
 
 @media (min-width: 50rem) {
-  .grid .row {
+  .row {
     display: table;
     width: 100%; }
-    .grid .row .column {
+    .row .column {
       display: table-cell;
       vertical-align: top; }
-      .grid .row .column.fixed-width.x-small {
-        width: 5rem; }
-      .grid .row .column.fixed-width.small {
+      .row .column.fixed-width.x-small {
+        width: 3.5rem; }
+      .row .column.fixed-width.small {
         width: 7rem; }
-      .grid .row .column.fixed-width.medium {
+      .row .column.fixed-width.medium {
         width: 20rem; }
-      .grid .row .column.fixed-width.large {
+      .row .column.fixed-width.large {
         width: 30rem; }
-      .grid .row .column.auto {
+      .row .column.auto {
         width: auto; }
-      .grid .row .column.full {
+      .row .column.full {
         width: 100%; }
-      .grid .row .column.two-thirds {
+      .row .column.two-thirds {
         width: 66.7777%; }
-      .grid .row .column.half {
+      .row .column.half {
         width: 50%; }
-      .grid .row .column.third {
+      .row .column.third {
         width: 33.3333%; }
-      .grid .row .column.fourth {
+      .row .column.fourth {
         width: 25%; }
-      .grid .row .column.fifth {
+      .row .column.fifth {
         width: 20%; }
-      .grid .row .column.sixth {
+      .row .column.sixth {
         width: 16.6666%; } }
 /******************************************************
 
@@ -384,11 +385,18 @@ button, .button {
     height: 2rem; }
     button.small:active, .button.small:active {
       padding: 0.3rem 0.5rem 0.2rem 0.5rem; }
+  button.square, .button.square {
+    padding: 0.5rem 0;
+    height: 2.5rem;
+    width: 2.5rem;
+    text-align: center; }
+    button.square:active, .button.square:active {
+      padding: 0.6rem 0 0.4rem 0; }
   button.medium, .button.medium {
-    padding: 0.75rem 1rem;
-    height: 3rem; }
+    padding: 0.5rem 1rem;
+    height: 2.5rem; }
     button.medium:active, .button.medium:active {
-      padding: 0.8rem 1rem 0.70rem 1rem; }
+      padding: 0.6rem 1rem 0.4rem 1rem; }
   button.large, .button.large {
     padding: 1.5rem;
     height: 4.5rem; }
@@ -448,7 +456,7 @@ button, .button {
   button i, .button i {
     display: inline-block;
     height: 1.5rem;
-    width: 1.5rem;
+    width: 1.3rem;
     text-align: center;
     line-height: 1.5rem;
     font-size: 1.3rem; }
@@ -598,8 +606,9 @@ label {
   background-position: right;
   background-size: 40px;
   position: relative;
-  height: 3rem;
-  line-height: 2.9rem; }
+  height: 2.5rem;
+  line-height: 2.4rem;
+  cursor: pointer; }
   .select:last-child, .select .no-margin {
     margin-bottom: 0; }
   .select:after {
@@ -613,21 +622,23 @@ label {
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 1.3rem;
-    height: 3rem;
-    line-height: 2.9rem;
-    padding: 0 0.75rem; }
+    font-size: 1.1rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 0.5rem;
+    pointer-events: none; }
   .select select {
-    display: inline-block;
+    display: block;
     width: 110%;
     border: none;
     outline: none;
     background-color: transparent;
-    height: 3rem;
-    line-height: 2.9rem;
+    height: 2.5rem;
+    line-height: 2.4rem;
     padding: 0 0.75rem;
     font-family: inherit;
-    -webkit-appearance: none; }
+    -webkit-appearance: none;
+    cursor: pointer; }
 
 /* Text inputs */
 textarea,
@@ -639,8 +650,8 @@ input[type=number] {
   border: 1px solid #e0e0e0;
   outline: none;
   padding: 0 0.75rem;
-  height: 3rem;
-  line-height: 2.9rem;
+  height: 2.5rem;
+  line-height: 2.4rem;
   font-family: inherit;
   background-color: #fff;
   display: block;
@@ -758,6 +769,7 @@ button.choice {
   background-color: #fff;
   height: 3rem;
   position: relative;
+  width: 100%;
   z-index: 100; }
   .navbar ul, .navbar li {
     margin: 0;
@@ -786,7 +798,7 @@ button.choice {
         height: 1rem;
         margin: 1rem 0;
         width: 2px;
-        background-color: #f1f1f1; }
+        background-color: rgba(0, 0, 0, 0.05); }
       .navbar ul li:last-child:after {
         display: none; }
       .navbar ul li a {
@@ -832,9 +844,9 @@ button.choice {
         left: 0;
         background-color: #fff;
         width: 15rem;
-        -webkit-box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+        -webkit-box-shadow: 0 0.15rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 0.15rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0.15rem 0.5rem 0 rgba(0, 0, 0, 0.15);
         z-index: 1; }
         .navbar ul li:hover ul li {
           float: none; }
@@ -857,8 +869,8 @@ button.choice {
           .navbar ul li:hover ul li:hover a {
             color: #000; }
           .navbar ul li:hover ul li:hover ul {
-            top: 1rem;
-            left: 14rem;
+            top: 0.5rem;
+            left: 14.5rem;
             display: block; }
             .navbar ul li:hover ul li:hover ul li a {
               color: #777;
@@ -898,36 +910,37 @@ button.choice {
 
   100% {
     opacity: 1; } }
-.gridView {
+.gridView .card {
+  float: left;
+  width: 100%;
+  margin: 0;
   padding: 0.5rem; }
-  .gridView .card {
-    float: left;
-    width: 20rem;
-    margin: 0;
-    padding: 0.5rem; }
-    .gridView .card .card-inner {
-      background-color: #fff;
-      border-radius: 0.25rem;
-      padding: 1rem; }
-    .gridView .card h2 {
-      font-size: 1.3rem;
-      line-height: 1.3rem;
-      margin: 0 0 0.5rem 0; }
-      .gridView .card h2 a {
-        color: #000; }
-        .gridView .card h2 a:before {
-          font-family: FontAwesome;
-          margin-right: 0.4em;
-          font-weight: normal;
-          font-style: normal;
-          -webkit-font-smoothing: antialiased; }
-
-.place h2 a:before {
-  content: "\f13d"; }
+  .gridView .card .card-inner {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 1rem; }
+  .gridView .card h3 {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+    margin: 0 0 0.5rem 0; }
+    .gridView .card h3 a {
+      color: #000; }
+    .gridView .card h3:before {
+      font-family: FontAwesome;
+      margin-right: 0.4em;
+      font-weight: normal;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased; }
+  .gridView .card.city h3:before {
+    content: "\f13d"; }
+  .gridView .card.ship h3:before {
+    content: "\f21a"; }
 
 .cargo {
   background-color: #f7f7f7;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  overflow: hidden; }
   .cargo ul {
     margin: 0;
     padding: 0;
@@ -945,8 +958,6 @@ button.choice {
       .cargo ul li span.qty {
         float: right; }
 
-.ship h2 a:before {
-  content: "\f21a"; }
 .ship .route {
   background-color: #f7f7f7;
   border-radius: 0.25rem;
@@ -973,11 +984,11 @@ button.choice {
         .ship .route ul li.current:before {
           content: "\f041"; }
       .ship .route ul li.origin:before {
-        content: "\f041"; }
+        content: "\f10c"; }
       .ship .route ul li.destination {
         float: right; }
         .ship .route ul li.destination:before {
-          content: "\f14e"; }
+          content: "\f041"; }
       .ship .route ul li:before {
         font-family: FontAwesome;
         margin-right: 0.4rem;
@@ -985,7 +996,7 @@ button.choice {
         font-style: normal;
         -webkit-font-smoothing: antialiased; }
   .ship .route.active {
-    background-color: #E08283;
+    background-color: #B36869;
     color: #fff; }
     .ship .route.active ul:before {
       display: block;
@@ -995,9 +1006,31 @@ button.choice {
       bottom: 0;
       left: 0;
       height: 3rem;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: #E08283;
       -webkit-transition: width 500ms;
-      transition: width 500ms; }
+      transition: width 500ms;
+      background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 100%);
+      background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255, 255, 255, 0.13)), color-stop(50%, rgba(255, 255, 255, 0.13)), color-stop(50%, rgba(255, 255, 255, 0.15)), color-stop(100%, rgba(255, 255, 255, 0.15)));
+      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 100%);
+      background: -o-linear-gradient(left, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 100%);
+      background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 100%);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
+      background-size: 3rem;
+      -webkit-animation-name: animateProgressBar;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-delay: 0;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: normal;
+      -webkit-animation-fill-mode: forwards;
+      animation-name: animateProgressBar;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-delay: 0;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+      animation-fill-mode: forwards; }
     .ship .route.active[data-progress="1"] ul:before {
       width: 1%; }
     .ship .route.active[data-progress="2"] ul:before {
@@ -1211,7 +1244,7 @@ button.choice {
       margin-left: -0.5rem;
       width: 1rem;
       height: 2rem;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 2rem;
       content: "\f0ec"; }
     .ship .route.active.single ul:after {
@@ -1227,10 +1260,22 @@ button.choice {
       margin-left: -0.5rem;
       width: 1rem;
       height: 2rem;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 2rem;
       content: "\f178"; }
 
+@-webkit-keyframes animateProgressBar {
+  0% {
+    background-position: 0; }
+
+  100% {
+    background-position: 3rem; } }
+@keyframes animateProgressBar {
+  0% {
+    background-position: 0; }
+
+  100% {
+    background-position: 3rem; } }
 .item:before {
   font-family: FontAwesome;
   margin-right: 0.5em;
@@ -1268,28 +1313,40 @@ button.choice {
 .item[data-name="Mail"]:before {
   content: "\f003"; }
 
-.ui {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll; }
-
 #world-display {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 30rem;
-  height: 100%;
-  z-index: -99; }
+  width: 100%;
+  z-index: -99;
+  overflow: hidden;
+  height: 50rem; }
 
 .sidebar {
-  position: fixed;
-  top: 3rem;
-  bottom: 0;
-  left: 0;
-  width: 40rem;
   height: 100%;
   background-color: #f7f7f7;
-  z-index: 99; }
+  width: 30rem; }
+  .sidebar .sidebar-section:after {
+    content: " ";
+    display: block;
+    margin: 0 1rem;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.05); }
+  .sidebar .sidebar-section:last-child:after {
+    display: none; }
+
+main.main-content {
+  position: relative;
+  background-color: #C5EFF7; }
+
+.main-content h2 {
+  color: rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  text-align: center; }
+  .main-content h2:before {
+    font-family: FontAwesome;
+    margin-right: 0.4em;
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased; }
+  .main-content h2.cities:before {
+    content: "\f13d"; }
+  .main-content h2.ships:before {
+    content: "\f21a"; }

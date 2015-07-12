@@ -3,8 +3,9 @@
 	background-color: #fff;
 	height: 3rem;
 	position: relative;
+	width: 100%;
 	z-index: 100;
-	
+
 	ul, li{
 		
 		margin: 0;
@@ -42,7 +43,7 @@
 				height: 1rem;
 				margin: 1rem 0;
 				width: 2px;
-				background-color: #f1f1f1;
+				background-color: rgba(0,0,0,0.05);
 				
 			}
 			
@@ -119,9 +120,9 @@
 					left: 0;
 					background-color: #fff;
 					width: 15rem;
-					-webkit-box-shadow:0 0 1em 0 rgba(0,0,0,0.15);
-					-moz-box-shadow:0 0 1em 0 rgba(0,0,0,0.15);
-					box-shadow:0 0 1em 0 rgba(0,0,0,0.15);
+					-webkit-box-shadow: 0 0.15rem 0.5rem 0 rgba(0,0,0,0.15);
+					-moz-box-shadow: 0 0.15rem 0.5rem 0 rgba(0,0,0,0.15);
+					box-shadow: 0 0.15rem 0.5rem 0 rgba(0,0,0,0.15);
 					z-index: 1;
 					
 					li{
@@ -165,7 +166,7 @@
 							a{color: #000;}
 						
 							ul{
-								top: 1rem; left: 14rem; display: block;
+								top: 0.5rem; left: 14.5rem; display: block;
 								
 								li{
 									a{color: #777; background-color: #fff;}

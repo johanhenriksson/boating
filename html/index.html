@@ -98,12 +98,15 @@
 					<li>
 						<a href="" id="toggle-map"><i class="fa fa-globe"></i><span>Toggle map</span></a>
 					</li>
+					<li>
+						<a href="" id="toggle-sidebar"><i class="fa fa-columns"></i><span>Toggle sidebar</span></a>
+					</li>
 				</ul>
 			</nav>
 		    <div id="world-display" style="display: none;">
 		    </div>
 			<div class="row full-height">
-				<aside class="column full-height sidebar">
+				<aside class="column full-height fixed-width large sidebar">
 					<section class="sidebar-section">
 						<div class="row padded">
 							<div class="column auto">
@@ -192,9 +195,13 @@
     <script src="js/world.js"></script>
 	<script>
 		$("#toggle-map").click(function(e){
-		e.preventDefault();
-			$('#world-display').slideToggle();
+			e.preventDefault();
+			$('#world-display').slideToggle(500);
 		});
 		
+		$("#toggle-sidebar").click(function(e){
+			e.preventDefault();
+			$('.sidebar').toggle();
+		}); 		
 	</script>
 </html>

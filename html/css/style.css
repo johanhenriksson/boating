@@ -1318,9 +1318,7 @@ button.choice {
   height: 50rem; }
 
 .sidebar {
-  height: 100%;
-  background-color: #f7f7f7;
-  width: 30rem; }
+  background-color: #f7f7f7; }
   .sidebar .sidebar-section:after {
     content: " ";
     display: block;

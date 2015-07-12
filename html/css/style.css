@@ -601,9 +601,6 @@ label {
   border-radius: 0.25rem;
   margin: 0 0 0.5rem 0;
   background-color: #fff;
-  background-image: url("../img/arrow.png");
-  background-repeat: no-repeat;
-  background-position: right;
   background-size: 40px;
   position: relative;
   height: 2.5rem;
@@ -810,6 +807,7 @@ button.choice {
         white-space: nowrap;
         overflow: hidden;
         float: left;
+        outline: none;
         max-width: 100%; }
         .navbar ul li a i, .navbar ul li a span {
           display: inline-block; }

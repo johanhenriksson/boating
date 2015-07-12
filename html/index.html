@@ -95,10 +95,13 @@
 					<li>
 						<a href=""><i class="fa fa-money"></i><span>Assets</span><i class="fa fa-chevron-down"></i></a>
 					</li>
+					<li>
+						<a href="" id="toggle-map"><i class="fa fa-globe"></i><span>Toggle map</span></a>
+					</li>
 				</ul>
 			</nav>
-	    <div id="world-display">
-	    </div>
+		    <div id="world-display" style="display: none;">
+		    </div>
 			<div class="row full-height">
 				<aside class="column full-height sidebar">
 					<section class="sidebar-section">
@@ -187,4 +190,11 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/world.js"></script>
+	<script>
+		$("#toggle-map").click(function(e){
+		e.preventDefault();
+			$('#world-display').slideToggle();
+		});
+		
+	</script>
 </html>

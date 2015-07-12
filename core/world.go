@@ -5,14 +5,14 @@ var World = NewWorld()
 type WorldState struct {
     Cities      CityMap
     Players     PlayerMap
-    Vehicles    VehicleMap
+    Vehicles    *Garage
 }
 
 func NewWorld() *WorldState {
     world := &WorldState {
         Cities:     Cities,
         Players:    make(PlayerMap),
-        Vehicles:   make(VehicleMap),
+        Vehicles:   NewGarage(),
     }
     return world
 }

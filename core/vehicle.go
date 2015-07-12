@@ -58,6 +58,7 @@ func NewBoat(owner *Player, city *City, name string) *Vehicle {
     }
     owner.AddVehicle(boat)
     city.Vehicles.Add(boat)
+    World.Vehicles.Add(boat)
     return boat
 }
 

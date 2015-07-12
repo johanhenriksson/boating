@@ -70,13 +70,16 @@ func (srv *VehicleService) Get(p RouteArgs) {
         fmt.Fprintf(p.Writer, "no vehicle id")
         return
     }
-    vehicle := core.World.Vehicles[core.VehicleId(vehicle_id)]
+    exists, vehicle := core.World.Vehicles.Find(core.VehicleId(vehicle_id))
+    if exists {
+        response := NewVehicleResponse(vehicle, player)
 
-    response := NewVehicleResponse(vehicle, player)
-
-    p.Writer.Header().Set("Content-Type", "application/json")
-    js, _ := json.Marshal(response)
-    p.Writer.Write(js)
+        p.Writer.Header().Set("Content-Type", "application/json")
+        js, _ := json.Marshal(response)
+        p.Writer.Write(js)
+    } else {
+        fmt.Fprintf(p.Writer, "Vehicle %d not found", vehicle_id)
+    }
 }
 
 type VehicleResponse struct {

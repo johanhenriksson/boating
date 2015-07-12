@@ -44,6 +44,14 @@ func (g *Garage) Stores(vehicle *Vehicle) bool {
     return exists
 }
 
+func (g *Garage) Find(id VehicleId) (bool, *Vehicle) {
+    g.lock.Lock()
+    defer g.lock.Unlock()
+
+    v, exists := g.Vehicles[id]
+    return exists, v
+}
+
 /* Parks a vehicle in the city */
 func (g *Garage) park(vehicle *Vehicle) {
     g.lock.Lock()

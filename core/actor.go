@@ -8,16 +8,20 @@ var ACTOR_STORAGE   ActorType = 10
 var ACTOR_GARAGE    ActorType = 11
 
 type Actor struct {
-    Orders chan func()
+    orders chan func()
+    stop   chan int
+    loop   bool
 }
 
 type Orderable interface {
     Issue(func())
+    Stop()
 }
 
 func NewActor() *Actor {
     actor := &Actor {
-        Orders: make(chan func()),
+        orders: make(chan func()),
+        stop:   make(chan int),
     }
     go ActorWorker(actor)
     return actor
@@ -43,8 +47,15 @@ func ActorWorker(a *Actor) {
         }
 
         select {
-        case order := <-a.Orders:
+        case order := <-a.orders:
             orderQueue = append(orderQueue, order)
+
+        case <-a.stop:
+            /* Stop any running loop (after next order) and clear
+               the order queue */
+            a.loop = false
+            orderQueue = nil
+
         case <-orderDone:
             executing = false
         }
@@ -53,15 +64,23 @@ func ActorWorker(a *Actor) {
 
 /* Queue an order */
 func (a *Actor) Issue(order func()) {
-    a.Orders <- order
+    a.orders <- func() {
+        a.loop = false
+        order()
+    }
 }
 
 func (a *Actor) Loop(order func()) {
-    a.Orders <- func() {
-        for {
+    a.orders <- func() {
+        a.loop = true
+        for a.loop {
             order()
         }
     }
+}
+
+func (a *Actor) Stop() {
+    a.stop <- 1
 }
 
 func (a *Actor) Type() ActorType {

@@ -2,7 +2,7 @@ package test
 
 import (
     "testing"
-    "github.com/johanhenriksson/boating/core"
+    "../core"
 )
 
 var testCom = &core.Commodity {

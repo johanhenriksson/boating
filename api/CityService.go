@@ -52,7 +52,7 @@ func (srv *CityService) GetAll(p RouteArgs) {
         if crates, ok := city.Stock.Crates[player]; ok {
             for _, crate := range crates {
                 response[i].Stock = append(response[i].Stock, CrateResponse {
-                    Type:       crate.Type.Type,
+                    Type:       crate.Type.Type(),
                     Commodity:  crate.Type.Name,
                     Quantity:   crate.Qty,
                     Owner:      crate.Owner.Name,

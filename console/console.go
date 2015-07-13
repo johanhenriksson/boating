@@ -27,6 +27,9 @@ func Run() {
             fmt.Println("Helpful Help Menu:")
             fmt.Println("  time")
             fmt.Println("  timescale <int scale>")
+            fmt.Println("  vehicles")
+            fmt.Println("  order <int VehicleId> <order> [; <order>]...")
+            fmt.Println("  stop <int VehicleId>")
             fmt.Println("  quit")
         case "quit":
             os.Exit(0)
@@ -72,6 +75,12 @@ func Run() {
                 order.Execute(v.Actor)
             } else {
                 fmt.Println("Unknown vehicle #%d", id)
+            }
+
+        case "vehicles":
+            fmt.Println("All vehicles")
+            for _, v := range world.Vehicles.Vehicles {
+                fmt.Println(" ", v)
             }
 
         case "timescale":

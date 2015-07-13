@@ -25,7 +25,10 @@ func parseGo(line int64, tokens []string) (orders.Order, error) {
     if len(tokens) != 1 {
         return nil, errors.New(fmt.Sprintf("%d: Too many arguments to Go", line))
     }
-    city := cityMap[tokens[0]]
+    city, ok := cityMap[tokens[0]]
+    if !ok {
+        return nil, errors.New(fmt.Sprintf("%d: Unknown city", tokens[0]))
+    }
     return &orders.GoOrder {
         City: city,
     }, nil

@@ -151,6 +151,10 @@ func (v *Vehicle) UnloadAll() bool {
     return true
 }
 
+func (v *Vehicle) String() string {
+    return fmt.Sprintf("%d: %s (%s)", v.Id, v.Name, v.Owner.Name)
+}
+
 func (v *Vehicle) Unload(com *Commodity, qty int64) bool {
     if !v.InCity() {
         fmt.Println("Cannot unload ship", v.Id, "- not in town")

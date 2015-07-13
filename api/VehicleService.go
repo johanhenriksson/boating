@@ -107,7 +107,7 @@ func NewVehicleResponse(v *core.Vehicle, player *core.Player) VehicleResponse {
     if ok {
         for _, crate := range crates {
             r.Cargo = append(r.Cargo, CrateResponse {
-                Type:       crate.Type.Type,
+                Type:       crate.Type.Type(),
                 Commodity:  crate.Type.Name,
                 Quantity:   crate.Qty,
                 Owner:      crate.Owner.Name,

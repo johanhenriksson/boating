@@ -6,13 +6,46 @@ import (
 
 type ComType int64
 
+/* Commodity Definitions */
+
+var GOLD        = NewCommodity(1,   "Gold",       100 * GRAM)
+var SILVER      = NewCommodity(2,   "Silver",     1   * KG)
+var COPPER      = NewCommodity(3,   "Copper",     10  * KG)
+var DIAMOND     = NewCommodity(4,   "Diamond",    10  * GRAM)
+var COAL        = NewCommodity(5,   "Coal",       1   * TON)
+var STEEL       = NewCommodity(10,  "Steel",      100 * KG)
+var WOOD        = NewCommodity(11,  "Wood",       100 * KG)
+var FOOD        = NewCommodity(99,  "Food",       1   * TON)
+var COFFEE      = NewCommodity(100, "Coffee",     1   * TON)
+var LEMONS      = NewCommodity(101, "Lemons",     1   * TON)
+var BEER        = NewCommodity(102, "Beer",       100 * KG)
+var GARBAGE     = NewCommodity(400, "Garbage",    1   * TON)
+var MAIL        = NewCommodity(500, "Mail",       1   * TON)
+var EXPLOSIVES  = NewCommodity(300, "Explosives", 1   * TON)
+
+/* Commodity Errors */
+
 var CommodityNotFoundError = errors.New("No such commodity in storage")
 var NotEnoughItemsError    = errors.New("Not enough items in storage")
 
+
+type Tradable interface {
+    Is(ComType) bool
+    Type() ComType
+}
+
 type Commodity struct {
-    Type            ComType
     Name            string
     UnitWeight      Weight
+    ctype           ComType
+}
+
+func (c *Commodity) Type() ComType {
+    return c.ctype
+}
+
+func (c *Commodity) Is(ctype ComType) bool {
+    return c.Type() == ctype
 }
 
 /** Returns the unit weight of this commodity */
@@ -20,88 +53,10 @@ func (c *Commodity) Weight() Weight {
     return c.UnitWeight
 }
 
-/* Commodity Definitions */
-
-var GOLD = &Commodity {
-    Type: 1,
-    Name: "Gold",
-    UnitWeight: 100 * GRAM,
-}
-
-var SILVER = &Commodity {
-    Type: 2,
-    Name: "Silver",
-    UnitWeight: 1 * KG,
-}
-
-var COPPER = &Commodity {
-    Type: 3,
-    Name: "Copper",
-    UnitWeight: 10 * KG,
-}
-
-var DIAMOND = &Commodity {
-    Type: 4,
-    Name: "Diamond",
-    UnitWeight: 10 * GRAM,
-}
-
-var COAL = &Commodity {
-    Type: 5,
-    Name: "Coal",
-    UnitWeight: 1 * TON,
-}
-
-var STEEL = &Commodity {
-    Type: 10,
-    Name: "Steel",
-    UnitWeight: 100 * KG,
-}
-
-var WOOD = &Commodity {
-    Type: 11,
-    Name: "Wood",
-    UnitWeight: 100 * KG,
-}
-
-var FOOD = &Commodity {
-    Type: 99,
-    Name: "Food",
-    UnitWeight: 1 * TON,
-}
-
-var COFFEE = &Commodity {
-    Type: 100,
-    Name: "Coffee",
-    UnitWeight: 1 * TON,
-}
-
-var LEMONS = &Commodity {
-    Type: 101,
-    Name: "Lemons",
-    UnitWeight: 1 * TON,
-}
-
-var BEER = &Commodity {
-    Type: 102,
-    Name: "Beer",
-    UnitWeight: 100 * KG,
-}
-
-var EXPLOSIVES = &Commodity {
-    Type: 300,
-    Name: "Explosives",
-    UnitWeight: 1 * TON,
-}
-
-var GARBAGE = &Commodity {
-    Type: 400,
-    Name: "Garbage",
-    UnitWeight: 1 * TON,
-}
-
-var MAIL = &Commodity {
-    Type: 500,
-    Name: "Mail",
-    UnitWeight: 1 * TON,
+func NewCommodity(ctype ComType, name string, weight Weight) *Commodity {
+    return &Commodity {
+        Name: name,
+        UnitWeight: weight,
+        ctype: ctype,
+    }
 }

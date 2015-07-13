@@ -1,25 +1,24 @@
-package test
+package core
 
 import (
     "testing"
-    "../core"
 )
 
-var testCom = &core.Commodity {
-    Type: core.ComType(9001),
+var testCom = &Commodity {
+    ctype: ComType(9001),
     Name: "Test Item",
-    UnitWeight: 10 * core.KG,
+    UnitWeight: 10 * KG,
 }
 
-var testPlayer = &core.Player {
+var testPlayer = &Player {
     Name: "Test Player",
 }
 
 func TestNewCrate(t *testing.T) {
     var want_qty int64 = 50
-    want_weight := core.Weight(want_qty) * testCom.UnitWeight
+    want_weight := Weight(want_qty) * testCom.UnitWeight
 
-    c := core.NewCrate(testPlayer, testCom, want_qty)
+    c := NewCrate(testPlayer, testCom, want_qty)
 
     if c.Type != testCom {
         t.Errorf("Expected crate to be of type '%s', got '%s'", testCom.Name, c.Type.Name)
@@ -36,7 +35,7 @@ func TestNewCrate(t *testing.T) {
 }
 
 func TestNewCrateNegQty(t *testing.T) {
-    c := core.NewCrate(testPlayer, testCom, -1)
+    c := NewCrate(testPlayer, testCom, -1)
     if c.Qty != 0 {
         t.Errorf("Negative quantities should probably be an error or at least zero")
     }
@@ -45,7 +44,7 @@ func TestNewCrateNegQty(t *testing.T) {
 func TestCrateTake(t *testing.T) {
     qty, take := int64(100), int64(50)
     want_a, want_b := qty - take, take
-    crate_a := core.NewCrate(testPlayer, testCom, qty)
+    crate_a := NewCrate(testPlayer, testCom, qty)
 
     crate_b, err := crate_a.Take(take)
 
@@ -63,10 +62,10 @@ func TestCrateTake(t *testing.T) {
 func TestCrateTakeMuch(t *testing.T) {
     qty, take := int64(100), int64(150)
 
-    crate_a := core.NewCrate(testPlayer, testCom, qty)
+    crate_a := NewCrate(testPlayer, testCom, qty)
     _, err := crate_a.Take(take)
 
-    if err != core.NotEnoughItemsError {
+    if err != NotEnoughItemsError {
         t.Errorf("Expected not enough items error")
     }
 }

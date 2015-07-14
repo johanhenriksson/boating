@@ -1,3 +1,10 @@
+$gridView-card-background: #F9F8F4;
+$gridView-card-header-color: darken( #9E6138, 20);
+
+$cargo-list-text-color: #000;
+$cargo-list-background-odd: darken(#F9F8F4, 5);
+$cargo-list-background-even: darken(#F9F8F4, 3);
+
 
 .gridView{
 	
@@ -10,9 +17,10 @@
 				
 		.card-inner{
 			
-			background-color: #fff;
+			background-color: $gridView-card-background;
 			border-radius: 0.25rem;
 			padding: 1rem;
+			//box-shadow: 0 0 0.5rem rgba(0,0,0,0.25), -1px -1px 3px rgba(0,0,0,0.10) inset, 1px 1px 3px rgba(255,255,255,0.10) inset;
 		}
 			
 		h3{
@@ -22,7 +30,7 @@
 			margin: 0 0 0.5rem 0;
 			
 			a{
-				color: #000;
+				color: $gridView-card-header-color;
 			}
 				
 			&:before{
@@ -35,6 +43,7 @@
 	
 		}
 
+		/*
 		&.city h3:before{
 			
 			content: "\f13d";
@@ -46,6 +55,8 @@
 			content: "\f21a";
 			
 		}
+		*/
+		
 		
 	}
 	
@@ -53,9 +64,7 @@
 
 
 
-
 .cargo{
-	background-color: #f7f7f7;
 	border-radius: 0.25rem;
 	font-size: 0.9rem;
 	overflow: hidden;
@@ -73,10 +82,13 @@
 			line-height: 1rem;
 			white-space: nowrap;
 			overflow: hidden;
+			background-color: $cargo-list-background-odd;
 			
-			&:nth-child(odd){
+			color: $cargo-list-text-color;
+			
+			&:nth-child(even){
 				
-				background-color: #f1f1f1;
+				background-color: $cargo-list-background-even;
 				
 			}
 			
@@ -161,7 +173,7 @@
 		}
 		
 		&.active{
-			background-color: #B36869;
+			background-color: #C2B49A;
 			color: #fff;
 			
 			ul:before{
@@ -173,7 +185,7 @@
 				bottom: 0;
 				left: 0;
 				height: 3rem;
-				background-color: #E08283;
+				background-color: rgba(0,0,0,0.2);
 			    -webkit-transition: width 500ms;
 			    transition: width 500ms;
 				background: -moz-linear-gradient(left, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 100%);

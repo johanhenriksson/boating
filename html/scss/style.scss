@@ -2,7 +2,7 @@
 
 body{
 	font-size: 12pt;
-	font-family: "Lato", Helvetica, sans-serif;
+	font-family: "Roboto Slab", Helvetica, sans-serif;
 	background-color: #e0e0e0;
 }
 
@@ -58,7 +58,7 @@ $button-danger-text-color: #fafafa;
 }
 
 .sidebar{
-	background-color: #f7f7f7;
+	background-color: #F9F8F4;
 	
 	.sidebar-section{
 		&:after{
@@ -81,14 +81,17 @@ $button-danger-text-color: #fafafa;
 
 main.main-content{
 	position: relative;
-	background-color: #C5EFF7;
+	background-color: #716659;
 }
 
 .main-content h2{
 	
-	color: rgba(0,0,0,0.4);
+	color: rgba(0,0,0,0.5);
 	padding: 0.5rem;
 	text-align: center;
+	font-family: "grumpy";
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+	
 				
 	&:before{
 		font-family: FontAwesome;

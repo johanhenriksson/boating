@@ -1,11 +1,20 @@
 .navbar{
 	
-	background-color: #fff;
 	height: 3rem;
 	position: relative;
 	width: 100%;
 	z-index: 100;
-
+	background: #47413a;
+	/*
+	background: -moz-linear-gradient(top, #47413a 0%, #332e29 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#47413a), color-stop(100%,#332e29));
+	background: -webkit-linear-gradient(top, #47413a 0%,#332e29 100%);
+	background: -o-linear-gradient(top, #47413a 0%,#332e29 100%);
+	background: -ms-linear-gradient(top, #47413a 0%,#332e29 100%);
+	background: linear-gradient(to bottom, #47413a 0%,#332e29 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#47413a', endColorstr='#332e29',GradientType=0 );
+	*/
+	
 	ul, li{
 		
 		margin: 0;
@@ -21,8 +30,17 @@
 		float: right;
 		line-height: 3rem;
 		padding-right: 1rem;
-		color: #555;
 		font-family: "Lobster", Helvetica, sans-serif;
+		
+		a{
+			color: #fff;
+			opacity: 0.7;
+		
+			&:hover{
+				
+					opacity: 1;
+			}
+		}
 	}
 	
 	ul{
@@ -59,12 +77,13 @@
 				padding: 1rem;
 				line-height: 1rem;
 				height: 3rem;
-				color: #555;
+				color: #fff;
 				white-space: nowrap;
 				overflow: hidden;
 				float: left;
 				outline: none;
 				max-width: 100%;
+				opacity: 0.7;
 				
 				
 				i, span{
@@ -96,7 +115,7 @@
 			&:hover{
 				
 				a{
-					color: #000;
+					opacity: 1;
 				}
 				
 				ul{

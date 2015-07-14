@@ -1,38 +1,29 @@
+order
+---------------
 
-One command per line. Split on whitespace, first word is the command
-go <city>
-load <commodity> [quantity]
-store <commodity> [quantity]
+order BuyCoffee
+    if vehicle has gold 50
+        go amsterdam
+        buy coffee for gold 50
+    else
+        go london
+        load gold 100
+    end
+end
 
------------
-Design Goal
------------
 
-VAR coffee_price 50
-VAR coffee_amount 75
+loop
+    BuyCoffee
+end
 
-VAR steel_price 100
-VAR steel_amount 150
+-----------------
 
-FUNC load
-    go london
-    load gold coffee_price + steel_price
-END
+OrderLoop
+    OrderIf
+        Then:
+        OrderGo Amsterdam
+        OrderBuyFor Coffee Gold 50
+        Else:
+        OrderGo London
+        OrderLoad Gold 50
 
-FUNC buy_coffee
-    go amsterdam
-    store gold coffee_price
-    load coffee coffee_amount
-END
-
-FUNC buy_steel
-    go hamburg
-    store gold steel_price
-    load steel steel_amount
-END
-
-LOOP
-    load
-    buy_coffee
-    buy_steel
-END

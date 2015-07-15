@@ -22,7 +22,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            background-color: #A2DED0;
+            background-color: #59ABE3;
 
             width: 100%;
             height: 100%;
@@ -41,13 +41,14 @@
     </head>
     <body>
         <div class="map" ng-controller="MapView" ng-init="init()">
-            <input type="range" min="1.5" max="30" step="0.1" ng-model="zoom"> {{ x }}, {{ y }}
+            <input type="range" min="1.0" max="20" step="0.1" ng-model="zoom"> ({{ magnification | number:0 }}x)
+            <span>{{ x | number }}</span><span>, </span><span>{{ y | number }}</span>
             <div class="map-view"
                 ng-mousemove="mouseMove($event)"
                 ng-mousedown="mouseDown($event)" 
                 ng-mouseup="mouseUp()"
                 ng-mouseleave="mouseUp()">
-                <div id="map_render" class="map-display"></div>
+                <svg id="map_render" class="map-display"></svg>
             </div>
         </div>
 
